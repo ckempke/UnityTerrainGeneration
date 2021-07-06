@@ -11,3 +11,7 @@ scale tells me, *I* am an individual, and I've now got time to look into project
 boundaries of procedural design.
 
 Will this turn into something more than some musings on the web?   Who knows!   That's the wonder of it.
+
+Another wonder of the modern internet is that you never know who's going to wander by, curtesy of Bing, Google, or the world's most specific typo.    If you're looking for me, contact information is over at https://www.chriskempke.com
+
+--Chris
