@@ -44,14 +44,18 @@ At a very high level, the fundamental takeaway is this:  despite their three-dim
 
 When we get down to grinding code; heightmap computations (for “whatever”) tend to be a set of nested for loops:
 
+```clike
 For x in 0…xsize
    For z in 0…zsize {…}
+```
 
 Voxel implementations, on the other hand, tend to be nested three levels deep:
 
+```clike
 For x in 0…xsize
    For y in 0…ysize 
       For z in 0…zsize {…}
+```
 
 This extra dimension buys us the advantages of a true three-dimensional representation, but at a significant computational cost (effectively a multiplier by the size of the extra dimension).
 
@@ -64,3 +68,4 @@ A reference Unity implementation (largely unoptimized, and not using compute sha
 This breakdown into chunks provides an additional benefit.   For most circumstances, most of the time, a player avatar standing on the surface of a 512x512x512 chunk wouldn’t be able to see the vast majority of the voxels, anyway – they’d be “underground.”   There’s also no point in rendering large numbers of voxels that are all “air.”     The breakdown into smaller chunks means that we’re rendering only the voxels that are near the surface of the terrain (or just the ones in the player’s vicinity, if they’re underground).   This could result in the player being able to see a full 512x512 (or greater) terrain space, not realizing that they’re standing on a thin “shell” only one or two chunks thick.  We only need to render the deeper chunks when at least one voxel in them becomes visible.
 
 Is that enough?   It depends on the game world, environment, and the complexity of the rest of the terrain generation.    This is where we need to start talking about size.
+
