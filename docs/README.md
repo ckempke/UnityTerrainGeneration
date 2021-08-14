@@ -21,10 +21,12 @@ Another wonder of the modern internet is that you never know who's going to wand
 
 This site is being hosted at Github Pages, but it's not using their Jekyll parser.  Instead, I'm using Docsify, with the Mermaid extenstions turned on.
 
-```mermaid
-graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
-```
+$\begin{matrix} a & b \ c & d \end{matrix}$
+
+$$
+\mathbf{V}_1 \times \mathbf{V}_2 =  \begin{vmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+\frac{\partial X}{\partial u} &  \frac{\partial Y}{\partial u} & 0 \\
+\frac{\partial X}{\partial v} &  \frac{\partial Y}{\partial v} & 0 \\
+\end{vmatrix}
+$$
