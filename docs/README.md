@@ -9,7 +9,7 @@ As a developer, one of the attractions of such systems is that a small team--per
 
 Will this turn into something more than some musings on the web?   Who knows?   That's the wonder of it.
 
-Another wonder of the modern internet is that you never know who's going to wander by, curtesy of Bing, Google, or the world's most specific typo.    If you're looking for me, contact information is over at https://www.chriskempke.com
+Another wonder of the modern internet is that you never know who's going to wander by, courtesy of Bing, Google, or the world's most specific typo.    If you're looking for me, contact information is over at https://www.chriskempke.com
 
 --Chris
 

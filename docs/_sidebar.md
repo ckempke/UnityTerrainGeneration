@@ -8,3 +8,4 @@
 * [Size of Game Worlds](size_of_game_worlds.md#size-of-game-worlds)
     * [Geology](size_of_game_worlds.md#geology)
     * [Floating Point Precision Limits](size_of_game_worlds.md#floating-point-precision-limits)
+    * [Level of Detail](size_of_game_worlds.md#level-of-detail)
