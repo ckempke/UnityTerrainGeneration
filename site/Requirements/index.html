@@ -1,0 +1,305 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://ckempke.github.io/UnityTerrainGeneration/Requirements/" rel="canonical"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.2.3, mkdocs-material-8.1.7" name="generator"/>
+<title>Requirements - My Docs</title>
+<link href="../assets/stylesheets/main.cd566b2a.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.e6a45f82.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="none" data-md-color-primary="none" data-md-color-scheme="" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#requirements">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="My Docs" class="md-header__button md-logo" data-md-component="logo" href=".." title="My Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            My Docs
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Requirements
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="My Docs" class="md-nav__button md-logo" data-md-component="logo" href=".." title="My Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    My Docs
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2">
+          Theory
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Theory" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          Theory
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Background/">
+        Background
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../size_of_game_worlds/">
+        Size
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../heightmaps_and_voxels/">
+        Heightmaps or Voxels
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+          Practice
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Practice" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          Practice
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Requirements
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Requirements
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#target-software-platform">
+    Target Software Platform
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scalability">
+    Scalability
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#world-size-and-variety">
+    World Size and Variety
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configurability">
+    Configurability
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#target-software-platform">
+    Target Software Platform
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#scalability">
+    Scalability
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#world-size-and-variety">
+    World Size and Variety
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configurability">
+    Configurability
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="requirements">Requirements</h1>
+<p>If the goal is to build something, it helps to know what we're trying to build.   I've called this section "Requirements," but this is an experimental project, so what we're listing here are really "aspirational goals."   Not all of these may be achievable, reasonable, or even technically possible.   But we still want to describe what an "ideal" system would look like.</p>
+<p>For the moment, we're going to consider just Geology (that is, just the shape of the terrain, not what's on/in it.</p>
+<h2 id="target-software-platform">Target Software Platform</h2>
+<p>Unity3D initially.   Presumedly many of the concepts would move to other engines (particularly Unreal), but we're going to take advantage of whatever technologies Unity offers us without much concern for whether or not they're portable.</p>
+<h2 id="scalability">Scalability</h2>
+<p>Our first requirement is that this system be scalable to different hardware.    Our specific target is 90/90/90: 90 frames per second 90% of the time on 90th percentile gaming hardware (that is, a PC gaming system which can outperform 90 percent of all PC game systems.)</p>
+<p>Why exclude 90% of PCs?   First, because the tail on systems is very long:  <a href="https://store.steampowered.com/hwsurvey/Steam-Hardware-Software-Survey-Welcome-to-Steam">See Steam's System Surveys here</a> for samples.   The bottom half or so of these systems aren't playing modern games much.  But more importantly:</p>
+<ul>
+<li>
+<p>That's more or less where my current system sits, so it's the most practical one to target.</p>
+</li>
+<li>
+<p>We're building engine-level code rather than a game, so even if this gets widely adopted, there's a long lead time between "now" and when the first games will be available, and the the speed of game systems increases quickly.</p>
+</li>
+</ul>
+<p>However, we'd like the system to scale to lower level hardware; we'd like at least 60fps on current generation Unity-capable consoles or Apple Silicon Macs, and ideally at least 30fps on late model Intel Macs and reasonably capable mobile devices (say, everything iOS and the "top tenth" of Android - basically flagship class devices, not the sub-$250 ones that make up the bulk of the Android world).</p>
+<h2 id="world-size-and-variety">World Size and Variety</h2>
+<p>Ideally we'd like to be able to generate infinite worlds.   As an initial goal, we'll aim for a generation of a one million square kilometer area (1000x1000 km) as the proof of concept.   Our generated space should contain as high a variety of geomes as possible--at least sea, mountain, hills, plains, and riverbeds.    We will include "sea level" water, but for the moment not worry about higher elevation, emitted, or moving water (any lakes or rivers will be "dry"), since Unity's support for such things is in flux right now.  </p>
+<p>The world should be capable of having undercut erosion (i.e. overhangs and natural bridges) and cave systems of arbitrary complexity, but we'll assume that these systems are (to within an order of magnitude or so) similar in number to their real-world counterparts.   That is, such features will be relatively rare; comprising a very small percentage of terrain space.</p>
+<h2 id="configurability">Configurability</h2>
+<p>The generation of worlds should allow the generator to control limits and biases.  For example, there should be options to set the height of the highest mountains and the sea level, determine whether undersea features are present or not, determine the frequency of biomes/geomes in the world, and similar things.    In addition, we'll want to allow the option to "gamify" the environment, things like:</p>
+<ul>
+<li>Number of caves increased, and caves made larger so as to be traversable by walking humans.</li>
+<li>A tendency for caves or spaces behind waterfalls</li>
+<li>An increase in (or even mandate for) natural "switchbacks" and "collapsed slopes" that allow access to most terrain without climbing or high-jumping mechanics (e.g that you can "walk" to most of the world, even mountain peaks and the like).</li>
+<li>Vertically spaced "handholds" for most steep surfaces (for games with climbing mechanics).</li>
+<li>More regions of increased verticality in general (canyons, badlands, cliffs, other eroded or uplifted spaces)</li>
+<li>An increase in "dead end" type terrains:  places with few or even just one point of entry.  For example: deep canyons, caulderas accessed through only one path or cave system, mountain valleys, etc.</li>
+<li>Region separation: natural boundaries that separate the world into mutually inaccessible (or difficult to access) regions.    This allows the game to control player progression into "higher level" areas over time.  Such boundaries will suppress the handholds/switchback options in the boundary areas.</li>
+</ul>
+<p>All of these should be able to be independently turned on or off; when they're all disabled, the worlds will tend toward the "natural," independent of player accessibility.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Heightmaps or Voxels" class="md-footer__link md-footer__link--prev" href="../heightmaps_and_voxels/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              Heightmaps or Voxels
+            </div>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+<script src="../assets/javascripts/bundle.01de222e.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+</body>
+</html>

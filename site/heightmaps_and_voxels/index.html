@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://ckempke.github.io/UnityTerrainGeneration/heightmaps_and_voxels/" rel="canonical"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.2.3, mkdocs-material-8.1.7" name="generator"/>
+<title>Heightmaps or Voxels - My Docs</title>
+<link href="../assets/stylesheets/main.cd566b2a.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.e6a45f82.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="none" data-md-color-primary="none" data-md-color-scheme="" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#heightmaps-vs-voxels">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="My Docs" class="md-header__button md-logo" data-md-component="logo" href=".." title="My Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            My Docs
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Heightmaps or Voxels
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="My Docs" class="md-nav__button md-logo" data-md-component="logo" href=".." title="My Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    My Docs
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2">
+          Theory
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Theory" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          Theory
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Background/">
+        Background
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../size_of_game_worlds/">
+        Size
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Heightmaps or Voxels
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Heightmaps or Voxels
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#heightmaps">
+    Heightmaps
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#voxels">
+    Voxels
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+          Practice
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Practice" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          Practice
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Requirements/">
+        Requirements
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#heightmaps">
+    Heightmaps
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#voxels">
+    Voxels
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="heightmaps-vs-voxels">Heightmaps vs. Voxels</h1>
+<p>For our discussion, assume a three -dimensional, three axis coordinate space, with mutually orthogonal axes X, Y, and Z.    The Y axis will represent height (i.e., it’s the “up and down” axis), and X and Z represent horizontal positions.    There are numerous different representations that meet these requirements (e.g., left-handed and right-handed coordinate systems); the specific one being used doesn’t matter so long as consistency is maintained across the system (or accounted for:  some of Unity’s “map” types invert the (X, Z) values from others).</p>
+<h2 id="heightmaps">Heightmaps</h2>
+<p>A “heightmap” is a two-dimensional array of height values (sometimes represented as a greyscale image where dark areas are ‘low’ and light areas are ‘high’) that describe the height of the geology at each (x, z) coordinate in space.    This is a reasonably compact way of storing elevation/height values; is uniform in sampling; usually compresses well; and is extremely simple to implement, explain, and use.      They also lend themselves well to machine generation; there are many simple and well-known algorithms for achieving natural-looking terrain with them.    Heightmaps (aka “elevation maps”) also exist for a wide variety of real-world scientific purposes where their overhang limitations are irrelevant, so there are a numerous sources that will let you “sample” a portion of the real world to generate realistic looking (because it’s actually real) locations for a game.</p>
+<p>The downside of heightmaps is that they represent only a single ground level per (x, z) location.   This means they cannot be used to represent any structure that has multiple potential “ground” surfaces at a single (x,z) point:  most notably caves, but also bridges, tunnels, or even simple overhanging or undercut surfaces.   (It also wouldn’t represent building interiors, but human-constructed structures are almost always superimposed on the geology with game objects rather than being part of them, so this limitation usually doesn’t matter).</p>
+<p>Whether or not this is a problem depends on the game.   If the game does not require such structures, heightmaps are a good choice.  Such games are numerous, and players often won’t notice the absence of overhangs among all the other details of a good-looking world.   It’s also common to simply not model interior spaces as part of the terrain at all, and simply transition the player to a new scene representing the interior space (e.g., Skyrim ).</p>
+<p>If there are relatively few “overhanging” objects, they can be added to a heightmap-based world by using mesh game objects to create the overhanging parts, and adding them to the world like any other object.    Conversely, recent versions of Unity allow heightmaps to define “holes” in them, to which a custom mesh to represent, say, a cave interior can be “attached.”   Both of these mechanisms are reasonably complex to implement, and while they could be automated, in practice usually require a trained modelling artist to design each instance.   Less troublesome, but still a consideration is that the “appended” structure (the meshes that describe either the overhanging object or the cave) are different in nature from the terrain object itself, and need to be handled separately for things like collision, walkability, and navigation agent (or other AI) availability.</p>
+<p>This last point is especially important for games that implement player deformation of the terrain, usually in the form of digging.    It’s possible to limit the player to only single-height deformations (a standard “bowl-shaped” crater created by an explosion would be representable in a height map, for example).    Even digging can be limited in this way, so long as digging always removes all terrain above the dug point.   The recent (as of this writing) game Valheim does this reasonably successfully because of its generally shallow digging mechanism, but it does produce some odd behaviors on steep surfaces.</p>
+<p>For games where digging is a primary game element (e.g. the player may be removing large hunks of the world for building, resource gathering, area accessibility, or other purposes), the limitations of heightmaps can be considerable, as the player expects to be able to cut horizontal holes in vertical surfaces.</p>
+<p>Similarly, in games where the player can add to the surface, the inability to create overhangs will be immediately apparently.</p>
+<h2 id="voxels">Voxels</h2>
+<p>If a “pixel” is a two dimensional “pixel element,” a voxel is its three-dimensional counterpart: a “volume element.”   Voxel terrains involve representing the environment as a three-dimensional array of “blocks”, in which each block is either present or absent.       This allows three dimensional structures that have as many potential “ground heights” as they have blocks, and trivially represents things such as caves and overhangs.</p>
+<p>The canonical voxel world game is Minecraft .   The Minecraft world is made up of cubical blocks about half the height of the player, and effectively any block can be removed or replaced to solve the game’s puzzles and build whatever the player wishes.</p>
+<p>Compared to what we think of as pixels, Minecraft’s voxels are very, very large.   That’s typical of voxel based games, because representing any significant amount of terrain with sub-millimeter sized voxels would require prohibitively large amounts of memory.   In the block-based world of Minecraft, the large block sizes are a design benefit; much of the game’s distinctive style and “feel” comes from its blocky nature.</p>
+<p>If we wish to represent more natural-looking voxel terrain, there are obstacles that need to be overcome.     The most obvious one is the blocky nature of the terrain.</p>
+<p>Since the voxel “blocks” need to be converted to a mesh for display anyway, we can use this conversion as an opportunity to ‘smooth’ the blocks into something less chunky.    There are well-known methods to do this, in particular the marching cubes or marching tetrahedrons algorithms.    These generate meshes more complex than the pure cubes of the underlying voxel representation, but they’re relatively inexpensive to implement because they’re primarily lookup-table based.   At a very high level, each vertex and face of a block is replaced by a new face based on the present/not present state of the bock itself and the neighboring blocks in the direction of the vertex or face.</p>
+<p>When flat shaded, the resulting terrains would still not be mistaken for entirely natural.   Again, this could be an advantage:  System Era Softworks’s Astroneer  uses this sort of “smoothed voxel” terrain as a stylistic choice; it perfectly matches the cartoony, low-polygon aesthetic of the rest of the game’s elements.    More sophisticated shading and texturing algorithms can mask the polygonization of the terrain and make it appear realistic. </p>
+<p>A bigger problem is memory, or its related sibling, resolution.    </p>
+<p>A default size terrain in Unity has 512 edges in each direction, for a heightmap (which records vertex heights, not planar heights) of 513x513 heights.   Assuming each height element is a 32-bit float, the heightmap can be represented in a little over 8MB of memory.   Not tiny by any stretch, but quite manageable for any modern computer.    The mesh generated from that heightmap will be larger:  each vertex of the resulting mesh having a position in 3D space, it’s going to be a minimum of about 24MB, and probably more once you include texture UV’s, normal maps, and all the other aesthetic niceties of the modern rendering engine.     But even if it approaches 100MB, that represents (at the commonly used scale of one Unity unit per “real world” meter) about a quarter of a square kilometer of space for the player to move around in; extending that to vision distances of maybe a couple kilometers square would still fit comfortably in two or three gigabytes of memory; even less with level of detail and mipmap optimizations.</p>
+<p>So what about the voxel world?   If we assume our voxels are one Unity unit on an edge, we need 512 x 512 x N of them, where N is the “height range” of the terrain: the distance between the lowest and highest.  Since typical implementations use a square grid, if we assume a 512 block height range, we get about 135 million blocks.   If our terrain consists of a single bit of memory for each block (present or not present), that’s about 16MB of data for the voxel representation.   Each block when converted to a mesh will have as many as 8 vertices using the blocky Minecraft representation, or up to about 16 using the marching cubes implementation.   At 3x32 bits for each of those, we’re up to more than 1.5 gigabytes just for the basic mesh, and again some multiple of that for the other miscellanea.</p>
+<p>That’s a naïve implementation—most or all of those vertices are shared with other blocks, and the majority of vertices won’t be present at all in non-pathological terrains because they’re inside solid areas or in the “air” and omitted altogether.   Ultimately, a voxel-based representation of the same terrain that’s produced from a heightmap will generate identical or near-identical meshes, albeit without taking advantage of any of the voxel’s overhang advantages.   But achieving these niceties takes computing time.</p>
+<p>At a very high level, the fundamental takeaway is this:  despite their three-dimensional appearance, heightmaps are fundamentally a two-dimensional “space” (they represent a single, non-overlapping surface), and voxel terrains are fundamentally a three-dimensional one.   And the number of dimensions maps directly to the amount of computation for things like mesh generation, texturing, rendering, storage, etc.</p>
+<p>When we get down to grinding code; heightmap computations (for “whatever”) tend to be a set of nested for loops:</p>
+<pre><code class="language-clike">For x in 0…xsize
+   For z in 0…zsize {…}
+</code></pre>
+<p>Voxel implementations, on the other hand, tend to be nested three levels deep:</p>
+<pre><code class="language-clike">For x in 0…xsize
+   For y in 0…ysize 
+      For z in 0…zsize {…}
+</code></pre>
+<p>This extra dimension buys us the advantages of a true three-dimensional representation, but at a significant computational cost (effectively a multiplier by the size of the extra dimension).</p>
+<p>There are a lot of ways to reduce the cost of voxel terrain operations.   Since the process tends to be of the “do some relatively simple thing on all these positions” type, large gains can be achieved on modern systems by moving some of the work to the GPU via various shaders.   But even after optimizations and across a wide range of algorithms, the extra dimension multiplier remains.</p>
+<p>For that reason, voxel worlds tend to be generated and rendered in relatively small “chunks.”    While a Unity terrain object can easily handle a square 512 Unity units on an edge (and on beefy hardware, 4K x 4x or larger terrain objects), a 512 x 512 x 512 voxel cube would bring even a high-end 2021-era CPU to its knees.    More typical sizes are 16x16x16 (or if on GPU, 32x32x32) chunks, several of which are generated and placed next to each other to build the terrain.    The total number of chunks is then adjusted to computational capability of the hardware.</p>
+<p>A reference Unity implementation (largely unoptimized, and not using compute shaders) I use can generate roughly a 5x5 set of chunks in realtime at decent frame rates on a midrange Intel Macintosh, or about a 7x7 set of chunks on a high end gaming PC.    Many versions of Minecraft allow you to set the number of rendered chunks in the settings, as well, to play around with what numbers a decent implementation can provide.</p>
+<p>This breakdown into chunks provides an additional benefit.   For most circumstances, most of the time, a player avatar standing on the surface of a 512x512x512 chunk wouldn’t be able to see the vast majority of the voxels, anyway – they’d be “underground.”   There’s also no point in rendering large numbers of voxels that are all “air.”     The breakdown into smaller chunks means that we’re rendering only the voxels that are near the surface of the terrain (or just the ones in the player’s vicinity, if they’re underground).   This could result in the player being able to see a full 512x512 (or greater) terrain space, not realizing that they’re standing on a thin “shell” only one or two chunks thick.  We only need to render the deeper chunks when at least one voxel in them becomes visible.</p>
+<p>Is that enough?   It depends on the game world, environment, and the complexity of the rest of the terrain generation.    This is where we need to start talking about size.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Size" class="md-footer__link md-footer__link--prev" href="../size_of_game_worlds/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              Size
+            </div>
+</div>
+</a>
+<a aria-label="Next: Requirements" class="md-footer__link md-footer__link--next" href="../Requirements/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              Requirements
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+<script src="../assets/javascripts/bundle.01de222e.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+</body>
+</html>

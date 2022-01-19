@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="https://ckempke.github.io/UnityTerrainGeneration/size_of_game_worlds/" rel="canonical"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.2.3, mkdocs-material-8.1.7" name="generator"/>
+<title>Size - My Docs</title>
+<link href="../assets/stylesheets/main.cd566b2a.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/palette.e6a45f82.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css" rel="stylesheet"/>
+<script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="none" data-md-color-primary="none" data-md-color-scheme="" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#size-of-game-worlds">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header__inner md-grid">
+<a aria-label="My Docs" class="md-header__button md-logo" data-md-component="logo" href=".." title="My Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            My Docs
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Size
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Search" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<nav aria-label="Search" class="md-search__options">
+<button aria-label="Clear" class="md-search__icon md-icon" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="My Docs" class="md-nav__button md-logo" data-md-component="logo" href=".." title="My Docs">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    My Docs
+  </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="..">
+        Home
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2">
+          Theory
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Theory" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+          Theory
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Background/">
+        Background
+      </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+          Size
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+        Size
+      </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#geology">
+    Geology
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#floating-point-precision-limits">
+    Floating Point Precision Limits
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#level-of-detail">
+    Level of Detail
+  </a>
+<nav aria-label="Level of Detail" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reduce-the-data-set">
+    Reduce the data set
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reduce-the-level-of-detail">
+    Reduce the Level of Detail
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../heightmaps_and_voxels/">
+        Heightmaps or Voxels
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3">
+          Practice
+          <span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-label="Practice" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+          Practice
+        </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Requirements/">
+        Requirements
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#geology">
+    Geology
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#floating-point-precision-limits">
+    Floating Point Precision Limits
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#level-of-detail">
+    Level of Detail
+  </a>
+<nav aria-label="Level of Detail" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reduce-the-data-set">
+    Reduce the data set
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#reduce-the-level-of-detail">
+    Reduce the Level of Detail
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="size-of-game-worlds">Size of Game Worlds</h1>
+<p>By and large, game worlds are tiny.   Very, very tiny.    This includes the “huge open worlds” that have become popular.    We have become accustomed to the metaphors of game environments to the point where we often don’t consciously notice the weird sizes of things.</p>
+<p>Let’s assume human player characters are of standard human size, that is, somewhere between 1.5 and 2 meters in height.  Normal human walking speeds are in the vicinity of 3-5 km/hour, maybe twice that at the “fast jog” that seems to be most game characters’ primary locomotion.  From these, along with timing how long it takes to make various journeys in the game world, we can get rough estimates of the sizes that these worlds and objects would be if “superimposed” on the real world.</p>
+<p>The numbers are surprisingly small.   You could fit all of World of Warcraft’s Azeroth, along with all the lands of its various expansions, several times into the county I live in—it is variously estimated online at being between 200-800 square miles.   A knowledgeable player could cross the original <em>continent</em> of Everquest’s Norrath on foot in about 40 minutes.   (Spoiler:  it takes a little longer than that to cross real continents on foot.  Try it!)  Those huge, craggy, massive mountains that blot out the sky of Skyrim?   The tallest is about 700 meters—certainly big enough that it might be called a mountain rather than a hill (especially with that craggy shape), but nowhere near the size you’d expect for its prominence in the skyline.    The entire world of Skyrim covers less than 15 square miles, smaller than my town.  For comparison: the base of Mt. Hood—a single, moderately large volcano in Oregon—covers more than 92 square miles.   Whole planets in No Man’s Sky are somewhere in the vicinity of twenty miles in diameter (although there are quintillions of them, so the total land area is…big.)</p>
+<p>Ignoring infinite and/or near-infinite procedurally generated terrains and real-world sampled ones, I’d estimate that all of the artist-designed game worlds in all computer games ever written put together would fit comfortably inside of Texas, with room left over for a lot of rattlesnakes.</p>
+<p>Things get even weirder when we consider population centers and commerce:   a bustling metropolis in most of these games would have fewer than 100 residents; it’s not uncommon for there to be a fully-stocked store that could literally outfit an army of adventurers in a town of eight people (and for some reason, a frighteningly large number of these shopkeepers need rats removed from their cellars).</p>
+<p>There are reasons for all these numbers, of course.    The primary one, of course, is that even granting very fast travel, the vast majority of an “Earth-sized world” would never be seen by players.  Games also have limits on how large they can be, even in an era of multi-terrabyte storage.   Artists are expensive, and designing large spaces that are unlikely to be seen isn’t a financially productive use of their time.    Players would likely be bored if they had to spend real-world amounts of time traversing between towns or navigating about a city.   </p>
+<p>For games, a better metric of world size is probably something like “interest density;” some sort of measure of how many distinct places there are to visit or things to do in the game world.   You can see this in city racing games:  there’s a lot of physical space, but it’s not very detailed (almost no buildings would have interiors, for example) because the players will be literally racing by it at high speeds most of the time.    On the other side, Skyrim has hundreds of points of interest and biomes scattered around it’s very small (by real world standards) land area.   The environment is vastly denser than the real world, giving players much less “travel time” for their adventures while still creating a psychologically large sense of scale.</p>
+<p>Of course, games aren’t the only uses for terrains, and for simulation purposes, real-world-analog sizes and distances are important.   Microsoft Flight Simulator models, in essence, the entire (real) Earth by way of streamed geologic data.   Google Earth similarly presents Earth itself in its full-scale glory.   We have renderable terrain data for Mars and the Moon, as well.    In some applications, there’s value in being able to generate “real world-like” terrains at will (often enhancing or emphasizing some geologic attributes for things like pilot training in mountainous areas or spacecraft landing in unexplored terrains.)</p>
+<p>All this boils down to:  it would be useful to be able to create both “full scale” and “compressed” terrains in order to maximize the applicability of our terrain generation engine.</p>
+<h2 id="geology">Geology</h2>
+<p>We’ll start with geology.   As mentioned earlier, many games combine the notion of the physical shape of the land with the biological and other ‘things’ that grow or sit upon it, referring to the entire combination as a biome.   For example, the Minecraft desert biome is always made up of shallow, gentle hills (reminiscent of dunes), the mountain biome is steep and (even by Minecraft standards) jagged, swamps are almost entirely flat, and so on.    While these describe real-world scenarios well enough that they don’t seem unnatural (at least in a world made entirely of cubes), they discount a number of possibilities.    Not all mountains, jungles, hills, or forests are the same, and in many cases a single geographical entity might have many biological environments represented in it (mountains and hills, in particular, cross multiple elevations, and even with something like deserts there’s amazing variablility).</p>
+<p>Still, it’s handy to have a term for a particular geologic “shape,” so we’ll call this a geome.   A geome is a description of physical shape (e.g. mountainous, hilly, flat, etc.) without regard to the life or other decoration that appears on it.</p>
+<p>There are a number of mathematical mechanisms that we can use to generate natural-looking geological structures, most of them fractal in nature--that is, if we “zoom in” on a particular sub-region of a geome, the types of shapes we see will be similar to the shape of the whole geome in structure, jaggedness, height variability, and so on.      For example, “smooth” old mountains tend to be fairly smooth at every scale due to long-term erosion; “young” mountains tend to be sharper and rougher at both the large and the small scale.    The rippling shapes of sand on desert dunes is often reminiscent of the shape of the dunes themselves.</p>
+<p>Real world fractals can maintain this self-similarity over very large ranges of size, but our synthetic ones stop at whatever the “resolution” of the world is on the small end (e.g. for Minecraft, the fractal nature ends at each cube.   For a marching cubes/tetrahedrons implementation, it would break down each “cube” one more time into polygons, which would then be flat and not broken down further.)</p>
+<p>On the larger end, the structure stops at the point of the largest element of the geography:  a mountain, a hill, a plain, an ocean, or whatever, although you could extend the model to whole continents or planets (and once you get planets, you’ve got self similarity on huge scales again: moons orbiting planets orbiting stars orbiting galaxies orbiting clusters…).</p>
+<p>Ignoring water, mountains and other large structures are the hardest part of generating terrains simply because they’re large.   This is particularly true for voxel terrains, because a single mountain (even a game-scale one, and definitely real-scale ones) would consist of far more 16-32 meter voxel chunks than are ever likely to be loaded at once.     But even the simpler terrain objects have trouble representing spaces that are larger than a kilometer or so in a given direction.</p>
+<p>Solutions fall into several categories.    The simplest is just not to allow such large terrains:  even a lot of “open world” games have maps that cover very small amounts of actual space, usually by increasing the detail density to a level that you would never see in the real world, but that meets our expectations in games.    For artist-generated worlds, the artist can combine multiple terrain or voxel objects; build the terrain as a monolithic whole, then separate them again for streaming at play time.</p>
+<h2 id="floating-point-precision-limits">Floating Point Precision Limits</h2>
+<p>There is, as always, another problem.  Coordinates in Unity (and for that matter most game engines and video cards) are stored as standard 32-bit floating point numbers.   The “floating” of “floating point numbers” means that the decimal point can move around in the number--but the total number of bits is fixed.  Which, in turn, means that there are only so many bits to go around:  the larger the integer portion, the fewer bits are available to represent the decimal portion of the numbers.  So, it’s an inherent property of floating point numbers that the larger the absolute number, the lower the decimal precision.</p>
+<p>For most numerical uses, that’s fine—even desirable.   We generally care about precision as a number of significant digits, and we tend to “round” large numbers more than small ones, anyway.   If you are doing math on large numbers, the rightmost decimal digits are likely noise or uncertain, anyway.</p>
+<p>But when we’re using these numbers to generate positions for things: trees, rocks, animals, mountains…that lack of decimal precision is problematic.     As our virtual character wanders farther and farther from the origin of their world, the “grid” size on which things can be placed becomes coarser and coarser.    This is because while we’re considering the character’s position on some global grid, the character’s interest is always local--concerning the objects that are positioned around them.</p>
+<p>Unity doesn’t enforce any particular interpretation of its units, but common convention sets one Unity Unit to one real-world meter (e.g. an approximately human character is between 1 and 2 Unity Units high in most game engines).    </p>
+<p>A 32-bit floating point value has roughly 7 (decimal) digits of precision.    So, if we’re representing a position in meters, and we want at least centimeter (1/100 meter) resolution, we need to reserve two of those digits for decimal places.    That leaves us about 5 decimal places of potential distance, or about 10,000 meters in which we can position things with centimeter accuracy.   Since the coordinate systems are usually centered on the origin, that means our character can move (or see) about five in-game kilometers from the origin before the precision with which we can place objects drops to a tenth of a meter instead of a hundredth.   Beyond 50 kilometers, we can’t even place objects a meter apart reliably, and it gets worse from there.</p>
+<p>How the game engine deals with this falloff of precision after 5000 meters or so depends on the engine, but most of them will have objects “jumping” or “shaking” when placed with higher accuracy than the coordinate position allows, and certainly if you’re allowing travel beyond 20 kilometers or so the errors will be too large to ignore even if you’re willing to tolerate the jitter.</p>
+<p>For objects with small details, the problems get worse:  render pipelines will often include steps where the model’s “object” coordinates are translated into “world” coordinates.  In such scenarios, the individual vertices of the model will be subject to the precision limits of that part of the world, and serious (and very visible) distortion will result.</p>
+<p>The financial industry has been dealing with this for decades, and their solution is usually to not use floating point numbers at all to represent currency, but rather a (large) integer number of the smallest currency unit (in the US, pennies, maybe) that needs to be represented.</p>
+<p>That doesn’t help us come actual render time, because we don’t have control over Unity’s coordinate implementation.   But we can borrow this mechanism for actually positioning things in our ‘world’ for long-term storage or generation:   We can calculate positions using (say) 64-bit integer numbers of centimeters, which gives us a “resolution” of several quadrillion meters before we run out of space—enough to represent the entire surface of any planet in our solar system to centimeter accuracy.   Double-precision floats can give you trillions of meters at centimeter accuracy.   Need more?   Most platforms give you access to 128-bit integers, as well, which can safely be described as “effectively infinite” for this purpose.  If your platform provides quadruple-precision floating point numbers, you could use these, too.  The “integer number of some fraction” is effectively the same idea as fixed-point numbers, also provided by some libraries in large forms.</p>
+<p>Once we need to push polygons to screen, though, we’re going to have to live with the limitations of 32-bit floating point numbers.  And that means we need to keep moving the origin so that it stays near the player.   This implies a degree of chunking even to non-voxel worlds (in the voxel case, the chunks are handily already provided!).    When a certain distance is reached, the player and every “nearby” object will be translated or reloaded relative to a new origin point closer to the player.</p>
+<p>Finally, consider a character standing on a mountaintop on a clear day.   On Earth, that character would be able to see perhaps a hundred kilometers in any direction.    This seems to throw a wrench into our “everything has to be within 5000 meters of the player” rule.   There are all sorts of reasons why this scenario is hard, not the least of which is that there’s an awful lot of “there” there.   But once we observe that the character isn’t going to be seeing centimeter-sized details from 5km away, nor meter-sized ones at 100km, it becomes a little easier.    We’re going to have to solve level-of-detail (LOD) issues, anyway, so we just need to be aware that floating-point precision is going to put an upper bound on how precise each detail level can be--probably a weaker bound than the actual amount of space, though.    If the world is divided into 1km square terrain pieces, our mountaintop viewer can see potentially a hundred thousand of them at once, which means each one can’t have many polygons, anyway.</p>
+<h2 id="level-of-detail">Level of Detail</h2>
+<p>...and that brings up the next point.   It's fairly common to have terrain rendered on top of an (x,z) mesh where the vertices are one meter apart.  Unity uses "unity units", which have no explicit size out of context, but by common convention many modelers base it on a 1UU = 1M scale, so a typical human is somewhere between one and two units in height, depending on age, gender, physique, etc.</p>
+<p>The continental United States is approximately 4500 x 2500 kilometers, so it would have something over eleven trillion "vertices" if measured on a coordinate grid.   Of course, at that scale the curvature of the Earth would make a mess of pure cartesian coordinates, but in many applications—even some real world ones—that can be ignored.   Real world map data at that scale does exist, for example see the <a href="https://datagateway.nrcs.usda.gov">USDA Geospatial Data Gateway</a> for LiDAR maps of most of the United States at one meter resolution.   But these data sets are very large:  even if you could somehow represent each height element as a single byte, that's over eleven terabytes for the U.S. alone.</p>
+<p>Technical discussions always run the risk of rapidly becoming outdated by the march of technological progress, but at least in mid-2021, it's reasonable to say that no video card is going to push 11 terabytes of coordinate data (nor the 22 trillion resulting tesselated polygons) at all, much less in real time.   And never mind the GPU:  very, very few modern computers are likely sporting 11 TB of RAM, and while a few folks may have that level of secondary storage, they're going to be in a distinct minority, as well.</p>
+<p>So there are compromises to be made, depending on the applicaton.</p>
+<h3 id="reduce-the-data-set">Reduce the data set</h3>
+<p>As a starting point, consider whether we need to store that much data at all.</p>
+<p>Flight simulators, and other scenarios where the player isn't going to get a good look at terrain details can probably get by with much less than 1m resolution.   If you can reduce your grid to, say, ten meter spacing, your 11 TB dataset is now a mere few hundred GB, and if you can use hundred meter spacing, you're within the sizes acceptable for a downloadable game these days.</p>
+<p>Alternatively, even in a flight simulator, the player isn't going to be able to see most of the US at any given moment--or for most flights, at all.   Streaming just the needed data from a large cloud source might work, especially in combination with level of detail calculations.  For example, your game might need 1m resolution near airports, but only 10m resolution for most of a flight where the plane is at 30,000 feet altitude.</p>
+<p>Similarly, GPS mapping systems meant for automobile navigation need basically no data at all for areas not on a roadway.  Even better, roads have relatively few configurations in the real world, so a hundred miles of interstate through the central plains might take only a few hundred bytes of data to accurately represent.  A curving mountain road or logging road might require a much higher information density, but they make up a relatively small percentage of the total roads.</p>
+<p>For game worlds that don't represent real worlds, we have additional options.   There are numerous mechanisms for generating "random" terrains from seed values, or for using seed values to 'search' into some mathematical space, such as Perlin noise.   In both cases, the seed values can be generated hierarchically from a higher level seed.  For example, use one seed integer for the world, use that to generate the seed values for quarters of the world, subdivide each of those into quarters using <em>those</em> seeds, and so on, in a space partitioning algorithm.   Since this generates a binary (really quadrary) tree, the "deepest" seeds can be generated from the initial seed in a logarithmic number of steps; a few dozen iterations will get us to US-sized spaces with ease.</p>
+<p>Even easier is to skit the seed generation (or use only one "world" seed) and just use the coordinates of the desired location as the "seed" or lookup key.   Minecraft does this, using the world coordinates to look up a position in a Perlin (or similar) continuous 3D noise function to generate its terrain.  Non-voxel games, or games in which 3D overhangs do not appear, can use a simpler 2D noise function.</p>
+<p>If the player cannot modify the world, using these generation methods means that no terrain data need be stored at all; it can always be regenerated (and on modern systems, possibly even done on the GPU itself via shader) based on the player's (or some other entity's) position.</p>
+<p>If player interations are limited to surface elements (chopping down trees, picking up rocks, killing monsters, etc.), only the "things" in the world need to be stored long term.</p>
+<p>Even if the player can modify the world's terrain itself (digging, building, blasting, whatever), it is unlikely that the vast majority of "chunks" in the world will remain forever untouched by the player, and only those chunks that are modified need to be stored.   It's not uncommon for even that storage to be time- or space-limited; returning to a modified terrain after a long absence (or after modifying lots of other terrain in the interim) will in some games result in the player's modifications being lost:  the game trades off the likelyhood that the player will return to a long-ago-important location against limiting the size of the "modified chunks" cache.</p>
+<p>(I'm suddenly envisioning a hypothetical game in which players smash asteroids into planets from space, thus violating the "players only modify things really near themselves" rule, but that'll take a different design entirely.)</p>
+<h3 id="reduce-the-level-of-detail">Reduce the Level of Detail</h3>
+<p>Somewhat orthogonal to the question of how much data is being used to store the world, is the question of how much data is being used to store the parts of it that the player can actually see at any given moment.</p>
+<p>The answer might be "all of it;" <em>Astroneer</em>, <em>No Man's Sky</em> and <em>Empyrion</em> all feature gameplay elements where a player approaches a planet from space, and at least during these ascent/descent sequences can see a significant fraction of the entire surface of the planet.   All of them make visibly obvious simplifications to the world in order to pull it off.  Most notably, terrain "snaps" into more and more detailed configurations as the player approaches the surface, and "ground" clutter things like trees, plants, objects, and animals either do not appear at all until landing, or only when the player is extremely close to the ground.  (<em>No Man's Sky</em> uses the same "hide the details" mechanism even for relatively low flight, unless the player's spacecraft moves extremely slowly with respect to the terrain.)</p>
+<p>More typically, the player is on the ground, and their vision will be limited by any nearby objects, the terrain itself, the horizon (real or virtual), and other factors.   Video games often supplement this with <em>fog</em> or other visibility-limiting elements, but we're interested here in the "clear day" scenarios.</p>
+<p>The Internet—which would never lie to me—tells me that the horizon as viewed from a height <em>h</em> above the ground on a flat plain or ocean, will be a distance <em>d</em> away based on:
+$$
+d = 10000 * \sqrt{h / 6.752}
+$$
+Where <em>d</em> and <em>h</em> are in centimeters.  (Drop the 10K multiplier to get <em>d</em> in kilometers, since it will typically be large).   For an average height human standing up, that's going to be a little less than 5km (or 3 miles, but games almost always use metric internally).   Which isn't too bad.   A circle with that radius has about 78 million square meters, most of which will be out of sight behind or to the side of the player.    It's still too much to draw:  If we can "see" 25 million of them, and they have two polygons each, that's about 4.5 billion polygons we'll need to draw per second to get 90 fps.  A fairly high end modern video card can do that under optimal circumsances, but it doesn't leave us much polygon budget for the rest of the game, nor any real support for more typical hardware.   It's also (probably coincidentally) just about the range at which floating point errors will start being visible.</p>
+<p>And that's a best case.   Add even a few dozen centimeters (say, a character jumping), and you'll get a few hundred meters of additional view.    Let the character be standing on a mountainside at 3000 meters, and they'll be able to see more than 200 kilometers.   That's reversable, too; a player on a flat plain will be able to see at least part of a 3000 meter mountain even if it's 200 km away from them.   Even that's hardly a worst case.   Earth's Mt. Everest is almost three times that high, even the old and eroded Cascade Mountains in the US Pacific Northwest have several volcanos well over the 3000 meter mark.  Lower-gravity worlds are likely to have features many times larger still.</p>
+<p>As we discussed above, though, the primary problem here are those 1m resolution polygons.    At the opposite end of the equation, I could represent the entire United States (badly) with a single polygon.  It wouldn't capture most of the details, but with a reasonable texture on it, and viewed from, say, the moon or high orbit, it might work fine. </p>
+<p>The "Secret Sauce," of course, is to mix the levels.   Things nearby the player should be modelled at higher resolutions, things further away can be modelled at progressively lower resolutions the farther away they are.   It would probably be possible to build a continuous version of this (where every polygon has it's vertex resolution determined by how far it is from the player), but more generally LOD systems tend to be zoned.  For example, terrain within a kilometer of the player is at 1meter resolution, then 2 meter resolution for another kilometer, 16 meter resolution for another few kilometers, and 128 meter resolution beyond that (these numbers are made up for example and will be highly dependent on the particular engine and game.)</p>
+<p>Zones will usually "round" to chunks of some sort.   For example, if we're using Unity Terrain objects with 512x512 meter edges, it would be reasonable to have the Terrain in which the character is located be at 1meter resolution, as well as the nine or twenty-four Terrains encircling that one.  Beyond that, the Terrain objects may be built at lower resolutions (and possibly higher sizes) out to whatever maximum visibility we allow.    As the player moves and leaves their current Terrain, the ones that are now "too far" from the player are discarded in favor of lower-resolution versions, and new ones that have come "in range" are generated or re-generated at higher resolution.</p>
+<p><strong>Note</strong>:  <em>Unity terrains have an internal level of detail that describes their shapes using a minimum set of polygons:  rough areas have more polygons than smooth ones (which discard vertices which would just be in a plane described by the surrounding ones).   This is done automatically and internally as the shapes of the terrain change, and scales with the scale of the terrain.    So we get this extra optimization "for free," at least until our terrains become too complex.</em></p>
+<p>We may be able to apply additional optimizations:   If the game does not allow a player to move underwater, it's reasonable to simplify "undersea" terrain significantly, since the player will never see it.   A very sophisticated engine might be able to determine that large amounts of terrain are "over the hill," occluded by a mountain, or otherwise blocked by the existing terrain from the player's view point, and not generate that space at all until needed.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<nav aria-label="Footer" class="md-footer__inner md-grid">
+<a aria-label="Previous: Background" class="md-footer__link md-footer__link--prev" href="../Background/" rel="prev">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Previous
+              </span>
+              Background
+            </div>
+</div>
+</a>
+<a aria-label="Next: Heightmaps or Voxels" class="md-footer__link md-footer__link--next" href="../heightmaps_and_voxels/" rel="next">
+<div class="md-footer__title">
+<div class="md-ellipsis">
+<span class="md-footer__direction">
+                Next
+              </span>
+              Heightmaps or Voxels
+            </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js"}</script>
+<script src="../assets/javascripts/bundle.01de222e.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+</body>
+</html>

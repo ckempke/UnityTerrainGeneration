@@ -1,0 +1,28 @@
+site_name: My Docs
+site_url: https://ckempke.github.io/UnityTerrainGeneration/#/
+theme: material
+
+nav:
+    - Home: index.md
+    - Theory:
+        - Background: Background.md
+        - Size: size_of_game_worlds.md
+        - Heightmaps or Voxels: heightmaps_and_voxels.md
+    - Practice:
+        - Requirements: Requirements.md
+        
+plugins:
+    - search
+    - mermaid2
+    
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js
+   
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css
