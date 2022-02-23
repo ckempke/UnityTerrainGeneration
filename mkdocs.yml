@@ -1,5 +1,5 @@
-site_name: My Docs
-site_url: https://ckempke.github.io/UnityTerrainGeneration/#/
+site_name: Unity Terrain Generation
+site_url: https://ckempke.github.io/UnityTerrainGeneration/
 theme: material
 
 nav:
