@@ -1,7 +1,7 @@
 # Runtime Terrain Generation in Unity
 I've always loved open world games, with their illusion of complete freedom of movement in a vast world ready for exploration.    And as a developer, I've similarly been a fan of _procedural generation_ of game environments: the notion that the game can—through application of rules—generate its own content.    In the best scenarios, this gives way to _emergent behavior_, in which those rules combine in ways that are more than the sum of their parts, and can produce results (pleasantly) surprising even to the developer.  (Contrast with _bugs_, which are results unpleasantly surprising to the developer...)
 
-The logical endpoint of this are games like _No Man's Sky_, in which virtually the entire world is procedurally generated.
+The logical endpoint of this are games like _No Man's Sky_, in which virtually the entire world is procedurally generated, like this:
 
 ![No Man's Sky](media/no-mans-sky-1.jpg)
 
