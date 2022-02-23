@@ -13,11 +13,16 @@ nav:
         
 plugins:
     - search
-    - mermaid2
     
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
 
 extra_javascript:
   - https://polyfill.io/v3/polyfill.min.js?features=es6
