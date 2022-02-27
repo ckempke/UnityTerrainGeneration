@@ -19,7 +19,7 @@ Second, we have the "Biome," which is associated with the (generally) biological
 
 For example, consider this screenshot from Bethesda Softwerks's _Skyrim:Enhanced Edition_.[^1]
 
-![Skyrim](/media/skyrim-1.jpg)
+![Skyrim](media/skyrim-1.jpg)
 
 The shape of the world around us would be the geology, including the terraced rocks, sloping shores, and even the (underwater) river bed.     The river itself is of course water, and most of the rest of what we see would be the biome:  the trees, the grass, the large stump on the opposite shore, and maybe even some of those smaller rocks areound the river.
 
@@ -58,5 +58,4 @@ implementing this in Unity, we could be reasonably certain that the larger "shap
 ## Unity Terrain GameObjects
 
 The Unity engine provides a high-level game object called “Terrain.”    Unity Terrain objects consist of both geology (represented as a heightmap), and biome (represented as a “trees” collection and a “details” collection).   It does not handle water directly (and since about 2019 Unity has not included the “Standard Assets” collections that used to provide the easiest implementation), so water features are imposed as separate game objects, usually as one or more geometric volumes or a simple “surfaces” at a particular altitude, depending on the needs of the game. 
-
 

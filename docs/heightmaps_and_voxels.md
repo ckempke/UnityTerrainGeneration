@@ -10,7 +10,13 @@ The downside of heightmaps is that they represent only a single ground level per
 
 Whether or not this is a problem depends on the game.   If the game does not require such structures, heightmaps are a good choice.  Such games are numerous, and players often won’t notice the absence of overhangs among all the other details of a good-looking world.   It’s also common to simply not model interior spaces as part of the terrain at all, and simply transition the player to a new scene representing the interior space (e.g., Skyrim ).
 
- If there are relatively few “overhanging” objects, they can be added to a heightmap-based world by using mesh game objects to create the overhanging parts, and adding them to the world like any other object.    Conversely, recent versions of Unity allow heightmaps to define “holes” in them, to which a custom mesh to represent, say, a cave interior can be “attached.”   Both of these mechanisms are reasonably complex to implement, and while they could be automated, in practice usually require a trained modelling artist to design each instance.   Less troublesome, but still a consideration is that the “appended” structure (the meshes that describe either the overhanging object or the cave) are different in nature from the terrain object itself, and need to be handled separately for things like collision, walkability, and navigation agent (or other AI) availability.
+ If there are relatively few “overhanging” objects, they can be added to a heightmap-based world by using mesh game objects to create the overhanging parts, and adding them to the world like any other object.    For example, in this screen shot from Black Desert Online, it's likely that many of those "rocks" are additions to the terrain rather than part of it.
+
+![Screen shot from Black Desert online](media/black-desert-online-1.jpg)
+
+
+
+Conversely, recent versions of Unity allow heightmaps to define “holes” in them, to which a custom mesh to represent, say, a cave interior can be “attached.”   Both of these mechanisms are reasonably complex to implement, and while they could be automated, in practice usually require a trained modelling artist to design each instance.   Less troublesome, but still a consideration is that the “appended” structure (the meshes that describe either the overhanging object or the cave) are different in nature from the terrain object itself, and need to be handled separately for things like collision, walkability, and navigation agent (or other AI) availability.
 
 This last point is especially important for games that implement player deformation of the terrain, usually in the form of digging.    It’s possible to limit the player to only single-height deformations (a standard “bowl-shaped” crater created by an explosion would be representable in a height map, for example).    Even digging can be limited in this way, so long as digging always removes all terrain above the dug point.   The recent (as of this writing) game Valheim does this reasonably successfully because of its generally shallow digging mechanism, but it does produce some odd behaviors on steep surfaces.
 
@@ -24,13 +30,19 @@ If a “pixel” is a two dimensional “pixel element,” a voxel is its three-
 
 The canonical voxel world game is Minecraft .   The Minecraft world is made up of cubical blocks about half the height of the player, and effectively any block can be removed or replaced to solve the game’s puzzles and build whatever the player wishes.
 
+![Screen shot from Minecrafh, showing a player looking down from a hill](media/minecraft-2.png)
+
 Compared to what we think of as pixels, Minecraft’s voxels are very, very large.   That’s typical of voxel based games, because representing any significant amount of terrain with sub-millimeter sized voxels would require prohibitively large amounts of memory.   In the block-based world of Minecraft, the large block sizes are a design benefit; much of the game’s distinctive style and “feel” comes from its blocky nature.
 
 If we wish to represent more natural-looking voxel terrain, there are obstacles that need to be overcome.     The most obvious one is the blocky nature of the terrain.
 
 Since the voxel “blocks” need to be converted to a mesh for display anyway, we can use this conversion as an opportunity to ‘smooth’ the blocks into something less chunky.    There are well-known methods to do this, in particular the marching cubes or marching tetrahedrons algorithms.    These generate meshes more complex than the pure cubes of the underlying voxel representation, but they’re relatively inexpensive to implement because they’re primarily lookup-table based.   At a very high level, each vertex and face of a block is replaced by a new face based on the present/not present state of the bock itself and the neighboring blocks in the direction of the vertex or face.
 
-When flat shaded, the resulting terrains would still not be mistaken for entirely natural.   Again, this could be an advantage:  System Era Softworks’s Astroneer  uses this sort of “smoothed voxel” terrain as a stylistic choice; it perfectly matches the cartoony, low-polygon aesthetic of the rest of the game’s elements.    More sophisticated shading and texturing algorithms can mask the polygonization of the terrain and make it appear realistic. 
+When flat shaded, the resulting terrains would still not be mistaken for entirely natural.   Again, this could be an advantage:  System Era Softworks’s Astroneer  uses this sort of “smoothed voxel” terrain as a stylistic choice; it perfectly matches the cartoony, low-polygon aesthetic of the rest of the game’s elements.    
+
+![Image from Astroneer, player looking toward mountains](media/astroneer-1.jpg)
+
+More sophisticated shading and texturing algorithms can mask the polygonization of the terrain and make it appear realistic. 
 
 A bigger problem is memory, or its related sibling, resolution.    
 
