@@ -16,7 +16,7 @@ Another wonder of the modern internet is that you never know who's going to wand
 
 ## Tools
 
-This site is being hosted at Github Pages, but it's not using their Jekyll parser.  Instead, I'm using Docsify, with the Mermaid extensions turned on.
+This site is being hosted at GitHub Pages, but it's not using their Jekyll parser.  Instead, I'm using MkDocs, with the Mermaid extensions turned on.
 
 Mermaid allows graphs such as flowcharts and sequence diagrams:
 

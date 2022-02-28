@@ -6,7 +6,7 @@ nav:
     - Home: index.md
     - Theory:
         - Background: Background.md
-        - Size: size_of_game_worlds.md
+        - World Size: size_of_game_worlds.md
         - Heightmaps or Voxels: heightmaps_and_voxels.md
         - Generation: generation.md
     - Practice:

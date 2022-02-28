@@ -63,7 +63,7 @@ Another popular noise-like algorithm is "Midpoint Displacement."  There are nume
 - Set the height of that new position to the average of the 2/4 positions around it, plus or minus a small random displacement.
 - Repeat until you're at the desired resolution, possibly halving the displacement each time.
 
-This is a little more complex in practice than it looks like, since some of the positions need to be handled slightly differently than the others (there's a center square in each quad that has no neighbors with existing values when created), but it's relatively simple.
+This is a little more complex in practice than it looks like, since some of the positions need to be handled slightly differently than the others (there's a center square in each quad that has no neighbors with existing values when created), but it's relatively simple.   ("Diamond square" is a popular specific algorithm, there are others, as well.)
 
 This doesn't generate quite as nice looking a terrain as the perlin/simplex versions, but it has the advantage that you can force certain positions to have certain values:  if you want to insure that the edges of your map are below sea level, for example, or that there are mountains/continents in specific places or quantities.
 
@@ -71,9 +71,9 @@ On the other hand, it shares a fair amount of disadvantages with the other noise
 
 Also, despite seeming fairly fractal, there's really only two scales:  the initial "gross features" one and the detailed "rough surface" one.  Everything else tends to get smoothed out between them.  It's pretty good (maybe better than any of the other algorithms) at creating the rough structure of continents and seas, but is much poorer at things like mountain ranges and hills, unless you provide them in the initial data (which sort of defeats the point).
 
-# Voronoi
+## Voronoi
 
-Voronoi diagrams are a sort of "region map."    A bunch of "seed points" are randomly distributed over a surface, and then every other point is assigned to the "region" containing the closest seed point to it.   The region edges are polygons, whose edges are along the exact midpoint between each pair of seed points.   This process effectively divides space into a random set of convex polygons.
+Voronoi diagrams/Voronoi maps are a sort of "region map."    A bunch of "seed points" are randomly distributed over a surface, and then every other point is assigned to the "region" containing the closest seed point to it.   The region edges are polygons, whose edges are along the exact midpoint between each pair of seed points.   This process effectively divides space into a random set of convex polygons.
 
 For example, using Alex Beutel's online Voronoi generator [here](http://alexbeutel.com/webgl/voronoi.html), we can create an example diagram:
 
@@ -81,4 +81,36 @@ For example, using Alex Beutel's online Voronoi generator [here](http://alexbeut
 
 The seed points here are the black dots, and the various colored polygons are their associated regions.   Note that because they are distributed randomly, the seed points are often quite far from the center of regions they define.   Also note that every polygon is convex, and all of the edges are straight lines.   The size of the regions is defined by the density of the corresponding seed points; in the diagram above, sparser points on the left tend to lead to larger polygons than on the right.
 
-Such diagrams can be used in several ways to generate terrains.
+Despite their apparent simplicity, Voronoi diagrams can be used in a number of ways for terrain generation.   
+
+**Height Map:** Using the seed points as mountain "peaks" and defining either a fixed slope or one dependent on the polygon size can give you a base for mountain ranges and passes (the mountain passes correspond to the polygon edges, which are the low points of the height maps).   Mountains generated in this way are unnaturally conical and "spiky," so this would generally be the starting point for an algorithm that then roughens the surface by adding noise, erosion, etc.
+
+**Elevation Generation**:  Let's take the above map and manipulate it a little bit.  If we take every polygon that touches the edge and make it blue, then every polygon that *does not* touch a blue one white, and the remainder green, you get this:
+
+![Same Voronoi diagram, but with coloration showing "distance" from the edge of the map.](media/voronoi-2.png)
+
+If you squint at that hard enough, you can see an island surrounded by water, with central snowy mountain peaks.  Using the "distance" (here meaning smallest number of polygons to an edge) to generate elevation zones can give you, again, a starting point for other generation techniques.  To get more elevation levels and rougher coastlines, start with more seed points. Amit Patel has a frequently-referenced online article where he takes this technique a *lot* farther, which you can find here:  http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/
+
+**Others:**  There are lots of other possibilities.  Andy Lo uses them to define continental plates: https://squeakyspacebar.github.io/2017/07/12/Procedural-Map-Generation-With-Voronoi-Diagrams.html, then models the "stress" along their edges as they push together or pull apart.  Voronoi maps can be used to place moisture maps, biomes, political divisions, or what have you.  *Empyrion* appears to use a similar technique to determine zone of control around planetary bases (which act as the seed points).   Basically any time you've got "zones of influence" that can't overlap, you're ending up with a Voronoi diagram or something like it under the covers.
+
+## Natural Processes
+
+The natural world is shaped by continental drift, volcanism, gravity, water, and wind (and the occasional drive-by attack by comets and asteroids).   To one degree or another, all of these are relatively simple phenomenon that interact in decidedly non-simple ways to produce the astounding diversity of our planet's geography.
+
+This sort of "simple rules to produce non-simple emergent behavior" is the whole idea of procedural generation, and of course it's ideal for computational approximation.
+
+### Continental Drift
+
+**Continental Drift**, or more accurately *Plate Tectonics,* is the science that described the large-scale movement of sections of the Earth's crust, called plates.   While it's accepted today as the best scientific description of planetary geology, it's surprisingly young--there was considerable debate about it as late as the 1960's.
+
+For our purposes, we can simplify the ideas to this, while losing some details:  The surface of our Earth-like planet is divided into large regions which float on top of the "liquid" mantle.   These plates move about, very slowly (centimeters per year).   Interesting things happen at the edges:
+
+- Where two plates push into each other, the earth buckles up and you get mountain ranges.   This isn't a stable situation (mountains can't grow indefinitely), and the heavier plate will be pushed under the lighter one, a process called "subduction."    If one or both the the plates are oceanic rather than landmasses, the physics are a little different and you'll generally get a trench or deep ocean valley instead (often with a line of volcanos or volcanic mountains some distance back along the uplifted side).
+- Where two plates pull apart, you get significant volcanism, and the formation of rift valleys (on land) and oceanic ridges at sea, where volcanism effectively produces "new" seafloor to fill in the gaps.
+- Where plates slide along each other, you get buildups and releases of friction, which cause earthquakes, generally in combination with one of the other two scenarios.   The edges of plates are fault lines.
+
+From an implementation standpoint, we can do things as complicated as measuring stresses (see the Andy Lo article above), or as simple as just realizing that mountain ranges, rifts, and trenches tend to follow plate boundaries, and that the interiors of plates distant from the edges tend toward flatness.
+
+Plate tectonics as it occurs on Earth may not be a universal phenomenon; science is ongoing about its existence (or lack of same) on other worlds.
+
+ 

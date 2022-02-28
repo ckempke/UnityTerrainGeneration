@@ -10,10 +10,9 @@ The exact usage often doesn’t matter—and Unity’s primary use is for games�
 
 A "Terrain" as we customarily think of it is made up of at least two very high-level properties.
 
-First, we have the "Geology," which determines the physical structure of the "ground" in the terrain.  Examples include "mountains", "hills", "plains", and more exotic structures like
-canyons, badlands, moors, buttes, plateaus, land bridges, caves, etc.   We can even stretch the word “natural” to the breaking point to include things like Avatar’s air-floating islands for magical worlds. In Unity's built-in terrain objects, geology is represented by the components related to the mesh: the mesh itself, as well as colliders, heightmaps, nav agents, and the like.
+First, we have the "Geology," which determines the physical structure of the "ground" in the terrain.  Examples include "mountains", "hills", "plains", and more exotic structures like canyons, badlands, moors, buttes, plateaus, land bridges, caves, etc.   We can even stretch the word “natural” to the breaking point to include things like Avatar’s air-floating islands for magical worlds. In Unity's built-in terrain objects, geology is represented by the components related to the mesh: the mesh itself, as well as colliders, heightmaps, nav meshes, and the like.
 
-Second, we have the "Biome," which is associated with the (generally) biological details of an area. Examples here would be "swamp", "sea", "lake", "desert", "barren", "forest," and many more.   Unity's terrain objects include these as the "trees" and "details" components.    Note that there’s some fuzziness about “biological” here.   Things like small rock formations, scattered stones, stalactites and stalagmites, and other “small mineralogical” things aren’t biological, but they’d generally be handled in a manner similar to the locating of plants, and hence lumped into the biome.
+Second, we have the "Biome," which is associated with the (generally biological) details of an area. Examples here would be "swamp", "sea", "lake", "desert", "barren", "forest," and many more.   Unity's terrain objects include these as the "trees" and "details" components.    Note that there’s some fuzziness about “biological” here.   Things like small rock formations, scattered stones, stalactites and stalagmites, and other “small mineralogical” things aren’t biological, but they’d generally be handled in a manner similar to the locating of plants, and hence lumped into the biome.
 
 “Water” (or “hydrology”) is a weird component which could be considered either geology or biome, both, or entirely independent. How a game or simulation deals with it will largely depend on whether water is a "decoration" or an interactive environment of its own.   Unity itself shares this ambiguity, and has generally just given up on implementing water as a standard part of the engine in the early-2020’s versions of the engine.   We’ll consider it separately just because many implementations are likely to.
 
@@ -45,7 +44,7 @@ implementing this in Unity, we could be reasonably certain that the larger "shap
   
   | Type | Unity Type | Description |
   | ------ | ------ | ------ |
-  | Texture | Spryte/Material | The images used to paint the polygons of a mesh |
+  | Texture | Sprite/Material | The images used to paint the polygons of a mesh |
   | Billboard | Mesh + Material | a 2-dimensional illusion of a 3-dimensional object, where the single polygon face (usually a quad) faces the player at all times |
   | Meshes | Mesh | A 3D object made up of vertices, edges, polygons, and textures (and possibly other elements) for drawing an "object" in the virtual world |
   
