@@ -35,7 +35,7 @@ The generation of worlds should allow the generator to control limits and biases
 - An increase in (or even mandate for) natural "switchbacks" and "collapsed slopes" that allow access to most terrain without climbing or high-jumping mechanics (e.g that you can "walk" to most of the world, even mountain peaks and the like).
 - Vertically spaced "handholds" for most steep surfaces (for games with climbing mechanics).
 - More regions of increased verticality in general (canyons, badlands, cliffs, other eroded or uplifted spaces)
-- An increase in "dead end" type terrains:  places with few or even just one point of entry.  For example: deep canyons, caulderas accessed through only one path or cave system, mountain valleys, etc.
+- An increase in "dead end" type terrains:  places with few or even just one point of entry.  For example: deep canyons, calderas accessed through only one path or cave system, mountain valleys, etc.
 - Region separation: natural boundaries that separate the world into mutually inaccessible (or difficult to access) regions.    This allows the game to control player progression into "higher level" areas over time.  Such boundaries will suppress the handholds/switchback options in the boundary areas.
 
 All of these should be able to be independently turned on or off; when they're all disabled, the worlds will tend toward the "natural," independent of player accessibility.

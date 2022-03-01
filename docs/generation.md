@@ -103,9 +103,9 @@ This sort of "simple rules to produce non-simple emergent behavior" is the whole
 
 **Continental Drift**, or more accurately *Plate Tectonics,* is the science that described the large-scale movement of sections of the Earth's crust, called plates.   While it's accepted today as the best scientific description of planetary geology, it's surprisingly young--there was considerable debate about it as late as the 1960's.
 
-For our purposes, we can simplify the ideas to this, while losing some details:  The surface of our Earth-like planet is divided into large regions which float on top of the "liquid" mantle.   These plates move about, very slowly (centimeters per year).   Interesting things happen at the edges:
+For our purposes, we can simplify the ideas to this, while losing some details:  The surface of some Earth-like planet is divided into large regions which float on top of the "liquid" mantle.   These plates move about, very slowly (centimeters per year).   Interesting things happen at the edges:
 
-- Where two plates push into each other, the earth buckles up and you get mountain ranges.   This isn't a stable situation (mountains can't grow indefinitely), and the heavier plate will be pushed under the lighter one, a process called "subduction."    If one or both the the plates are oceanic rather than landmasses, the physics are a little different and you'll generally get a trench or deep ocean valley instead (often with a line of volcanos or volcanic mountains some distance back along the uplifted side).
+- Where two plates push into each other, the earth buckles up and you get mountain ranges.   This isn't a stable situation (mountains can't grow indefinitely), and the heavier plate will be pushed under the lighter one, a process called "subduction."    If one or both the the plates are oceanic rather than landmasses, the physics are a little different and you'll generally get a trench or deep ocean valley instead (often with a line of volcanos or volcanic islands some distance back along the uplifted side).
 - Where two plates pull apart, you get significant volcanism, and the formation of rift valleys (on land) and oceanic ridges at sea, where volcanism effectively produces "new" seafloor to fill in the gaps.
 - Where plates slide along each other, you get buildups and releases of friction, which cause earthquakes, generally in combination with one of the other two scenarios.   The edges of plates are fault lines.
 
@@ -113,4 +113,6 @@ From an implementation standpoint, we can do things as complicated as measuring 
 
 Plate tectonics as it occurs on Earth may not be a universal phenomenon; science is ongoing about its existence (or lack of same) on other worlds.
 
- 
+### Volcanism
+
+Volcanos are a more local effect, especially if you broaden the definition to anytime magma, ash, or hot materials are brought to the surface.   They occur around continental plate edges (e.g. the Pacific "Ring of Fire"), often on the uplifted (higher) side of a subduction zone.  Those tend to be the clustered ones you see in mountain ranges, like the numerous volcanoes in the Cascade range of the U.S. Pacific Northwest.   But volcanoes can form anywhere that there's a sufficient "hot spot" below the earth's crust.  Hot spot volcanoes like this are often responsible for island chains--for example, Hawaii's islands were formed by repeated volcanic eruptions of a hot spot as the tectonic plate moved over it.   They can also be absolutely massive, such as the super-volcanos that formed the Yellowstone caldera and Lake Toba.

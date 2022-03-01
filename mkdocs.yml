@@ -11,6 +11,7 @@ nav:
         - Generation: generation.md
     - Practice:
         - Requirements: Requirements.md
+        - Unity Terrains: unity-terrain-types.md
     - References: references.md
         
 plugins:
