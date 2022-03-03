@@ -69,9 +69,15 @@ So there are at least three possible mechanisms we can use here, each with some 
 
 **Uniform Range, Uniform Base (UR, UB):**  In this model, we use the same range for every terrain patch; it represents the entire distance from the lowest point to the highest point *in our game world.*   Stitching is automatic as long as the patches generate compatible edges.    In this model, the difference between Plain A and Plain B above is *altitude,* Plain B is higher above sea level (or closer to sea level if undersea) than Plain A is.  Because the scale, range, and interpretation of every terrain patch is uniform, this is relatively easy to implement.   The major downside of it is that the entire world's highs and lows need to fit into the chosen range, which means either limiting it to 5 kilometers of vertical scope or accepting some loss of resolution (and associated artifacts) to get a larger one.
 
+![ur-ub model illustration](media/ur-ub.png)
+
 **Uniform Range, Dynamic Base (UR, DB):**  In this model, we use the same range for every terrain patch (so a "hill" 0.15 high will be the same size in every patch), but interpret the bottom of the range differently for each patch based on it's local highs and lows.   For example, a patch from the side of a beach rise might range from 0 to 500 meters above sea level, the next patch "uphill" from 400 to 900 meters.   This involves keeping a "base height" for each terrain that indicates what "zero" means for that patch.    This method allows us almost unlimited global range.  In implementation, the entire terrain object will be moved up or down relative to its neighbors to achieve the correct relative position.   This is only slightly more difficult to implement, and allows a sort of "floating origin" to keep the terrain chunks near the player in the 10K window (negative values are possible here because you can position the actual terrain lower than zero).   Whether stitching is problematical or not will depend on implementation details; assuming the edges match in "real world" heights and the terrains are properly positioned vertically, things should match up.  But because there are more transforms involved here, there's a chance of small rounding differences showing up as holes along the patch edges.    
 
+![ur-db model illustration](media/ur-db.png)
+
 **Dynamic Range, Dynamic Base (DR, DB):**  In the most complicated model, we use the entire range available for each patch to cover it's local highs and lows.   That is, if the lowest and highest points in a patch are 300 and 500 meters, the range for the patch will be 200.    If the low and high are -500 and 3000 within that single patch, the range will be 3500.   This needs to be coupled, like the last case, with a dynamic height to indicate what "0.0" means in that patch.   Generation also becomes harder because the same "distance" in heightmap [0,1] space means something different in each patch.   Rounding is almost certain to be different between patches, making stitching difficult.
+
+![dr-db model illustration](media/dr-db.png)
 
 (The missing case here, Dynamic Range and Uniform Base, combines the worst of all worlds and doesn't really merit discussion, "implicit" stitching will almost certainly fail because of artifactual differences between patches.)
 
@@ -108,4 +114,6 @@ The same sort of considerations apply if you're trying to use a GPU shader to do
 The second consideration for (again, non-implicit) stitching is that it _changes_ one of more of the terrains as it adjusts the heights along the edge.   If that edge is sufficiently close to the player camera, the result may be a visible distortion of the ground over either the edge or the entire skirt area, depending on the stitching algorithm.
 
 Of course, if the player can see the edge, they can presumably also see the "new" terrain popping into place, which is far more distracting.    In both cases, the solution is to make sure that new patches generate at a distance from the player where they're either invisible or sufficiently tiny as to not matter, and do stitching as early as possible, long before the player approaches the edge.
+
+Most chunking algorithms keep a "buffer" of loaded space around the player anyway, so this isn't likely to be a big problem.   But you should do stitching _before_ placing detail objects on the terrain, since the ground may shift underneath them.
 
