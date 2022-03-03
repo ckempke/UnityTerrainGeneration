@@ -12,6 +12,7 @@ nav:
     - Practice:
         - Requirements: Requirements.md
         - Unity Terrains: unity-terrain-types.md
+        - Locality: locality.md
     - References: references.md
         
 plugins:
