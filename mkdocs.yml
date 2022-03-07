@@ -12,7 +12,10 @@ nav:
     - Practice:
         - Requirements: Requirements.md
         - Unity Terrains: unity-terrain-types.md
-        - Locality: locality.md
+        - Locality:
+            - Overview: locality.md
+            - Global:  global-loc.md
+            - Local : local-loc.md
     - References: references.md
         
 plugins:

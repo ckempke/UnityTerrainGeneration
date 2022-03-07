@@ -73,9 +73,11 @@ Here's a screenshot of a character standing at the corner of three patches, one 
 
 The problem, though, is probably already obvious:  this isn't a very interesting world; just meter-high rolling hills to the end of infinity (or at least the end of the "long integer" coordinate space).
 
-Part of this is that we're just using a very simple noise function.    Usually Perlin-class noise functions add several different "octaves" (scales) of the noise together to get a rougher terrain.   The technique is called _fractal Brownian motion_ (FBM), which I personally think is a horrible name, because (while accurate), it's very different from what we usually think of as Brownian motion: the random walk of individual particles in something like a liquid.    I'm just going to call it "fractal noise," and accept that the Nobel committee will probably overlook me.
+Part of this is that we're just using a very simple noise function.    Usually Perlin-class noise functions add several different "octaves" (scales) of the noise together to get a rougher terrain.   The technique is called _fractal Brownian motion_ (FBM), which I personally think is a horrible name, because (while accurate), there's no actual "motion" here, and it's very different from what we usually think of as Brownian motion: the random walk of individual particles in something like a liquid.    I'm just going to call it "fractal noise," and accept that the Nobel committee will probably overlook me.
 
 We could use fractal noise to generate a much more "rough" terrain by letting it generate features ranging in size from the sort of local hills we've got here through the size of the entire world.     But pure Perlin-class noise generation doesn't generate very interesting worlds at the best of times, and so we probably want to reserve it as a final "roughening" step after we use some other technique.
+
+The other issue with Perlin-class noise terrains is that they need to be uniform between patches.   If the frequency changes between two patches, the "position" of hills and depressions will move around, and a "hill" that begins in one patch will likely be somewhere else (or missing altogether) in the next, and this will increase the further you are from the origin.   Similarly, amplitude changes will cause features to have different sizes (but not positions) between patches, also causing discontinuities and gaps.  Stitching can probably cover minor differences, but attempting to generate a wide range of different terrains with varying Perlin-noise is going to make for a lot of blending problems.
 
 ### Local and Global
 
@@ -83,10 +85,21 @@ And this is where it starts to get ugly.   Consider a mountain.   Mountains are 
 
 That mountain has an influence over patches potentially hundreds of patches away.   My "foothill" patch needs to do it's part in the rise from plains to mountain range, even though that mountain range is very, very distant.  And in fact, my patch will "care" what's in the other direction, too.   If there's a second mountain range on the other side of us, we'll likely generate very different terrain than if the land falls off to the sea (look at a relief map and notice that subduction mountain ranges tend to "fall off" much faster on one side than the other.)
 
-So it seems like we need to know about, say, every mountain in our world to generate every patch.   And probably every valley, canyon, lake, etc. over a certain size.  That's the very opposite of independent generation.
+So it seems like we need to know about, say, every mountain in our world to generate every patch.   And probably every valley, canyon, lake, river, road, etc. over a certain size.  That's the very opposite of independent generation.
 
 On the other end of the scale, say there's a ten-meter pond in our patch.  If it's entirely within the bounds of our patch, no problem.   But if it spills over into the next patch, we don't want it to simply end in a hard line at the patch boundary.   We could solve this--very simply--by having small features like that always generated inside patch boundaries; but there are problems with that solution, too:  players may well start noticing a sort of "grid" layout to some feature types, it's clumsy to use with features of different sizes, it doesn't work for things near or slightly larger than a whole patch, and it gets even more limiting if our patch sizes need to get smaller to support mobile or older consoles. 
 
 Then there's the stuff in the middle: that ten kilometer mountain lake, the sheer cliff that runs for a few kilometers, a swamp contained in the caldera of an extinct volcano, or even a small cinder cone volcano itself rising out of an agricultural plain.
 
 And while we're solving all these problems, we still want to have our patches be able to be generated independently of the ones adjacent to them (and to match them at the edges, at least closely enough that we can cheaply stitch them.)
+
+The world tends to be fractal:  that is, structures repeat in spirit (not exact shape) at many different scales: coastlines share their ruggedness no matter how far you zoom in and out, erosion builds the same patterns in great hills and canyons as it does in your dried backyard dirt piles, desert dunes are recursive in shape.
+
+But for _our_ purposes, we can try to simplify this into four categories:
+
+- **Global** structures are those that are vastly larger than our patches:  the shapes of continents, mountain ranges, oceans, supervolcano calderas, (large) impact craters, and the like.  Anything whose structure spreads over more than maybe 2 or 3 kilometers in any direction, we'll consider global.
+- **Regional** structures are those that affect a small number of nearby patches:  a single hill, small volcanic crater, small to medium lake or island, smaller impact craters, buttes, valleys, rock outcroppings, glacier, or something like Devil's Tower.   The specific criteria here is that their influence or physical structure must be contained within a small number of patches: say 5-10 at the absolute most.   We'll also assume that they get rarer as they get larger.
+- **Local** structures are those that are smaller than a single patch:  the "lay of the land" itself, plants, trees, cave entrances, small hills, etc.  These will often be entirely internal to a patch, and must never impact more than the directly adjoining patch(es).
+- **Network** structures are rivers, roads/paths/natural trails, and long erosion paths (think the Nile Basin or the Grand Canyon).  Typically long, thin things that have a beginning and end, and can join with others of their kind in a sort of branching structure, and often get wider or narrower in different areas.
+
+Each of these will require solutions separate from the others, so let's get started.
