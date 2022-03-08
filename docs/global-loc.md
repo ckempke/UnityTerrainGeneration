@@ -77,4 +77,78 @@ Which of these (if any) is the ideal world for our game depends on the goals of 
 
 ![700-15-3](media/vor-700-15-3.png)
 
-Either would make an interesting world for exploration.
+Either would make an interesting world for exploration, although this takes over two minutes to generate on my system, which is a long time to wait at the beginning of a game.
+
+Next, we want to smooth this out a lot.   That, at least, is easy:
+
+- First, our "terraces" are much higher than we need them to be; we'll just use a smaller multiplier.   
+
+- Next, decide what our sea level is in terms of both heightmap level and number of terrace layers.   I pass this in as a parameter to the system, but you could just play with numbers until you find one you like, and hardcode it.
+
+- Iterate across the map, setting the heights based on the sea level:  undersea ones below it, land ones above (*shell* here is the terrace number, and the 0.003f was just chosen by expirimentation:
+  ```c#
+  // For the moment, just set the heights in the terrain according to the shell number.
+  for (int x = 0; x < dsize + 1; x++)
+      for (int z = 0; z < dsize + 1; z++)
+      {
+          // Note reversed
+          worldHts[z, x] = ((float)sealevel / (float)maxheight) +  0.003f * 
+              (vregions[regions[x, z]].shell - numUnderseaTiers);
+      }
+  
+  ```
+
+- Finally, we'll run one or more Gaussian Blur filters over the landscape.   You can find code for this everywhere, but the algorithm is simple:  just replace each pixel's value with the average of itself and the pixels in a "window" around it.   It's exactly the same as the Gaussian Blur filter in apps like Photoshop, so if you're using an image library anywhere in your code, it might already be written for you.
+
+```c#
+// Performs a Gaussian blur over the specified window.
+public static float[,] GaussianBlur(float[,] array, int dimension, int window)
+{
+    float[,] returnVal = new float[dimension, dimension];
+
+    for (int x = 0; x < dimension; x++)
+        for (int z = 0; z < dimension; z++)
+        {
+            float newVal = 0f;
+
+            // If the window would exceed the bounds, just copy the existing value.
+            // (Cheaper, but less accurate than doing a partial sum.)
+            if (x < window || x >= dimension - window || z < window || z >= dimension - window)
+            {
+                returnVal[x, z] = array[x, z];
+            }
+            else
+            { 
+            for (int i = -window; i <= window; i++)
+                for (int j = -window; j <= window; j++)
+                {
+                    newVal += array[x + i, z + j];
+                }
+
+            newVal /= (float)((window * 2 + 1) * (window * 2 + 1));
+            returnVal[x, z] = newVal;
+            }
+        }
+
+    return returnVal;
+}
+```
+
+You'll want to use pretty big windows in your blur (I use 10 for the first pass), or else repeat it a few times.    When we're done, we'll have a terrain that rises and descends reasonably smoothly.    We've gotten rid of all the sharp discontinuities, and now we're ready to create some new ones!
+
+### Step 2: Tectonics
+
+Next up, we want to put back mountain ranges and rift valleys/trenches (a rift valley or ocean trench is a tectonic canyon caused by plate movement, vastly larger than even the largest erosion canyons.)
+
+Earth has a lot of mountains, more than a million by some counts.  It's going to depend a lot on what you consider a "mountain" as opposed to a "hill."    The number of mountain ranges is even more difficult to define, but it's at least dozens.
+
+Although mountain ranges are usually formed by tectonic plate collisions, many of Earth's mountain ranges--even some of the big ones, like the Rockies, aren't along the current edges of modern tectonic plates.   Plates merge, change shape, and divide over time, and the plates today aren't the same as the plates of a billion or so years ago.    So for an Earth-sized world, we'd probably want to model more than the 15 or so current tectonic plates.
+
+Some of the modern plates run along the edges of continents (particularly along the western edges of the Americas), while other landmasses are just plopped in the middle of their plates somewhere.  Most plate edges don't run across land at all, although there are exceptions in the Middle East, Africa, and India, as well as Siberia and a few islands.
+
+We don't really care about these details.   For our algorithm, we'll take a Voronoi map and place mountains and valleys along some of the edges.
+
+We can use the Voronoi map we've already got (and in fact, we've already got smoothed discontinuities along many of the edges), or we can generate a new one and overlay it.    The former option will make mountain ranges and such tend to appear near coastlines and elevation changes, the second will make them more random.   It's a stylistic decision for a game, for "natural" worlds, the random one more closely approximates the real world (most mountain ranges are not along modern-day plate boundaries).
+
+Generally the mountain ranges formed by subduction aren't right at the edge of the plates, either, but that doesn't matter for our algorithm.
+
