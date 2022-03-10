@@ -81,7 +81,7 @@ For example, using Alex Beutel's online Voronoi generator [here](http://alexbeut
 
 The seed points here are the black dots, and the various colored polygons are their associated regions.   Note that because they are distributed randomly, the seed points are often quite far from the center of regions they define.   Also note that every polygon is convex, and all of the edges are straight lines.   The size of the regions is defined by the density of the corresponding seed points; in the diagram above, sparser points on the left tend to lead to larger polygons than on the right.
 
-Despite their apparent simplicity, Voronoi diagrams can be used in a number of ways for terrain generation.   
+Despite their apparent simplicity, Voronoi diagrams can be used in a number of ways for terrain generation, as we'll see later.
 
 **Height Map:** Using the seed points as mountain "peaks" and defining either a fixed slope or one dependent on the polygon size can give you a base for mountain ranges and passes (the mountain passes correspond to the polygon edges, which are the low points of the height maps).   Mountains generated in this way are unnaturally conical and "spiky," so this would generally be the starting point for an algorithm that then roughens the surface by adding noise, erosion, etc.
 
