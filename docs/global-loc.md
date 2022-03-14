@@ -150,5 +150,5 @@ We don't really care about these details.   For our algorithm, we'll take a Voro
 
 We can use the Voronoi map we've already got (and in fact, we've already got smoothed discontinuities along many of the edges), or we can generate a new one and overlay it.    The former option will make mountain ranges and such tend to appear near coastlines and elevation changes, the second will make them more random.   It's a stylistic decision for a game, for "natural" worlds, the random one more closely approximates the real world (most mountain ranges are not along modern-day plate boundaries).
 
-Generally the mountain ranges formed by subduction aren't right at the edge of the plates, either, but that doesn't matter for our algorithm.
+In fact, we don't really need the Voronoi map at all -- we just needs some scattered "edges" that we can drop mountain ranges and valleys along.
 

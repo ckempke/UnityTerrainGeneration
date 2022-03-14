@@ -116,3 +116,9 @@ Plate tectonics as it occurs on Earth may not be a universal phenomenon; science
 ### Volcanism
 
 Volcanos are a more local effect, especially if you broaden the definition to anytime magma, ash, or hot materials are brought to the surface.   They occur around continental plate edges (e.g. the Pacific "Ring of Fire"), often on the uplifted (higher) side of a subduction zone.  Those tend to be the clustered ones you see in mountain ranges, like the numerous volcanoes in the Cascade range of the U.S. Pacific Northwest.   But volcanoes can form anywhere that there's a sufficient "hot spot" below the earth's crust.  Hot spot volcanoes like this are often responsible for island chains--for example, Hawaii's islands were formed by repeated volcanic eruptions of a hot spot as the tectonic plate moved over it.   They can also be absolutely massive, such as the super-volcanos that formed the Yellowstone caldera and Lake Toba.
+
+### Erosion
+
+Gravity, wind, and water all combine into erosion; the sometimes gradual, sometimes sudden process by which parts of the terrain are separated from their initial position, carried away (or just dropped), and deposited somewhere else.  Water is perhaps the most powerful of these effects; it can dissolve materials, wear them away though battering, seep into and widen cracks as temperatures change, and carry the resulting debris substantial distances.   At colder temperatures, ice is an even more powerful source of erosion.
+
+For our purposes, t

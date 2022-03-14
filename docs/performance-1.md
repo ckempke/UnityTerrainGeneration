@@ -36,7 +36,7 @@ for each x position
             calculate the distance from (x,z) to that point
             if it's the smallest we've seen so far, remember it as "smallest"
             }
-set the region for (x,z) to smallest
+       set the region for (x,z) to smallest
 ```
 
 That works great, always gives the right answer, and is really simple to write; the actual code's only a little longer than the pseudocode here.    But _Vector2.Distance()_ is actually pretty expensive, and we're creating vectors constantly from both the test point at the Voronoi points in order to call it -- that allocation is moderately expensive, too.
@@ -57,7 +57,7 @@ repeat until no pixels are assigned during a pass (or equivalently, all points a
 }
 ```
 
-This never calls _Distance()_ (or makes any vectors) at all.   It's not a perfect algorithm; if two points are expanding into space and meet in the same iteration, the lower numbered voronoi point will always "get" that pixel, so there's a very slight bias to the lower-numbered points.   The "ring" calculation is complex and needs to not miss any pixels, so the actual implementation replaces it with an expanding square instead of a circle, which is much easier to calculate--and has even more small bias in favor of the lower-numbered points.   But we're using this to make a rough map in the first place, and the Voronoi point positions are randomized in space, so those errors aren't a problem for this use.
+This never calls _Distance()_ (or makes any vectors) at all.  Each pixel is touched only once unless it's on an edge or corner.  It's not a perfect algorithm; if two points are expanding into space and meet in the same iteration, the lower numbered voronoi point will always "get" that pixel, so there's a very slight bias to the lower-numbered points.   The "ring" calculation is complex and needs to not miss any pixels, so the actual implementation replaces it with an expanding square instead of a circle, which is much easier to calculate--and has even more small bias in favor of the lower-numbered points.   But we're using this to make a rough map in the first place, and the Voronoi point positions are randomized in space, so those errors aren't a problem for this use.
 
 And while it may not be obvious from the pseudocode, the second algorithm is much, much faster than the first.   For 400 Voronoi points on my system, it lowers the cost of the GTT from 2.5 minutes to 18 seconds.    And the benefits get higher as you increase the number of Voronoi points:  it takes the new algorithm about 25 seconds to do 900 points, but over ten minutes for the first one.
 
@@ -77,3 +77,43 @@ So our goal in both places is to spread the computation out over many frames, wi
 
 - We could do a little bit of work each frame, and then give up ("yield") the rest of that frame's computational time to the rest of the game.   In this model, everything would stay on the main thread, both our computation and the rest of the game's could use Unity APIs whenever they wanted, and the time taken would be determined by the total amount of computation and the single-threaded performance of the hardware.    This is the model implemented by the simple _async/await_ without Tasks, and by Unity's Coroutines.
 - We could offload the work entirely to another thread or process, which on most modern systems means moving them to another real or virtual/hyperthreaded CPU core.   This will be faster in absolute terms for both the expensive computation and the rest of the game -- they're effectively not competing for resources at all, and don't even need to interact until the expensive computation is done and the results are ready.    Unity APIs would be mostly unavailable to the expensive computation, which often isn't as much of a penalty as it seems, since these are generally mathematical and data-structure oriented.   This is the model implemented by _async/await_ combined with _Task.Run()_, and by the Unity Jobs System.     There's also a variant on this where you run essentially the same code simultaneously on many threads/cores with different inputs (say, generating 50 terrains at once) using _ParallelForTask_, but such routines are usually better suited to shaders on modern systems, and scale poorly between devices with varying numbers of cores.
+
+### Yield-based Methods
+
+The most common of the yield-based methods is the Coroutine.   To write one of these, you declare the routine to be of type IEnumerable (Coroutines can't return values), do whatever you're going to do, and break up the work with an occasional "yield return" statement of some sort.    Each time the yield is encountered, the system will suspend the work, go do something else for a while, and resume on the next frame.
+
+Aside from this "spreading" over time, the co-routine does just what it would do without the yields.  Everything's executed in the same order, the results should be the same (unless they're dependent on time), and anything waiting for those results will still need to wait for them.    It's always executing on the main thread, so there aren't any limitations in what Unity APIs you can call.   Most importantly, the routine will still take the same amount of (clock) time to execute, or even a little more.   You're not getting any true parallelism here--no background threads or multiple CPU cores are involved.   The code just isn't blocking all the other stuff going on (in Unity, especially other game objects and the like).
+
+A variant of the _yield_ is _yield wait_, which effectively says "when you block me, don't bother giving me more time until this much time has passed."   It's useful for expensive calculations that need to happen occasionally, but not on every frame.
+
+And that's the ideal case for co-routines:  things that are just running "beside" the regular stuff going on, and don't need to interact much with the rest of the system.    If a co-routine calculates a value that other routines need, for example, you'll need to code the delivery mechanism of that value yourself (raise an event, call a function, or whatever when the coroutine is "done").    Things co-routines are good at:  moving monsters around; turning on and off lighting and other effects as the players move around, tracking projectiles, etc.   What they're bad at is:  go do this expensive calculation, and give us the answer.  The expensive calculation will take at least as long as just calling a normal function, and we have to figure out a mechanism for getting that answer from a routine that has no return type.
+
+The C# language and .NET runtime provide the _async_ and _await_ keywords which do something similar in their basic forms:  _async_ functions can yield to suspend themselves for a while, and they can _await_ the results of other async functions (await is "yield until I get the answer I want.").    It works very similarly (Coroutines are implemented using async/await under the covers), but is somewhat more general and less Unity-specific.   You can use either, or both.
+
+I'm not giving examples here, because these are complex topics and there are much better examples and explanations on the Internet.
+
+### Thread-based Methods
+
+If your intent is to actually parallelize work--that is, use multiple threads and cores to get the same amount of work done in a shorter clock time--you need a different mechanism.  Again, you've got at least two to choose from.
+
+The **Unity Jobs system** allows you to package work as an IJob, whose _Execute()_ method contains the work to do.   When executed, the job will do its computation on a background thread, possibly on another core (resources permitting).
+
+The standard .NET runtime offers __Task__ objects, which are fundamentally similar.   Tasks are integrated with *async/await* so that you can use the same syntax, but _await_ on a function that returns a Task is actually waiting for that Task's thread to complete.  (You can also aggregate Tasks with a list of array, and then await "Any" or "All" of them completing.)
+
+Again, the exact syntax is left for more specific sites on the Internet to provide.
+
+But there are some takeaways here:   The first is:  Jobs or Tasks are how you get more work done in the same time.  They're actually happening in parallel, usually on different cores of the hardware itself.   If you've got a lot of these running, they'll all complete in the time that would be taken by the single longest one if you were running them sequentially.
+
+The second takeaway is the cost.   Multithreaded programming is _harder_ than single-threaded programming.  The order of things becomes less predictable if the system is scheduling things for you.    Two threads accessing the same variables can have all sorts of weird effects.    It's easy to end up with circular dependencies that deadlock your application.  Shared resources need to be carefully controlled to prevent multiple threads from modifying them in an unexpected order.    And there's a always a little added cost for all the synchronization (although you usually get far more back from the parallelism.)
+
+There are a number of standards and best practices for multithreading, but those only help for the code you write.   Unless they specifically say so, you shouldn't expect any libraries you call--even standard system ones--to be thread-safe.
+
+In particular, that goes for Unity's APIs.   There are a small number of API points you can call from Jobs (they're listed on Unity's web site), but in generally assume you can't do anything that calls Unity-provided endpoints from a background thread.   Even things you might expect to work, mathematical functions like Random.Range(), aren't thread safe.
+
+So Jobs and Tasks are meant for computationally expensive stuff that can be written mostly using the base capabilities of the language, or with explicitly thread-safe APIs.  For our purposes, that's actually not such a huge limitation, since we're generally just modifying large arrays of basic types using basic math.   But if you do need math libraries, you'll likely want to use the .NET ones instead of Unity's, and for anything class based (like System.Random), you'll want to instantiate one class per thread, not share them between jobs (especially if you're using seeds to try and insure the same sequence of numbers.   If multiple threads are pulling numbers from a single Random object, the order of numbers in each thread will not be deterministic even with seeding.)
+
+## So what does that mean for Terrain Generation?
+
+I moved the Voronoi "shell" height generation into a background task, and the entirely-independent mountain range generation into another one.    These can be executed in parallel, have no dependencies on each other, and are similarly complex, so they roughly cut the world generation time in half (to on the order of 15 seconds instead of half a minute).   I used Tasks instead of Jobs for no particular reason.  Since these make heavy use of random number generation, I built my own small random class that just implements the routines I need with the same names as Unity uses, but can be instantiated per-thread rather than based on a static.
+
+Terrain Patch generation has too many order dependencies for that to work easily, so I made it a coroutine; they're created as perfectly flat terrains and the coroutine started to build the topography.  The player isn't placed in-game until that process has completed for the terrain patch they're standing on initially.  After the initial patches, this is invisible to the player because it occurs at at least a patch-size distance from them.
