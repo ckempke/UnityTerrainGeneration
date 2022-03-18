@@ -63,3 +63,6 @@ Those blue dots are pointing out at least three problems for us:
 So let's enhance our model a bit to solve both problems.
 
 First is foothills.   For our purposes, foothills are just smaller mountains that "fade out" with distance from the range.  Note that these distances are actually fairly short -- you usually get foothills for a few dozen kilometers before the range, not spreading out for hundreds.
+
+So that's easy enough.  We'll just cycle back over our mountain range a second time, using a wider "spread" but much shorter mountains.
+

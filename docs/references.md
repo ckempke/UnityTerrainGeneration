@@ -23,3 +23,6 @@ An implementation of the Marching Cubes algorithm using Unity.   There are sever
 Voronoi diagram implementations differ greatly based on what you intend to do with the results.    If you can iterate over pixels, it's pretty much trivial to generate a bitmap representation.   If you can cheaply repeat distance checks over a lot of vertices simultaneously, implementation is fairly simple (this is why Voronoi noise is such a popular shader effect for anything that has a sort of "viscous liquid boiling" effect - lava, mud pits, cauldrons, etc.).    But if you need the actual structures in geometric form: i.e. a list of vector edges, it becomes quite a bit harder.   As developers, we like it when other people do the hard stuff for us, as in this implementation by someone with the handle "PouletFrit": [GitHub implementation](https://github.com/PouletFrit/csDelaunay), [Description with some sample "how to use code"](https://forum.unity.com/threads/delaunay-voronoi-diagram-library-for-unity.248962/).
 
 A bunch of techniques from Jacob Olsen for simulating erosion:  https://web.mit.edu/cesium/Public/terrain.pdf
+
+Penny de Byl has a several courses on procedurally generating various things, the terrain one is here (Udemy, possibly available elsewhere, as well):  https://www.udemy.com/course/procedural-terrain-generation-with-unity/
+

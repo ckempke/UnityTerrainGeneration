@@ -16,6 +16,7 @@ nav:
             - Overview: locality.md
             - Global:  global-loc.md
             - Global Features: mtns-and-valleys.md
+            - Do-Over! Global Features: redo-mtns-and-valleys.md
             - Local : local-loc.md
         - Performance: performance-1.md
     - References: references.md
