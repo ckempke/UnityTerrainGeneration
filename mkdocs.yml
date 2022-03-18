@@ -25,6 +25,7 @@ plugins:
     - search
     
 markdown_extensions:
+  - footnotes
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.superfences:
@@ -41,3 +42,17 @@ extra_javascript:
    
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css
+
+theme:
+  palette:
+    primary: deep-purple
+    - media: "(prefers-color-scheme: light)" 
+      scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)" 
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode

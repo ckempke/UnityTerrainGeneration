@@ -121,4 +121,4 @@ Volcanos are a more local effect, especially if you broaden the definition to an
 
 Gravity, wind, and water all combine into erosion; the sometimes gradual, sometimes sudden process by which parts of the terrain are separated from their initial position, carried away (or just dropped), and deposited somewhere else.  Water is perhaps the most powerful of these effects; it can dissolve materials, wear them away though battering, seep into and widen cracks as temperatures change, and carry the resulting debris substantial distances.   At colder temperatures, ice is an even more powerful source of erosion.
 
-For our purposes, t
+These changes take place over timescales ranging from seconds in the case of landslides and floods through millennia in the case of mountains flattening.  Generally speaking, we can't hope to simulate the actual processes, just the net results.    That usually means removing height from one location and adding some or all of it to another.    A crude form of this is the Gaussian Blur we use so often to smooth algorithmic maps -- it generally degrades sharp peaks and fills in sharp valleys.
