@@ -6,6 +6,8 @@ Terrain generation is applicable to a number of fields, but primarily computer g
 
 The exact usage often doesn’t matter—and Unity’s primary use is for games—so we’ll use “game” as a catch-all term for the rest of this discussion.
 
+_Author's Note:  I'm leaving the above paragraphs in.  But as I've written this, it's become pretty obvious that "game" nature and "real" nature are mostly incompatible goals.   So, when forced to make a choice--which happens more often than you'd expect, typically a sort of cascade effect around distance and scale--I've gone with team "game."_
+
 ## Geology, Biome, and Water
 
 A "Terrain" as we customarily think of it is made up of at least two very high-level properties.

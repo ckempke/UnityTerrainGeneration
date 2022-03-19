@@ -32,6 +32,8 @@ nav:
             - Do-Over! Global Features: redo-mtns-and-valleys.md
             - Local : local-loc.md
         - Performance: performance-1.md
+        - Biomes:
+            - Overview: biomes.md
     - References: references.md
         
 plugins:
