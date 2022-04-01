@@ -31,7 +31,9 @@ nav:
             - Global Features: mtns-and-valleys.md
             - Do-Over! Global Features: redo-mtns-and-valleys.md
             - Local : local-loc.md
-        - Performance: performance-1.md
+        - Performance: 
+            - Overview: performance-1.md
+            - Patch Management: runtime-patch-management.md
         - Biomes:
             - Overview: biomes.md
     - References: references.md

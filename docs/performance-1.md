@@ -57,7 +57,13 @@ repeat until no pixels are assigned during a pass (or equivalently, all points a
 }
 ```
 
-This never calls _Distance()_ (or makes any vectors) at all.  Each pixel is touched only once unless it's on an edge or corner.  It's not a perfect algorithm; if two points are expanding into space and meet in the same iteration, the lower numbered voronoi point will always "get" that pixel, so there's a very slight bias to the lower-numbered points.   The "ring" calculation is complex and needs to not miss any pixels, so the actual implementation replaces it with an expanding square instead of a circle, which is much easier to calculate--and has even more small bias in favor of the lower-numbered points.   But we're using this to make a rough map in the first place, and the Voronoi point positions are randomized in space, so those errors aren't a problem for this use.
+This never calls _Distance()_ (or makes any vectors) at all.  Each pixel is touched only once unless it's on an edge or corner.  The "ring" calculation is complex and needs to not miss any pixels, so the actual implementation replaces it with an expanding square instead of a circle, which is much easier to calculate. 
+
+A circular expansion would produce the same basic map as the old algorithm.   The simpler, expanding-square algorithm does not.  It's not an actual Voronoi map.   Convexity isn't maintained, and in fact, the regions are much more unevenly shaped.  
+
+![Voronoi-approximate regions](media/fake-voronoi.png)
+
+But we're using this to make a rough map in the first place, and for this use, convexity isn't really much of a benefit and might even be a penalty.  (This image compresses some 700+ different regions into 256 color levels, so not all of the region edges are visible.)
 
 And while it may not be obvious from the pseudocode, the second algorithm is much, much faster than the first.   For 400 Voronoi points on my system, it lowers the cost of the GTT from 2.5 minutes to 18 seconds.    And the benefits get higher as you increase the number of Voronoi points:  it takes the new algorithm about 25 seconds to do 900 points, but over ten minutes for the first one.
 
