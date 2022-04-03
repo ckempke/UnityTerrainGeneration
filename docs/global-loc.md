@@ -98,10 +98,10 @@ Next, we want to smooth this out a lot.   That, at least, is easy:
   
   ```
 
-- Finally, we'll run one or more Gaussian Blur filters over the landscape.   You can find code for this everywhere, but the algorithm is simple:  just replace each pixel's value with the average of itself and the pixels in a "window" around it.   It's exactly the same as the Gaussian Blur filter in apps like Photoshop, so if you're using an image library anywhere in your code, it might already be written for you.
+- Finally, we'll run one or more Gaussian Blur filters over the landscape.   You can find code for this everywhere, but the algorithm is simple:  just replace each pixel's value with the average of itself and the pixels in a "window" around it.   It's exactly the same as the Gaussian Blur filter in apps like Photoshop, so if you're using an image library anywhere in your code, it might already be written for you.  (My "research" indicates that a lot of folks call this "Smooth" or some variant, which is accurate for the context, but I like the more generic term.)
 
 ```c#
-// Performs a Gaussian blur over the specified window.
+// Performs a Gaussian blur over the specified window. 
 public static float[,] GaussianBlur(float[,] array, int dimension, int window)
 {
     float[,] returnVal = new float[dimension, dimension];

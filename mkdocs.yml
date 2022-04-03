@@ -31,11 +31,14 @@ nav:
             - Global Features: mtns-and-valleys.md
             - Do-Over! Global Features: redo-mtns-and-valleys.md
             - Local : local-loc.md
+        - Erosion: erosion-implementation.md
         - Performance: 
             - Overview: performance-1.md
             - Patch Management: runtime-patch-management.md
         - Biomes:
             - Overview: biomes.md
+            - Water: water.md
+        - Seeds: seeds.md
     - References: references.md
         
 plugins:

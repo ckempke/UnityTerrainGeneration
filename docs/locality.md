@@ -104,16 +104,3 @@ But for _our_ purposes, we can try to simplify this into four categories:
 
 Each of these will require solutions separate from the others, so let's get started.
 
-## A Word About Seeds
-
-We're generally going to want to be able to *recreate* our worlds repeatedly, so that we don't need to store the entire planet in the save game file.   In order to do this, we're going to want to prefer algorithms that are deterministic:  we can give them the same starting values, and be confident that we're going to get the same values _out_ of the process.
-
-For random numbers--and random-adjacent things like Perlin noise--that means we're going to want to use _seeded_ generation algorithms:  we can provide a _seed_ value, and once we've done that, the sequence of "random" outputs will be the same every time.   
-
-Nearly all computer pseudorandom generators these days are seeded, so for simple stuff like *RandomRange*() and the like, we're covered.   Perlin noise is _not_ a seeded algorithm--the function always produces the same values for a given position--but we can use a large offset to work as a surrogate seed.   Simplex noise _does_ allow a seed value (and has other advantages), so we'll prefer that, anyway.
-
-But being able to seed isn't the whole solution.   Even with a seed, if we want to generate the same sequence, we need to generate exactly the same number of values after that seed, in the same order.    Which means if we, say, generate the global terrain, then patches A, B, C, D, and E without re-seeding, we always have to generate those same patches in that same order every time.
-
-Alternatively (and more practically), we need to _reseed_ our generators every time we start a new task.  We could use the global template's seed to generate a seed for every patch, but it's probably easier just to use some inherent property like the patch's position as the seed value.
-
-While doing the initial development for algorithms, though, it's often valuable to have new results every time (this gives is a sense of what the "outlier" possibilities are for our algorithms, e.g. occasionally generating a world that's entirely underwater).   And as algorithms change their consumption of random numbers, even using the same seed won't generate the same results, so we'll typically add seeding late in the development process.

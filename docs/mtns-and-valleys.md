@@ -66,3 +66,12 @@ First is foothills.   For our purposes, foothills are just smaller mountains tha
 
 So that's easy enough.  We'll just cycle back over our mountain range a second time, using a wider "spread" but much shorter mountains.
 
+## Rift Valleys
+
+There are all sorts of valleys.   Some just form are just the spaces between higher features.  Canyons and similar shapes are eroded from the passage of wind or water.   Ice or volcanism can crack terrains and seed valleys.
+
+We don't care about those, yet.  Right now, we're only concerned with _rift_ valleys; those caused by the spreading of tectonic plates away from each other.   These are massive -- far larger in scale than any standard valley, these are measured in the same scales as mountain ranges.   They tend to be wide, deep in total but shallow in slope, and huge.
+
+Even on this scale, water is a powerful force.   The separation of plates that causes rift valleys on land tends to form _ridges_ undersea.   Undersea trenches tend to form by the same subduction effects that raise mountain ranges on land.   In short, the effects of plates moving apart or together are largely reversed underwater.
+
+For our purposes, tranches are just rift valleys undersea.

@@ -106,7 +106,7 @@ The **Unity Jobs system** allows you to package work as an IJob, whose _Execute(
 
 The standard .NET runtime offers __Task__ objects, which are fundamentally similar.   Tasks are integrated with *async/await* so that you can use the same syntax, but _await_ on a function that returns a Task is actually waiting for that Task's thread to complete.  (You can also aggregate Tasks with a list of array, and then await "Any" or "All" of them completing.)
 
-Again, the exact syntax is left for more specific sites on the Internet to provide.
+Again, the exact syntax is left for more specific sites on the Internet to provide.  Also note that the Jobs system has some   integration with the "Boost" compiler, and I'm not sure that's necessarily true of Tasks, if you want that extra functionality.  That said, I'm not a big fan of libraries that replace something already built into the language with functionally identical replacements.
 
 But there are some takeaways here:   The first is:  Jobs or Tasks are how you get more work done in the same time.  They're actually happening in parallel, usually on different cores of the hardware itself.   If you've got a lot of these running, they'll all complete in the time that would be taken by the single longest one if you were running them sequentially.
 
