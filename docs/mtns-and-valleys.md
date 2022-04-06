@@ -52,7 +52,7 @@ Note that that world is _not_ flat in the non-mountain areas, but the mountain r
 
 ## Foothills
 
-Note the little blue spots around the base of the mountains:  Those are areas where the randomness noise added happened to be both negative and (in an absolute sense) greater that the height of the mountain + ground elevation at that point.
+Note the little blue spots around the base of the mountains:  Those are areas where the random noise added happened to be both negative and (in an absolute sense) greater that the height of the mountain + ground elevation at that point.
 
 Those blue dots are pointing out at least three problems for us:
 

@@ -14,7 +14,7 @@ So for patch management, we have three initial requirements:
 
 ## Prediction
 
-We'll start with the last category.   There's generally two kinds of movement that players perform in games:   the ordinary "walk around the world at a walk/jog/run page" kind, and various forms of "fast travel" that we'll lump under "teleportation."
+We'll start with the last category.   There's generally two kinds of movement that players perform in games:   the ordinary "walk around the world at a walk/jog/run pace" kind, and various forms of "fast travel" that we'll lump under "teleportation."
 
 Ordinary travel isn't too bad:   assuming our player can't cross a terrain patch in less time than it takes to make several more, the algorithm is fairly obvious:  Generate the patch the player's in, then the ones immediately adjacent to that, and then the ones immediately adjacent to those...for as far out as resources or game design require.   As long as the patches are "ready" by the time the player gets there, they'll get they appearance of a seamless world.  As they leave each patch and enter another, create the "new" patches that surround them (and maybe delete existing ones that have now become farther away.)
 

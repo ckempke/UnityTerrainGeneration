@@ -38,6 +38,7 @@ nav:
         - Biomes:
             - Overview: biomes.md
             - Water: water.md
+            - Unity Notes: biomes-unity.md
         - Seeds: seeds.md
     - References: references.md
         

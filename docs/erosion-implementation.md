@@ -48,7 +48,7 @@ It looks good, but it's incredibly expensive.   On a steeply sloped 512x512 terr
 
 ![Pockmarked terrain](media/classic-river.png)
 
-That screen shot is without the guassian blur, and the terrain took over 20 seconds to generate on my fastest machine (an Apple Silicon M1 Max; it takes more than twice as long on the game PC).   This is basically just a bunch of pits (the blur smooths them out a bit, but it still looks like a bunch of less-sharp pits).   At a guess, getting something natural looking there would take hundreds of thousands if iterations (and some tweaking of the rivulets / strength parameters), or adjusting to make each "pit" many, many times larger.
+That screen shot is without the guassian blur, and the terrain took over 20 seconds to generate on my fastest machine (an Apple Silicon M1 Max; it takes more than twice as long on the game PC).   This is basically just a bunch of pits (the blur smooths them out a bit, but it still looks like a bunch of less-sharp pits).   At a guess, getting something natural looking there would take hundreds of thousands of iterations (and some tweaking of the rivulets / strength parameters), or adjusting to make each "pit" many, many times larger.
 
 Note that this algoritm works fine in environment where the features are relatively small compared to the resolution of the height map:  such as our global terrain template.   But for our detail patches, it's going to be too expensive.
 
@@ -88,13 +88,13 @@ That's a lot closer to what we're looking for.   That's using a 50% pushdown (th
 
 This also has a game-friendly function, in that there are generally "paths" up the mountains that avoid the drops, although sometimes you need to go significantly far "out of the way" to reach them.   This will make our life a little easier when we get to the "gamify" functions, later.
 
-This is still pretty unnatural looking:  the slopes are too even, the lines at the edges of patches are too sharp, and since this is implemented independently on each patch, it makes some very weird things happen along the stitch lines.     But baby steps.
+This is still pretty unnatural looking:  the slopes are too even, the lines at the edges of patches are too sharp, and since this is implemented independently on each patch, it makes some very weird things happen along the stitch lines.     But, baby steps.
 
 With a little more tweaking, looking "up" a mountain gives us a sense of how bad the seam-stitching is going to be:
 
 ![Mountain view with obvious seam](media/erosion-3.png)
 
-We can see two crossing terrain edges here, one running horizontally across the screen near the top, and the other, more obvious one runing vertically.   In both cases, our stitching does the best it can, but the results are...poor.
+We can see at least two crossing terrain edges here, one running horizontally across the screen near the top, and the other, more obvious one runing vertically.   In both cases, our stitching does the best it can, but the results are...poor.   Bob Ross's mountains never looked like that!
 
 This is the first time we've seen this issue (at least to this extent), but it won't be the last.  Any time we apply transformations to terrains that are independent from the terrains next to them, we have the chance of significant mismatches like this, and the results will typically be the same as we see here:  sharp vertical cliffs that run along the terrain boundaries.    We'll discuss some ways to fix these later.  For now, we're primarily concerned with the erosion algorithm itself.
 
@@ -155,3 +155,17 @@ Some places are sharp, some are rounded, and the entire terrain feels much more 
 A final tweak here is that the algorithm produces very smooth terraces; the "cutout" portions are completely flat.  We fix that by putting back a percentage of the missing height at each step; this simulates erosive debris accumulation.
 
 ![Final Erosion Pic](media/erosion-4.png)
+
+That's a lot more "gouges" than natural mountains, of course, so we'll probably set this to a much smaller amount later.
+
+_Note from the future:  A little browsing of images of natural mountains indicates that the previous sentence is wrong as often as it's right; many mountains have **more** such shearing than what's shown above.   The real takeaway appears to be that there's a massive amount of variation in the natural world.   Also, that there are an awful lot of **real** mountains that you'd swear were bad renders by looking at them.  See also: clouds._
+
+## Canyoning
+
+The same net of canyons that define our mountain ranges at the global level makes sense at the local level, as well.   In fact, this is a stronger effect than the shearing, most of the time.
+
+## Striation and Layering
+
+Many landforms---especially where they've been cut by one form of erosion or another---show significant layering of color and other properties, and even dramatic shifts in shape at certain elevations where the "deeper" rocks are harder or softer than those above them, and hence wear differently.   Often, these layers are parallel to the ground, but they can also tilt at significant angles as a result of uplift (or presumedly subduction, although that's unlikely to be visible near the surface.)
+
+A lot of this we'll need to get from texturing, but sometimes the effect is pronounced enough that it's actually visible in shape as well as texture.
