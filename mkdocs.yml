@@ -22,6 +22,7 @@ nav:
         - Heightmaps or Voxels: heightmaps_and_voxels.md
         - World Size: size_of_game_worlds.md
         - Generation: generation.md
+        - MonoBehaviour vs. ScriptableObject: unity_base_classes.md
     - Practice:
         - Requirements: Requirements.md
         - Unity Terrains: unity-terrain-types.md
