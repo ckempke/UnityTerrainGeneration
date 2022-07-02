@@ -41,6 +41,7 @@ nav:
             - Water: water.md
             - Unity Notes: biomes-unity.md
         - Seeds: seeds.md
+    - Using it!: hooks-and-usability.md
     - References: references.md
         
 plugins:

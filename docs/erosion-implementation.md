@@ -160,9 +160,39 @@ That's a lot more "gouges" than natural mountains, of course, so we'll probably 
 
 _Note from the future:  A little browsing of images of natural mountains indicates that the previous sentence is wrong as often as it's right; many mountains have **more** such shearing than what's shown above.   The real takeaway appears to be that there's a massive amount of variation in the natural world.   Also, that there are an awful lot of **real** mountains that you'd swear were bad renders by looking at them.  See also: clouds._
 
+## Stitching Limits
+
+Our stitching algorithm can handle a fair amount of discrepancy between edges, but our erosions here are pushing it beyond its limits.   Even after adding some additional smoothing and tweaking, we're still seeing very harsh separations:
+
+![Image showing steep "cliffs" where stitching is averaging across wildly separate values](media/stitch-failures.png)
+
+Those "hard" cliffs along the top ridge and to the right of the character are caused by dramatic mismatches between the terrains that are being stitched.    The problem here isn't the base elevations -- those are well within the abilities of the stitching algorithm to compensate for, especially if we add a little skirting rather than a simple edge average.
+
+The problem is the erosion.   Since we're applying what amounts to very deep "scoops" out of terrain at the patch level, you get these issues any time one of the scoops touches an edge (unless you get very lucky and there's a corresponding scoop in the next patch.)
+
+This is the first time we're having to deal with this, but it won't be the last:  we're going to have the same problem with any feature that is larger than or crosses patch boundaries and results in significant elevation changes:  ridges, lakes, glaciers, etc.   
+
+Our solution is not to do these things at the patch level at all, but rather apply them more broadly across "regions" of the map, which we'll discuss when we talk about regional locality.
+
 ## Canyoning
 
 The same net of canyons that define our mountain ranges at the global level makes sense at the local level, as well.   In fact, this is a stronger effect than the shearing, most of the time.
+
+I've recently had the opportunity to make a long drive across the central United States, and of course I paid close attention to the geographic features I was passing through.    From the nearly flat midwest to the mountainous Rockies, and everywhere in between, canyoning was the single most dominant aspect of the landscape features except for erosive smoothing.
+
+It was also clear that the canyoning algorithm described there was incomplete.  From observation, there appear to be two different "kinds" of canyons, although they're really just variations on a theme.
+
+### Separator Canyons
+
+What I'm calling "separator canyons" are what we implemented for our mountain range algorithm.   They are more or less at the same elevation at both ends (although, of course they're caused mostly by water, and and so have some elevation drop that our current algorithm ignores), and visually separate geographic features from each other:  mountain ridges, hills, bluffs, badlands, etc.   Generally speaking, these are roughly equally "deep" along their entire length.  Our mountain algorithm made them all the same depth _as each other_, though, which is definitely not the case in nature -- these canyons occur at varying elevations, often with depth corresponding to length (longer canyons carry more water and are carved deeper).   When they're shallow and eroded, you get gentle hills or old, weathered mountains; where they're deep and sharp, new mountain ranges.
+
+### Drainage Canyons
+
+The "other kind" of canyon I'll call "drainage canyons."   These are features that occur only on slopes, distinctly change elevation, and tend to not be of uniform depth:  they're shallower at the high end where they begin, and become deeper and wider as they descend in elevation.    At the lower end, unless they hit some other geological feature, they tend to become shallower again, either spreading out into eventual invisibility, or by narrowing and simply ending.
+
+You'd expect these to be related mostly to the size of the slope they occur on, but the reality appears to be that they're far more affected by the underlying rock or soil.   Softer materials seem to produce more distinct canyons than harder ones.
+
+Shallower slopes produce deeper and longer canyons than steep ones, and in fact very gradual slopes (typically along rivers) generate the large structures we tend to think of as "canyons."   The erosion effect here is much, much stronger than the forces that shape the land, and can produce impressive canyons that descend well below the average surface elevation of an area.
 
 ## Striation and Layering
 
