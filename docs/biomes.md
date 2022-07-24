@@ -31,7 +31,7 @@ Is that practical?  Maybe.  A roughly million-meter-per-edge map (1024x1024 mete
 
 How many biomes are we looking at?  The Internet tells me that _Minecraft_ has about 60.   _Valheim_ has about a dozen.  *No Man's Sky* has nine, but uses a trick we'll see below to effectively have much more.   All of these are much lower than the real world.  The total number varies based on who you ask:  NASA says 7, various sources say 6, others say 12.  But the one thing they all have in common is that these "real world" numbers are using a _vastly_ more inclusive definition of "biome" than a game would.   For example, they lump all "temperate forests" together, regardless of tree species and other differentiators -- nearly all of the eastern United States is a single biome in that sort of categorization.   The root cause of this is that the ecological definition of "biome" differs a lot from the game-development definition.   For our purpose, I'm going to make a back-of-the-envelope guess that "Earth" has between two thousand and five thousand different game-style biomes; and frankly, I might be low by orders of magnitude.
 
-Nobody but the most dedicated game developer is likely to generate anywhere near that, but 100 biomes doesn't seem out of the question.  That's almost 7 GB...just for biome maps, and not counting things like the terrains themselves, which can be similarly sized.   Other than a fairly high-end gaming PC, that's going to be pretty prohibitive:  the Playstation 4 had only 8Gb of RAM, and even it's successor has only 16.   Many iPads have less than 4GB (note that this is RAM, not storage.  Apple doesn't usually publish the RAM number).  Android tablet RAM can be larger--or much smaller.
+Nobody but the most dedicated game developer is likely to generate anywhere near that, but 100 biomes doesn't seem out of the question.  That's almost 7 GB...just for biome maps, and not counting things like the terrains themselves, which can be similarly sized.   Other than a fairly high-end gaming PC, that's going to be pretty prohibitive:  the Playstation 4 had only 8Gb of RAM, and even it's successor has only 16.   Many iPads have less than 4GB (note that this is RAM, not storage.  Apple doesn't usually publish the RAM number, so it can be hard to find for any specific model).  Android tablet RAM can be larger--or much smaller.
 
 So, practically, we can't do this.   What are some options?
 
@@ -103,7 +103,7 @@ In some sense, this would be trading one set of maps for another:  we now need t
 
 An advantage of the "no-biome" solution is that it makes nearly all of these decisions local:  we make the maps once at world creation, but the actual placement of stuff happens on patch load at runtime.
 
-## The No-Biome Experiment
+## Self-Generating Biomes
 
 So let's start by trying out the no-biome mechanism.  Instead, we'll just give the various things (textures, details, trees) that would normally be part of a "biome" a set of dependencies, and let the "biome" behavior arise as a sort of emergent behavior.
 
