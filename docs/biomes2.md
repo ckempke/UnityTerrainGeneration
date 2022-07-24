@@ -71,6 +71,16 @@ We also need to consider the total number of elements in a given space (in our c
 
 > **Performance Note:**   We'd expect objects with complex colliders and a broader set of materials to be slower for Unity to render, and these experiments clearly show this to be true.    Adding 500,000 grass patch details has less effect on frame rate than a mere 1000 feature rocks (at least for the models I was using).  This is exacerbated by the Level of Detail (LOD) support in Unity:  Terrain-based tree and detail maps have sophisticated and automatic LOD support (billboards, distance culling, GPU instancing, etc.) that's not automatically present for basic prefabs.    So as a specific implementation detail, we either need to keep our total "feature" density lower than the others, or build our own LOD system around them.
 
+### Hard Limit Boundaries
+
+One final issue:
+
+![Image showing ground cover ending abruptly in a very straight line right next to the player.](media/tile-delta.png)
+
+This isn't distance culling.   Rather, the player is standing near a tile edge, and the tile to the right has a moisture level that's just *slightly* outside the limit of the ground cover blueprint.  So you get heavy ground cover in the left-hand tile, and none at all in the right hand tile, with a visible line separating them.  (The "fuzziness" of the line is because the ground cover models cover a significant area, so they "overlap" to different degrees.)
+
+So we also need to consider falloff or blending of tile attributes.   Either the tile on the left should have almost no ground cover (because it's so close to the moisture limit that will disallow it), the tile on the right should allow some (because it's close to the moisture limit that will allow it, or just because it knows there's some on the tile next to it), or both.   An "all or nothing" hard limit gives us these obvious lines as you cross borders.  You wouldn't expect that on a large world with relatively slow-changing parameters this would crop up very often, but I've seen it happen a bunch of times even in my development to date.
+
 ## Second look at GenerationDependentObject
 
-So, armed with some results, we can go back and add some capabilities to the **GenerationDependentObject** class, to give us more control over the "biomes" generated.
+So, armed with some results, we can go back and add some capabilities to the **GenerationDependentObject** class, to give us more control over the "biomes" generated, and to the generation system that uses it.
