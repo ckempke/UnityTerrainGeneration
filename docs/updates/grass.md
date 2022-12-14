@@ -1,6 +1,5 @@
 ---
 title: "First thoughts on grass"
-date: 2022-12-13
 author: Chris Kempke
 tags:
   - grass
