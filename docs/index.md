@@ -1,4 +1,8 @@
 # Runtime Procedural Terrain Generation (in Unity)
+
+{{ blog_content }}
+
+
 ## Update, September 2022
 
 I like books.   I don't necessarily mean the physical, dead-tree artifact (although I like those, too), but rather the _format_.   Books have a beginning, a middle, and an ending.  For nonfiction, they separate topics, explore them to whatever depth they're going to, and then move on to the next one.  It's easy to find what you need in a convenient table of contents, and in well-written material, there's a general flow of information from easiest to hardest, or at least they present each part in an order that builds on the previous ones.
@@ -15,7 +19,7 @@ So, while I'm not giving up on the "book" idea; I think that format is best for 
 
 Stay tuned
 
-   ---Chris
+   ---Chris
 
 
 

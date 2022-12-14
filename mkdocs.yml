@@ -1,5 +1,5 @@
 site_name: Unity Terrain Generation
-site_url: https://ckempke.github.io/UnityTerrainGeneration/
+site_url: https://ckempke.github.io/UnityTerrainGeneration
 theme:
   name: material
   palette:
@@ -45,11 +45,30 @@ nav:
         - Seeds: seeds.md
     - Using it!: hooks-and-usability.md
     - References: references.md
+    - Articles By Tag: tags.md
         
 plugins:
     - search
+    - blogging:
+        theme: 
+          name: button
+        dirs:
+            - updates
+        size: 10
+        paging: true
+        show_total: true
+        locale: en
+        features:
+           tags:
+              index_page: tags.md
+              insert: top
+        time_format: '%Y-%m-%d %H:%M:%S' # The format used to display the time
+        meta_time_format: '%Y-%m-%d' # The format used to parse the time from meta
     
 markdown_extensions:
+  - toc:
+        permalink: true
+  - attr_list  
   - footnotes
   - pymdownx.arithmatex:
       generic: true
