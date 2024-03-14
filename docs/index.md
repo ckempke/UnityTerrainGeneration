@@ -1,5 +1,29 @@
 # Runtime Procedural Terrain Generation (in Unity)
 
+## Alas, Unity, we hardly knew ye
+
+So far as I know, there's nobody out there actually reading any of this, but just in case, here's a final update.
+
+In mid September of 2023, Unity (the company) basically imploded; pushing out a revenue model that would have been disastrous for indie developers, retroactively counted installs for a new going-forward fee _on existing games_, changed their terms of service (also retroactively), and repeatedly lied about it.
+
+There was, to put it mildly, anger in the dev community.   As Unity's share price plummeted and the news cycles revolved around developers announcing they were leaving Unity for other platforms (mostly Unreal Engine, but for a few indie developers, Godot is far enough along), Unity walked back as little as they could get away with, but even after a replacement CEO and layoffs, are still going forward with the "runtime fee," albeit modified slightly so that the cost doesn't turn out to be _unlimited_ in the case of a mild unexpected success.
+
+Unity has (or had, at least, there's no way of knowing what their numbers look like now, since they're not giving stock guidance any more) a significant developer presence.   They more or less owned the mobile game development market and held a significant share of the indie games, as well.    For developer just learning their trade, Unity's C#-based engine was a little easier to learn than the C++-based Unreal Engine.    Their engine isn't as good as Unreal Engine, and few triple-A titles used it, but for many games--even pretty big names--it was good enough.   Similarly, Unity is infamous for constantly changing recommended practices while leaving the previous recommendation 70% done:  there are currently something like five rendering pipelines, two different UI systems, two different networking systems, two different control systems...none of which are "complete" without significant workarounds.    And they've been recently pushing into a "DOTS" system that basically throws away almost _everything_ in favor of a new "but this time it's better!" model.    Still, the price used to be right, and at least they were giving you options.    But they needed a laser-like focus on game engine technologies and people, but instead were internally hijacked by a focus on borderline predatory monetization tools that seemed to suck all the air from their engineering efforts. 
+
+It might have been, and might still be, possible for Unity to recover from this.   My intent was to go back to Unity to start implementing some of this stuff on the new Apple Vision Pro, and see if their supposed refocus on their tools was real or not.    But Unity had one final gasp of greed, and—despite receiving significant marketing and support from Apple as the "premier game engine" for the Vision Pro—decided to lock it behind a multi-thousand-dollar per year paid license; effectively pricing it out of reach of independent devs entirely.   
+
+That's \$2K per year, per developer, and eliminates the "you don't pay until you go over \$100,000" zone that made it the choice of beginning devs everywhere.   A small two-person team would pay more for Unity than they did for the Vision Pro hardware itself--every single year, whether they shipped anything or not.
+
+(As an aside, a month and a half after the Vision Pro shipped, I'm seeing almost no Unity-based software on it; the reason for this isn't clear, but none of the possibilities are particularly encouraging toward it's value in developing Vision Pro software.)
+
+I'm not a beginner dev (although I'm relatively new to game tech), and I know C++.   Even if I weren't, the C++ mechanics that Unreal Engine uses aren't much harder to learn than C# is, and the engine is all-around better.    And it's shortly going to start shipping its own support for the Vision Pro, _not_ with additional fees.    Given Unity's repeated lack of trustworthiness and focus on its core tools, I'd be insane not to switch.
+
+And so that's the bottom line, at least for me.      I'll transfer as much of my knowledge and assets as possible over to Unreal Engine, and continue from there.   But it also means this particular project will go no further, at least not in Unity.  The "terrain" objects in Unreal Engine are very different, and I'm not sure yet how much will transfer.   We'll see.
+
+If you _did_ read all this, thank you for coming along for the ride.
+
+--Christopher Kempke, March, 2024
+
 {{ blog_content }}
 
 
