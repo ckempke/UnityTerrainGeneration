@@ -1,0 +1,1477 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/biomes/">
+      
+      
+        <link rel="prev" href="../runtime-patch-management/">
+      
+      
+        <link rel="next" href="../biomes2/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Overview - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#biomes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_base_classes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-terrain-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redo-mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../erosion-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#biome-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Biome Maps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Biome Maps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smaller-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Smaller Maps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compress-the-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compress the Maps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dont-store-them-in-ram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Don't store them in RAM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allow-biomes-to-self-differentiate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Allow Biomes to self-differentiate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-this-biome-thing-anyway" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's this "Biome" thing, anyway?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-generating-biomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-Generating Biomes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Self-Generating Biomes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bias-and-rarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bias and Rarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-terrains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Terrains
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../water/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#biome-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Biome Maps
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Biome Maps">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#smaller-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Smaller Maps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compress-the-maps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compress the Maps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dont-store-them-in-ram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Don't store them in RAM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#allow-biomes-to-self-differentiate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Allow Biomes to self-differentiate
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#whats-this-biome-thing-anyway" class="md-nav__link">
+    <span class="md-ellipsis">
+      What's this "Biome" thing, anyway?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#self-generating-biomes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Self-Generating Biomes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Self-Generating Biomes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bias-and-rarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Bias and Rarity
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#base-terrains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Terrains
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="biomes">Biomes<a class="headerlink" href="#biomes" title="Permanent link">&para;</a></h1>
+<p>In our parlance, a <em>biome</em> is the physical characteristics of a terrain that aren't its basic shape.   Practically speaking, that is:</p>
+<ul>
+<li>The base textures of the ground (TerrainLayer objects)</li>
+<li>Imposed structure ("shape" that's specific to this biome, like pools in a swamp, spires in a badland, dunes in a desert, cave entrances, flattened regions for buildings, etc.), particularly at the local or regional level.</li>
+<li>Vegetation (grasses, bushes, trees) and small mineralogical (rocks, stalactites) details</li>
+<li>Water and water behavior.</li>
+</ul>
+<p>Buildings and other sentient-being-constructed things may also apply here.   Let's ignore that for the moment, since it rapidly leaves "terrain generation" and heads toward "game design."</p>
+<p>We're also going to ignore water-mostly.   Some of it we can treat like any other biome, placing corals, rocks, kelp "trees," and the like.   But water has all sorts of other gameplay effects (gravity, visual distance, opacity) and visual characteristics (surface appearance, caustics, light filtration) that are going to merit their own treatment later.</p>
+<h2 id="biome-maps">Biome Maps<a class="headerlink" href="#biome-maps" title="Permanent link">&para;</a></h2>
+<p>Early versions of Minecraft used to have fairly strict delineations between biomes:  you'd be in the desert, and a dozen steps later you'd be in the plains.  There was a little bit of "mixing" right at the edges, but for the most part where one biome ended, another would begin.  You can see the boundaries of 3-4 different biomes here (more if you count the ocean.)</p>
+<p><img alt="Minecraft Biome edges" src="../media/minecraft-biome-edges.png" /></p>
+<p><em>Valheim</em> hides it better, but there's still no overlap of biomes.  Note the fir trees and deciduous trees don't "mix" at all:</p>
+<p><img alt="Valheim biomes" src="media\valheim-biome.jpg" /></p>
+<p>Real worlds aren't like that (and as Minecraft has evolved, it's started blending, a little).  Changes between biomes are often so gradual that a traveler doesn't really notice them at all.  And even in the middle of, say, an arid grassland, there may be the occasional patch of scrub forest from the a neighboring slightly wetter biome.   There are also places where biome changes <em>are</em> sudden, usually because of the presence of either drastic elevation changes or water:  a desert oasis or the green vegetation around a river or pond in an otherwise dry landscape, for example, or the even starker "tree line" on mountains above which nothing grows.</p>
+<p>Part of this is just thinking of "biomes" as being discrete things: no two deserts are the same, and no two places in the <em>same</em> desert are generally the same, either.   Biomes, in the computer generation sense, are a shorthand meant to increase practicality, at some cost to realism.   But even so, our model shouldn't think of a place as having "a biome", but rather being affected by "this set of biomes" to different degrees.</p>
+<p>So ideally we'd like to have a floating-point map for every biome we support, so we can look at a specific tile and say things like "this tile is half underwater, a quarter beach, and the rest rocky cliffs", or "50% desert, 50% arid grassland" when we're generating the actual tile.</p>
+<p>Is that practical?  Maybe.  A roughly million-meter-per-edge map (1024x1024 meters) using 256x256 terrain patches is probably a good case for the largest practical map we can generate.   That's 4096x4096 total tiles, which at a 32-bit floating point value per tile is 64 MB per map, and we'd need one of these per biome type.   Add a little bit of overhead, and we can probably expect to store about 15 biome maps per gigabyte of ram.</p>
+<p>How many biomes are we looking at?  The Internet tells me that <em>Minecraft</em> has about 60.   <em>Valheim</em> has about a dozen.  <em>No Man's Sky</em> has nine, but uses a trick we'll see below to effectively have much more.   All of these are much lower than the real world.  The total number varies based on who you ask:  NASA says 7, various sources say 6, others say 12.  But the one thing they all have in common is that these "real world" numbers are using a <em>vastly</em> more inclusive definition of "biome" than a game would.   For example, they lump all "temperate forests" together, regardless of tree species and other differentiators -- nearly all of the eastern United States is a single biome in that sort of categorization.   The root cause of this is that the ecological definition of "biome" differs a lot from the game-development definition.   For our purpose, I'm going to make a back-of-the-envelope guess that "Earth" has between two thousand and five thousand different game-style biomes; and frankly, I might be low by orders of magnitude.</p>
+<p>Nobody but the most dedicated game developer is likely to generate anywhere near that, but 100 biomes doesn't seem out of the question.  That's almost 7 GB...just for biome maps, and not counting things like the terrains themselves, which can be similarly sized.   Other than a fairly high-end gaming PC, that's going to be pretty prohibitive:  the Playstation 4 had only 8Gb of RAM, and even it's successor has only 16.   Many iPads have less than 4GB (note that this is RAM, not storage.  Apple doesn't usually publish the RAM number, so it can be hard to find for any specific model).  Android tablet RAM can be larger--or much smaller.</p>
+<p>So, practically, we can't do this.   What are some options?</p>
+<h3 id="smaller-maps">Smaller Maps<a class="headerlink" href="#smaller-maps" title="Permanent link">&para;</a></h3>
+<p>The above calculation is "worst case" in the sense that it's the largest we're likely to generate while having the Global Terrain Template still fit in a Unity Terrain (even at 4096x4096, Terrain objects aren't very performant except on very powerful systems).   We can do the math for some other combinations, of either smaller total worlds or larger patch sizes:</p>
+<table>
+<thead>
+<tr>
+<th>World Size (meters)</th>
+<th>Patch Size (meters)</th>
+<th>GTT Tiles</th>
+<th>Map Size (1 float/tile)</th>
+<th>Biomes/GB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1,048,576 (~1M sq km)</td>
+<td>256</td>
+<td>4096x4096</td>
+<td>64 MB</td>
+<td>~ 15</td>
+</tr>
+<tr>
+<td>1,048,576</td>
+<td>512</td>
+<td>2048x2048</td>
+<td>16 MB</td>
+<td>~ 60</td>
+</tr>
+<tr>
+<td>1,048,576</td>
+<td>1024</td>
+<td>1024x1024</td>
+<td>4MB</td>
+<td>~ 250</td>
+</tr>
+<tr>
+<td>262,144 (~64K sq km)</td>
+<td>256</td>
+<td>1024x1024</td>
+<td>4MB</td>
+<td>~ 250</td>
+</tr>
+<tr>
+<td>262,144</td>
+<td>512</td>
+<td>512x512</td>
+<td>1MB</td>
+<td>~ 1000</td>
+</tr>
+<tr>
+<td>262,144</td>
+<td>1024</td>
+<td>256X256</td>
+<td>256 KB</td>
+<td>~ 4000</td>
+</tr>
+</tbody>
+</table>
+<p>That gives is a nice set of options we can provide to the developers:  based on how many biomes you want to have and the size of your memory constraints, here's how much map you can have.  Even the smaller map is about half the size of England, so large enough for many games.</p>
+<h3 id="compress-the-maps">Compress the Maps<a class="headerlink" href="#compress-the-maps" title="Permanent link">&para;</a></h3>
+<p>As our number of biomes increases, more and more of our biome maps are going to be sparse.   That is, most entries in the (say) 4096x4096 array of floats will be zero.   For worlds with only one sea biome, that particular map will have a lot of "1f" in it, and a lot of "0f" in it, and only the shorelines will have any other value.</p>
+<p>Whenever you see "lots of the same value," and especially "lots of the same value in large regions" in an array, that screams "compressibility."   Any decent lossless compression algorithm will do wonders on making these smaller; that 64MB biome map we were describing above would probably compress to 5-10K in most cases.   Whether or not this is practical will depend on how often and how much effort it takes to uncompress them when we need them.</p>
+<p>Another compression possibility is to not use a map of the whole world, but rather just the bounding boxes of each particular biome (and if a biome appears in, say, 8 places, store 8 much smaller bounding boxes).  This eliminates much of the empty space while adding just a bit of complexity to the data structure and time to the lookup.</p>
+<p>And we can let someone else do much of that work for us:  there are numerous implementations of "sparse arrays" out on the Internet; these are data structures that effectively omit the zeros blocks and just store the elements with values in them.  There are different implementations with different tradeoffs.</p>
+<h3 id="dont-store-them-in-ram">Don't store them in RAM<a class="headerlink" href="#dont-store-them-in-ram" title="Permanent link">&para;</a></h3>
+<p>For many platforms, 7GB is no big deal as long as it's not in memory.  Hard drive and SSD flash memory is relatively cheap, and most non-mobile platforms have lots of it available.   Even on mobile, a 10-15 GB game (or larger) isn't unheard of, although it's going to limit your potential audience.</p>
+<p>So if we just write these maps to disk immediately on creating them, and load them back when we need them just a few at a time, we can trade off disk access for memory.</p>
+<p>The downside here is that loading from spinning disks can be extremely slow, and even from SSD is usually a few hundred times slower than memory.   And we're going to need these maps a lot -- the simplest algorithms are going to require looking at every biome map (or at least one cell of every map) at the creation/loading of every single terrain patch.</p>
+<p>That "one cell of every map" implies that if you want to go down the rabbit-hole of memory-mapped files (where a file's contents are assigned to a set of otherwise unused memory addresses, and the file acts like a sort of specialized swap file), you'll need to make very few actual memory page loads: generally just the pages that hold the single value for the tile you're interested in, and because of locality (the player will generally be moving to nearby tiles), you'll hit cache a lot in most real-world usage.</p>
+<h3 id="allow-biomes-to-self-differentiate">Allow Biomes to self-differentiate<a class="headerlink" href="#allow-biomes-to-self-differentiate" title="Permanent link">&para;</a></h3>
+<p>This is a technique <em>No Man's Sky</em> uses:  let a "biome" describe a set of options rather than a particular specific set of characteristics, and then choose a specific value of those options for each instance of that biome occurring.    For example, we could use something like the "temperate forest" biome, but give it several options for "dominant tree species"  (oak, aspen, pine, fir, maple, etc.), base texture, undergrowth, density, etc.</p>
+<p>Then, using some value available at runtime ((x,z) position, wind or moisture levels. perlin-class noise, elevation, temperature, whatever), we select a specific set of those options for each area of the biome.</p>
+<p>This mechanism allows us to compress a lot of "specific selection" biomes into one "smart biome," effectively by bringing the implementation of "biome" closer to the natural science definition of the word.</p>
+<p>There are two tradeoffs here.   The first is complexity for the developers that need to create these biomes.   They need to understand and implement the options available, as well as build separate biomes any time the various "options" can be incompatible with each other. (For example, if certain undergrowth can't occur with maple trees, then they either need to be separate biomes or we need to build in exclusion mechanisms.)   The opposite is true as well:  it seems perfectly reasonable for a pine forest and an aspen forest to overlap (both are cold-tolerant, high-altitude trees), but since we're using the same biome for both, the biome needs to <em>always</em> allow both types of trees or the overlap is impossible without moving one to a second biome type.</p>
+<p>The second tradeoff is on us:  we need to make sure that whatever value we use for the "select a set of options" index is consistent (or smoothly varying) over the entire region of a biome (e.g. even across multiple tiles), in order to prevent our "pine forest" from abruptly turning into a "maple forest" at a tile boundary.</p>
+<h3 id="whats-this-biome-thing-anyway">What's this "Biome" thing, anyway?<a class="headerlink" href="#whats-this-biome-thing-anyway" title="Permanent link">&para;</a></h3>
+<p>The last option we'll consider here is eliminating the notion of "biome" altogether.  <em>Biome</em> is a shorthand for a set of specific options:  ground textures, vegetation species, etc.   If we talk a step back a bit, what we're really saying is "these things tend to occur together."   Our human tendency is to group and name categories:  that's a "swamp" not "an area with shallow pools, a lot of mud, snakes, alligators, noxious gas clouds, and quicksand."    So, it's natural for us to try and place "swamps" in our world.</p>
+<p>But the alligator doesn't care that he lives in a "swamp."   He cares about having deep enough waters to float in, moving slowly enough to conserve his swimming energy, enough prey to eat, temperatures warm enough not to cause torpor, and enough overhanging vegetation to create shaded places to hide or sunbeams to bask in.   If you provided all those things, but called the result a "desert," the gator would still be happy there.  <em>A rose by any other name,</em> and all.   The snake may have similar desires, but with fewer moisture and water constraints, so it can live in more places.</p>
+<p>Unlike the real world, a game world won't have millions of animal species, tens of thousands of plant species, and an infinite variety of rocks and minerals.  All of them together are unlikely to top a few hundred, at least not if you ever give your artists any time off.   The number of ground textures might be a little higher, but probably under a thousand of those, too.</p>
+<p>So if each of those plants, animals, minerals, and ground textures, has a detailed set of dependencies (temperature, moisture, animal and vegetation density, groundwater, sunlight, elevation, daylight/nighttime hours, latitude, underground or underwater, proximity to open water, etc. etc.), and our world is sufficiently defined that we can determine whether any given tile (or even smaller region, like an oasis or lake) matches those dependencies (and maybe how well it matches them), well, what do we we need biomes for?  And if we need to differentiate them even further, we can create artificial dependencies, like requiring a certain minimum value on a Perlin-class noise field as well as everything else.    </p>
+<p>There are difficulties:  We may be implicitly or explicitly forcing an order to the generation of tiles: for example, if pandas require bamboo, or koalas eucalyptus, then we need to make sure that plants are always placed before the animals.  Plants, in turn, might depend on certain base terrains (it's atypical for a tree to grow on rocks).   But as long as we avoid (or resolve) circular dependencies, this should be workable.</p>
+<p>In some sense, this would be trading one set of maps for another:  we now need to keep track of a lot of different attributes of our world in order to answer the various dependency questions.  But consider:</p>
+<ul>
+<li>The total number of these attributes is likely to be much smaller than the number of biomes.   For example, just four floating-point attribute values would give us potentially millions of specific combinations, even if we didn't require very high floating precision.</li>
+<li>Several of these (elevation, moisture, wind) we're storing anyway, since we need them in other parts of the generation engine.</li>
+<li>Others--like temperature, latitude, and sunlight--can be calculated in whole or in part from combinations of other variables.</li>
+<li>And several of these maps are pretty slow-changing with respect to distance; we could probably keep them at lower resolution than the heights.</li>
+</ul>
+<p>An advantage of the "no-biome" solution is that it makes nearly all of these decisions local:  we make the maps once at world creation, but the actual placement of stuff happens on patch load at runtime.</p>
+<h2 id="self-generating-biomes">Self-Generating Biomes<a class="headerlink" href="#self-generating-biomes" title="Permanent link">&para;</a></h2>
+<p>So let's start by trying out the no-biome mechanism.  Instead, we'll just give the various things (textures, details, trees) that would normally be part of a "biome" a set of dependencies, and let the "biome" behavior arise as a sort of emergent behavior.</p>
+<div class="highlight"><pre><span></span><code><span class="na">[Serializable]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">GenerationDependentObject</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ScriptableObject</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Relative commonness (lower numbers = rarer) of this entity.&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">bias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">100</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Dependencies</span>
+<span class="w">    </span><span class="c1">// Sea (note that shallow water isn&#39;t considered sea, but </span>
+<span class="w">    </span><span class="c1">// does have a 100% moisture level)</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;If true, this entity appears in deep waters.&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">undersea</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// 0 - .9 are the standard land range.  Items above 1 appear only in water.</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Minimum moisture level required for this entity. 0-.9 for land, 1 for pond/river/shallow water.&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">minMoistureLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0f</span><span class="p">;</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Maximim moisture level required for this entity.&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">maxMoistureLevel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">.</span><span class="m">9f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Elevation.  Real range is 0 - WorldGenerator.maxHeight</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Minimum elevation (meters) for this entity&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">minElevation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Maximum elevation (meters) for this entity&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxElevation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">999999</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Wind. Range 0-1</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Minimum average wind likelihood&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">minWind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0f</span><span class="p">;</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Maximum average wind likelihood&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">maxWind</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1f</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Slope</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Minimum slope (absolute value of degrees) for this entity&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">minSlope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0f</span><span class="p">;</span>
+<span class="w">    </span><span class="na">[Tooltip(&quot;Maximum slope (absolute value of degrees) for this entity&quot;)]</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">maxSlope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">90f</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>GenerationDependentObject</strong> here will be the base class for anything that has dependencies.    We're almost certainly going to need more attributes to be dependent on, but this gives us a good first set.</p>
+<p>If you're unfamiliar with Unity, the "Serialize" and "SerializeField" attributes just mark the class and the fields in it (respectively) as being able to be handled by the built-in serialization system.  That is, they can be turned into some intermediate object and restored from it, often used for save/load mechanisms.    It also makes the fields visible in the Unity editor when inspecting an asset of this type (not strictly necessary on the fields, since all public fields also appear in the editor by default, but we're likely going to need to serialize these, and it's standard for ScriptableObjects.)    The "Tooltip" attributes, as you might guess, provide the tooltip "hint" when the user hovers over one of these in the editor.</p>
+<p>The key here is deriving from <strong>ScriptableObject</strong>, <strong>GameObject's</strong> oft-misunderstood cousin.   This is a distinction worth its own page; see <a href="unity_root_classes.md">unity root classes</a> for more details.</p>
+<p><strong>GenerationDependentObject</strong> is an abstract class (you can't instantiate it directly, only a subclass).   So let's make a concrete subclass of it to hold terrains:</p>
+<div class="highlight"><pre><span></span><code><span class="na">[Serializable]</span>
+<span class="na">[CreateAssetMenu(fileName = &quot;BiomeTextureData&quot;, menuName = &quot;WorldGeneration/BiomeTextureElement&quot;, order = 1)]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">BiomeTextureElement</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">GenerationDependentObject</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Base element texture</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Texture2D</span><span class="w"> </span><span class="n">baseTexture</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Optional normal maps and mask maps.</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Texture2D</span><span class="w"> </span><span class="n">normalTexture</span><span class="p">;</span>
+<span class="w">    </span><span class="na">[SerializeField]</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="n">Texture2D</span><span class="w"> </span><span class="n">maskTexture</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>That "CreateAssetMenu" attribute is a key to editability here:  it creates a base menu called "WorldGeneration" in the "Create" menu that appears when you right-click in the Assets, and a specific "BiomeTextureElement" entry on that menu.</p>
+<p>Whenever I want to create a new texture, I right-click in the Assets, select WorldGeneration-&gt;BiomeTextureElement, and a new <strong>BiomeTextureElement</strong> asset is created.  I can use the inspector on it like any other asset, in this case to set up to three textures (the baseTexture is mandatory, the other two are optional), as well as all the attributes inherited from <strong>GenerationDependentObject</strong>.</p>
+<p><img alt="Screen shot of Biome Texture Inspector" src="../media/biome-texture-inspect.png" /></p>
+<p>In this particular case, the sample texture I've got doesn't have a normal or mask map, so I just set the base texture.  Most of the rest of the fields are self-explanatory, but let's talk about bias for a bit.</p>
+<h3 id="bias-and-rarity">Bias and Rarity<a class="headerlink" href="#bias-and-rarity" title="Permanent link">&para;</a></h3>
+<p>This is a trick I use a lot for "choose from a list of items of unknown length at random" type problems, which appear extremely often in game design.  The idea's certainly not original with me.</p>
+<p>The idea here is that you give every potential element a "Bias" field, which is sort of an inverse of the idea of rarity.   A higher bias means this object is more common than if it had a lower bias.</p>
+<p>The algorithm is pretty simple:   First, we filter out the objects (terrains, monsters, trees, whatever) that don't match our criteria.    From whatever's left, we sum the biases, choose a random number less than that sum, and then remove each item's "bias" from that random number one at a time until there isn't enough random number left to subtract, at which point the object we're currently looking at is selected.</p>
+<p>As an example, let's say we've got five items, with these rarities (Hat, 1) (Glove, 3) (Sword 3) (Magic Toothpick 1) (Health Potion 5).</p>
+<p>Those biases sum to 13, so  we pick a random number from 1-13.    Let's say that random number is "5", which becomes our target:    </p>
+<ul>
+<li>"Hat" has a rarity of 1, which is less than our target number, so we subtract 1 from the target to get 4, and discard "Hat" as an option.   </li>
+<li>Next, "Glove" has a rarity of 3, which is still less than our target 4.   So we discard "Glove," subtract 3 from our target number (giving us 1), and look at "Sword."    </li>
+<li>"Sword" has 3 rarity, which is <em>higher</em> than our remaining target (1), so we've selected "Sword" as our item.</li>
+</ul>
+<p>Most notably, biases are unitless (or maybe more accurately, they define their own units).  They tell you the relative rarity of each possibility compared to all the others, on whatever scale you want.    For example, if our intrepid adventurer opens a lot of chests, in the long run, we expect him to have received five times as many Health Potions as Magic Toothpicks.</p>
+<h3 id="base-terrains">Base Terrains<a class="headerlink" href="#base-terrains" title="Permanent link">&para;</a></h3>
+<p>You'll notice that the name I gave the example BiomeTextureElement, above was "Undersea Base."   I don't mean that in the sense of a place for supervillains, but rather that this is the <em>base</em> texture for undersea terrains (<em>Undersea</em> is checked.)   I've got a corresponding "rock" terrain that is the "Land Base" texture for non-undersea terrains.</p>
+<p>By "Base Texture," I just mean "the texture that will get selected if nothing more specific fits."   In this case, the rest of the dependencies define the entire range:  these "base" textures can apply to any slope, elevation, moisture level, etc..  They have a bias of (1), which means that no matter what scale we end up choosing, these will be the rarest textures.</p>
+<p>We're likely to have a lot of BiomeTextureElements.  The more we have, the more varied our world will look.  Some will have broad applicability, some will have very narrow acceptable dependencies.   As we add more content to our world, the set will increase, and in theory, we'll have nice terrain elements that match any combination, and hopefully we'll have <em>several</em> textures that match any actual combination, so that every square of a given terrain patch doesn't end up looking similar to every other.</p>
+<p>But...if we mess up, if there's a terrain location that doesn't match <em>any</em> set of dependencies, at least it will match this one (or rather, either the land or sea one), and get a reasonable default (sand underwater, rock above).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1263 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/local-loc/">
+      
+      
+        <link rel="prev" href="../redo-mtns-and-valleys/">
+      
+      
+        <link rel="next" href="../regional-loc/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Local - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#local-locality" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Local
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_base_classes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-terrain-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redo-mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-level-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Level Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Base Level Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#patch-size-and-steepness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Size and Steepness
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-interest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Interest
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../erosion-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../water/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-level-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Level Generation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Base Level Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#patch-size-and-steepness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Patch Size and Steepness
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-interest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Interest
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="local-locality">Local Locality<a class="headerlink" href="#local-locality" title="Permanent link">&para;</a></h1>
+<p>At the other extreme of our maps, "local" patches generate the terrain that the player actually interacts with, traverses, potentially even manipulates.</p>
+<h2 id="base-level-generation">Base Level Generation<a class="headerlink" href="#base-level-generation" title="Permanent link">&para;</a></h2>
+<p>The first step in generating a patch is to figure out where that patch is in relation to our larger world.    The Global Terrain Template is a height map with very coarse sampling:  the height vertices are spaced at the same distance as a single local patch covers.   That is, if our local patches are 1024 meters wide, there will be one height vertex for ever 1024 meters.</p>
+<p>Since patches actually represent the spaces between vertices (much as the polygons of a Terrain object define the actual surfaces of that terrain), each patch is influenced by four vertices of the Global Terrain Template: one at each corner of the patch.   Two of these corners are shared with every horizontally or vertically adjacent patch, and one corner with every diagonal patch.    This sharing of data between adjacent patches is what allows us to generate them independently.</p>
+<p>The first step is to create the <em>base level</em>.   That's effectively a heightmap for the terrain that just implements two large triangular regions, one connecting the lower left, upper left, and upper right corners of the terrain, and one connecting the upper right, lower right, and lower left.   You could also divide the terrain along the other diagonal, but doing it this way makes the test for which of the two triangles a given point represent as easy as testing if its (local) X value is greater or less than it's Z value.</p>
+<p>From a distance, this will look like tessellation.   Because it's possible (in fact, likely) that the four corners of the patch cannot share a single plane, two triangles are the minimum "flat" representation.</p>
+<p>The process of generating base heights for each location in the patch is relatively simple given the right mathematical tools:</p>
+<div class="highlight"><pre><span></span><code>for each x
+   for each z
+       if (z &gt;= x)
+          set height based on a Barycentric weighting from each of the ll, ul, ru corners
+       else
+          set height based on a Barycentric weighting from each of the ur, lr, ll corners
+</code></pre></div>
+<p><em>Barycentric weighting</em> is easily found on the Internet (search "Barycentric coordinates").   It's the same process used in "vertex shading" (aka Gouraud shading) and other pixel-mapping-from-a-vertex processes, where the value of something at a point <em>p</em> in a triangle takes on a weighted average of the value at each of the triangle's vertices.   The value depends on the distance to each corner, with closer corners contributing more value.</p>
+<p>But what you'll find on the Internet is academic papers and academic blog discussions, describing the process in equations and vectors.  It's surprisingly difficult to find actual <em>code</em>.    The best I've found are references to the book <em>Real-time Collision Detection</em>, by Christer Ericson.    That code is in C++ and not defined in terms of Unity types, but translating it to C# isn't hard:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Compute barycentric coordinates (u, v, w) for</span>
+<span class="c1">// point p with respect to triangle (a, b, c)</span>
+<span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="nf">Barycentric</span><span class="p">(</span><span class="n">Vector3</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">Vector3</span><span class="w"> </span><span class="n">v0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">d00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span><span class="w"> </span><span class="n">v0</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">d01</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">v0</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">d11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">d20</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">v0</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">d21</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">Dot</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">v1</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">denom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d00</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d11</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d01</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d01</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">d11</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d20</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d01</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d21</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">denom</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">d00</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d21</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">d01</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d20</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">denom</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1.0f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">w</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nf">Vector3</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The output vector contains the weights for point a, b, and c in that order.  These are normalized -- the three weights always add up to 1.0--so you can just use them as multipliers directly:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">float</span><span class="w"> </span><span class="n">upLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">templateHeights</span><span class="p">[</span><span class="n">templateindexZ</span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">templateindexX</span><span class="p">];</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">upRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">templateHeights</span><span class="p">[</span><span class="n">templateindexZ</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="n">templateindexX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">];</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">downLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">templateHeights</span><span class="p">[</span><span class="n">templateindexZ</span><span class="p">,</span><span class="w"> </span><span class="n">templateindexX</span><span class="p">];</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">downRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">templateHeights</span><span class="p">[</span><span class="n">templateindexZ</span><span class="p">,</span><span class="w"> </span><span class="n">templateindexX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">];</span>
+
+<span class="n">Vector3</span><span class="w"> </span><span class="n">ulVec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">);</span>
+<span class="n">Vector3</span><span class="w"> </span><span class="n">urVec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">1</span><span class="p">);</span>
+<span class="n">Vector3</span><span class="w"> </span><span class="n">dlVec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">);</span>
+<span class="n">Vector3</span><span class="w"> </span><span class="n">drVec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">);</span>
+
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">worldGen</span><span class="p">.</span><span class="n">terrainTileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">worldGen</span><span class="p">.</span><span class="n">terrainTileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">z</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Upper Left half</span>
+<span class="w">            </span><span class="n">Vector3</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Barycentric</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">worldGen</span><span class="p">.</span><span class="n">terrainTileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
+<span class="w">                                                </span><span class="m">0</span><span class="p">,</span>
+<span class="w">                                                </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">z</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">worldGen</span><span class="p">.</span><span class="n">terrainTileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)),</span>
+<span class="w">                </span><span class="n">dlVec</span><span class="p">,</span><span class="w"> </span><span class="n">ulVec</span><span class="p">,</span><span class="w"> </span><span class="n">urVec</span><span class="p">);</span>
+<span class="w">            </span><span class="n">result</span><span class="p">[</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">downLeft</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">upLeft</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">upRight</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// Lower Right  half</span>
+<span class="w">            </span><span class="n">Vector3</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Barycentric</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Vector3</span><span class="p">((</span><span class="kt">float</span><span class="p">)</span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">worldGen</span><span class="p">.</span><span class="n">terrainTileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">),</span>
+<span class="w">                                                </span><span class="m">0</span><span class="p">,</span>
+<span class="w">                                                </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">z</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)(</span><span class="n">worldGen</span><span class="p">.</span><span class="n">terrainTileSize</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)),</span>
+<span class="w">                </span><span class="n">dlVec</span><span class="p">,</span><span class="w"> </span><span class="n">urVec</span><span class="p">,</span><span class="w"> </span><span class="n">drVec</span><span class="p">);</span>
+<span class="w">            </span><span class="n">result</span><span class="p">[</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">downLeft</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">upRight</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">downRight</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>Note that this calls <em>Barycentric()</em> for every point in the heightmap, and we do this for every heightmap we generate.  There's an old computer programmer saying:</p>
+<blockquote>
+<p>Premature optimization is the root of all evil.</p>
+</blockquote>
+<p>I'd like to add my own to it:</p>
+<blockquote>
+<p>...but there's no need to be stupid.</p>
+</blockquote>
+<p>In this case, we're doing a lot of work repeatedly.   Some of it is easy, like the cast of <em>worldGen.terrainTileSize + 1</em> to float that could be pulled out of the loop.   But most of it is inside <em>Barycentric()</em>.   That is the "in a vacuum" case given above.   In context, we can see that for every point in a given triangle, the only thing that varies in that function is <em>p</em>, which means that any line that doesn't use <em>p</em> or variables which are calculated from it--about half the function, including the first three dot products and the denominator calculation--could be done once and applied to every point in a given triangle.   That optimization alone would reduce the cost of this process by half--I leave it up to you whether that's worth the significant cost in readability (and by extension, maintainability and reusability).  But I will say, if you <em>have</em> to prematurely optimize, you could do a lot worse than reducing the cost of the inner code of a double nested <code>for</code> loop.</p>
+<p>When this process is done, you'll have terrain height values that smoothly spread the rise or drop across each of the two triangles.   The corners will be in the exact position of the template heights, and the edges will interpolate between them.  Importantly, when adjacent terrains do this same algorithm, they'll generate the same values (give or take floating point rounding) for the edges and corners, so they'll still line up, without our having to reference the other patch's heightmap.  So we've maintained independence of generation.</p>
+<p>That rounding gets worse the "higher" we go in our game world, and the steeper the slope, so some stitching is going to be inevitable.   I've found that 8K as a global maximum height produces edges that are off on the steepest, highest hillsides by about a quarter meter vertically.   In flatter terrains, there's usually no visible gap at all, and the occasional one is a few centimeters in height.     Even the quarter meter ones should be easily stitched without requiring a skirt zone.</p>
+<p><img alt="Terrain Gaps at Height" src="../media/terraingaps.png" /></p>
+<p>Another downside is that our terrain is effectively flat (or at least smoothly sloped) except for a possible discontinuity along the center line if the two "triangles" that make up the terrain are significantly different in slope.    We're "correct" in the global function (rising toward mountains, falling toward plains, etc.), but quite uninteresting in the local space.</p>
+<p>And those centerline discontinuities can be pretty obvious.  Here our robot is overlooking a valley corner where 3-4 of these barycentric lines come together:</p>
+<p><img alt="Barycentric artifacts" src="../media/barycentric-artifact.png" /></p>
+<p>Even after applying noise (see below), those are some fairly straight lines (and the shadows emphasize it in the image).   Generally, this would indicate a failure of our global generation system - these discontinuities appear only in places with fairly sudden changes in global elevation slope, which is a pretty unnatural case to begin with.   But if we need to support that, the solution is to add some variance into our base elevation "triangulation."   Other than the corners and edges (which are necessary in order to align with connecting patches), there's no particular reason our "centerline" needs to be a line, and by replacing it with something like a weighted random walk (or repeated midpoint displacement), we can make that shape much more interesting.</p>
+<h3 id="patch-size-and-steepness">Patch Size and Steepness<a class="headerlink" href="#patch-size-and-steepness" title="Permanent link">&para;</a></h3>
+<p>There's a subtle relationship in this algorithm between the size you use for patches (1024x1024 in our examples) and the maximum steepness of our terrains.   Theoretically, the steepest surface you can have is a terrain that reaches the minimum and maximum world heights in a single patch.   The absolute height that can be reached is unchanged depending on patch size, but the rate at which you can "get there" isn't.   A 1km patch can achieve its elevation gain (assuming the base heights algorithm and ignoring local features) over a full kilometer.   A 250 meter patch can be four times as steep, just because it's edges are a quarter as far apart.</p>
+<p>Going from sea floor to maximum height in a kilometer isn't likely to happen, of course, but this same logic applies to any elevation gain:  they can be steeper with smaller patches.</p>
+<p>With a 5K maximum elevation and 1K terrain patches, even pretty "mountainous" slopes can be walkable using Unity's default 45-degree rule, although that that rule is fairly unrealistic.   Humans can't really walk up 45 degree slopes in anything like a normal gait.  If you want steeper ones, you can, of course, raise the maximum elevation; but an easier solution is just to lower the patch size -- this gives us more flexibility for platform support (particularly mobile), as well.</p>
+<h2 id="adding-interest">Adding Interest<a class="headerlink" href="#adding-interest" title="Permanent link">&para;</a></h2>
+<p>We've got a lot of tools remaining to apply, including biomes with detail and vegetation, as well as features applied at the regional level.   But before we get to all of those, it makes sense to use the easy one:  Perlin (or rather Simplex) noise.   While noise generates pretty mediocre terrain <em>by itself</em>, it makes an excellent "roughening" agent for covering up overly-regular structures, and it doesn't get much more regular than our base height map.</p>
+<p>We don't need <em>much</em> noise; just enough to break up the ground a little and not make the user feel like they're walking on a gradually terraced plain all the time.  And in fact, we don't want too much noise, because we need to be able to apply this <em>everywhere</em> in order to keep edges aligning.</p>
+<p>For now, those two algorithms (base height plus noise) will be enough to give us decent terrain shapes that define our local patches in terms of their global context, and look fairly natural doing it.   We'll add more later, but right now, we've got the beginnings of a world. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>

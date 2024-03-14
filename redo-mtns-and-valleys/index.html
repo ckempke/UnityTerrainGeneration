@@ -1,0 +1,1292 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/redo-mtns-and-valleys/">
+      
+      
+        <link rel="prev" href="../mtns-and-valleys/">
+      
+      
+        <link rel="next" href="../local-loc/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Do-Over! Global Features - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ok-lets-try-this-again" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Do-Over! Global Features
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_base_classes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-terrain-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#real-mountains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real Mountains
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-where-to-from-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      So where to from here?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="So where to from here?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-try-at-canyon-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      First Try at Canyon Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="First Try at Canyon Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#random-canyons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Random Canyons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mountain-ranges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mountain Ranges
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../erosion-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../water/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#real-mountains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real Mountains
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-where-to-from-here" class="md-nav__link">
+    <span class="md-ellipsis">
+      So where to from here?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="So where to from here?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-try-at-canyon-algorithm" class="md-nav__link">
+    <span class="md-ellipsis">
+      First Try at Canyon Algorithm
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="First Try at Canyon Algorithm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#random-canyons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Random Canyons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Success?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mountain-ranges" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mountain Ranges
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ok-lets-try-this-again">OK, let's try this again...<a class="headerlink" href="#ok-lets-try-this-again" title="Permanent link">&para;</a></h1>
+<p>So here's the thing:   The mountain algorithms described on the previous page suck.  </p>
+<p>They're not generating mountains that are anything like natural.   By layering multiple different erosion methods over top of them, it's possible to get a sort of natural level of "roughness," but there's still this sort of conical nature to them that you don't see in real ones.</p>
+<p>Worse, it's the sort of "wrong" that's obvious to a viewer.   If you watch good artists make mountains by hand in a terrain editor, their results invariably have properties that our generated ones do not.   In particular, none of the popular algorithms seem to generate ridges very well, the sort of high connections that make up mountain chains.  If you look at a mountain range edge-on, you don't see each mountain slope descending to a point, then suddenly reversing and rising up the next mountain.  Instead, it's sort of dips-and-rises, often without smooth differentiation of where one mountain ends and another begins.   Some of this is illusion:  mountains behind the first "row" will tend to "fill in" those gaps, but the actual effect is quite real.</p>
+<p>A second issue is that most of the standard generation techniques generate particularly picturesque mountains, not your sort of mundane, everyday ones.</p>
+<p>So let's start again, and ignore the "known" methods and try to develop our own.</p>
+<p>The US Geological survey has tons of elevation maps for the US, and at least rough ones for most of the world.   Let's see what some of our own planet's mountains look like:</p>
+<h2 id="real-mountains">Real Mountains<a class="headerlink" href="#real-mountains" title="Permanent link">&para;</a></h2>
+<p>Here's the Cascade mountains near my home in Oregon:</p>
+<p><img alt="USGS Cascade Range elevations image" src="../media/cascades-clip.png" /></p>
+<p>First off, you don't see many "round cone" mountains there (there are a few on the desert side to the east and south, which in Oregon are probably volcanos).  In fact, if I were describing this, I'd probably say something like "a series of uneven ridges separated by canyons" (most of which are rivers, creeks, or streams if you turn on the water overlays.)  A lot of what we see as a "mountain" is either just a high point on one of these ridges, or the ridge itself viewed edge-on.   It's really, <em>really</em> hard to say what the boundaries of a particular mountain are, here.</p>
+<p>Are these typical?  Let's take a look at the northern Rockies, up in Idaho, Montana, and Wyoming:</p>
+<p><img alt="Rockies Elevation Image" src="../media/rockies-clip.png" /></p>
+<p>A key difference here is that these are sharper and taller, although the canyons are actually even denser.   The effect isn't quite as pronounced as these images show, because they're not to the same scale.  The rockies are younger, less eroded mountains.   You may also notice a sort of vertical bias here -- there are more north/south features than east-west ones, both ridges and especially valleys.   That's even more obvious if you look at a much more zoomed out view of the Southeastern United States:</p>
+<p><img alt="Southwest US Elevation Map" src="../media/southwest-us-clip.png" /></p>
+<p>Here we're seeing uplift directly, these are basically the same ridges that you get if you shove a towel into another one on a smooth table.  And it's sort of fractal effect:  On this scale, whole ranges are the "peaks" that get separated by wide valleys (albeit in a more aligned pattern).  Most of that space is the Great American Desert, so there's a lot of erosion going on here, too.</p>
+<p>The USGS doesn't have as much detail outside the United States, but here's a shot of Peru (colored differently because different data sets are available there).  These are the Andes, even younger mountains still:</p>
+<p><img alt="Peruvian Andes Elevation Map" src="../media/andes-clip.png" /></p>
+<p>From this, we learn that the coastline of Peru is made up of very, very straight lines (some sort of map artifact).  But inland, we see the multiple "ripples" of tectonic squishing, and the same sort of "long ridges broken up by canyons" model we see elsewhere.  There's a sort of interesting effect here, too:  note that the western (whitish) areas tend to have most of the large canyon features north-south, but the greenish inland areas switch to almost exclusively east-west.</p>
+<h2 id="so-where-to-from-here">So where to from here?<a class="headerlink" href="#so-where-to-from-here" title="Permanent link">&para;</a></h2>
+<p>If you look at the higher zoom maps (more detail), you notice a fairly recurring pattern:  the elevation rises to a ridge (not usually a point) more or less evenly between each bordering canyon.</p>
+<p>So how about skipping the whole "place the mountains and erode them down" idea in favor of "place the canyons and then push up the space between them?"</p>
+<h3 id="first-try-at-canyon-algorithm">First Try at Canyon Algorithm<a class="headerlink" href="#first-try-at-canyon-algorithm" title="Permanent link">&para;</a></h3>
+<p>So here's my proposed solution:</p>
+<div class="highlight"><pre><span></span><code>Create a &quot;canyon map&quot; of boolean values, initialized to &quot;false&quot;.  &quot;true&quot; in this map represents the bottom of a canyon.
+
+Determine the overall bounds of our mountain range
+
+Using Midpoint displacement, draw some &quot;edges&quot; to those bounds as canyons.
+
+repeat
+    Find a point that&#39;s on a canyon
+    draw a canyon from that point in a random direction (but not outside)
+    if you get to another canyon point, stop N% of the time, always stop on an edge
+until we think we have enough canyons
+
+for each pixel on the height map, set it to a height based on how far it is from the nearest canyon.
+</code></pre></div>
+<p>For the "draw a canyon" step, we'll probably want to use a sort of weighted random walk, where each step is more likely to be "forward" than any other direction, but still provides a lot of randomness.     The N% stopping time is based on observation of the real-world maps, where canyons occasionally hit another canyon and still cross it.  This happens fairly rarely, so N might be 95% or so.</p>
+<h4 id="random-canyons">Random Canyons<a class="headerlink" href="#random-canyons" title="Permanent link">&para;</a></h4>
+<p>This turns out to be surprisingly easy to implement. After playing with it for a bit, I went with generating random-walk canyons for the entire map, and then just sampling it in places where I wanted the mountain ranges to me.</p>
+<p>The implementation is just to pick a direction and randomly move toward it most of the time, or slightly to the left or right instead the rest of the time, stopping when we hit another canyon.  (N = 100 for this first pass).   Generating for a whole 2049x2049 vertex heightmap (our Global Terrain Template), I settled on 10K "canyons" after some experimentation.  That gives me a canyon layout like this:</p>
+<p><img alt="Canyon Lines, a random web of white lines on a black background" src="../media/canyons.png" /></p>
+<p>My algorithm tends to prefer axis alignment or 45 degree angles, which is visible when you see the entire mesh like this.   It works for my purposes, but a better random walk would produce less aligned lines.   </p>
+<p>From there, we iterate across every pixel repeatedly, assigning all non-assigned surrounding elements a height value of one greater than our current value, resulting in a height map that looks something like this:</p>
+<p><img alt="Elevation Map from our canyons" src="../media/canyon-elevations.png" /></p>
+<p>Tell me that doesn't look a lot like the image of the Rockies, above!    But the proof is in the rendering.   If we select swaths of this as our mountain ranges and blend them into the current terrain:</p>
+<p><img alt="Mountain Offsets limited to ranges" src="../media/c-mtns-offsets.png" /></p>
+<p>We can feed them into the GTT generation, replacing the current mountain rendering and erosion steps:</p>
+<p><img alt="Rendered mountain range, edge-on" src="../media/canyon-alg.png" /></p>
+<h3 id="success">Success?<a class="headerlink" href="#success" title="Permanent link">&para;</a></h3>
+<p>I think that's a pretty good set of mountains.  It looks much more like a real mountain range than the conical shapes we were seeing before. and there are real ridges and a larger variety of shapes.   More interestingly, it's less expensive than our previous mountain algorithm, and the above images are <em>out of the box</em>.  We get varying heights, ridges, and erosion for "free."   And zipping around the map a bit to look around, there aren't any "weird" shapes.</p>
+<p>It's not perfect:  the edges of the real-world mountain ranges get "looser" as the canyons widen, and right now all of our canyons are all the same depth relative to the overlaid terrain.   We could add some noise for roughness, some options for higher, steeper mountains or smoother, lower ones.   It could use some added erosion to break up those fairly smooth edges.   We'll iterate on it again, but it's good enough at the moment to let us move on to related problems. </p>
+<h2 id="mountain-ranges">Mountain Ranges<a class="headerlink" href="#mountain-ranges" title="Permanent link">&para;</a></h2>
+<p>Our mountain <em>range</em> algorithm can use some work.   The test case above was pretty much just some polygons, blurred at the edges to make them fade out back to the plains (or whatever the baseline terrain is)   They don't look much like ranges, just mountainous "patches" in our world.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>

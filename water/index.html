@@ -1,0 +1,1230 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/water/">
+      
+      
+        <link rel="prev" href="../biomes2/">
+      
+      
+        <link rel="next" href="../biomes-unity/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Water - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#water" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Water
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_base_classes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-terrain-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redo-mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../erosion-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#armature-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Armature Position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#surface-distortion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Surface Distortion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#common-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vision" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vision
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#armature-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      Armature Position
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#surface-distortion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Surface Distortion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="water">Water<a class="headerlink" href="#water" title="Permanent link">&para;</a></h1>
+<p>Ignoring things like precipitation, steam, fog, and ice, liquid water exists in three forms in most open-world games:  oceans, ponds/lakes, and rivers.  The exact form these take will vary, depending on the game and the player's abilities within it.   Often, water is simply a decoration, a sort of scenic, "wall" that acts to contain and direct the player.   In other games, players can swim or dive in the water, making it a full-fledged environment in its own right.   <em>Subnautica</em> and other games in the "diving adventure" genre may take place nearly entirely underwater.</p>
+<p>Water is usually transparent to one degree or another, which means that visually it's an <em>addition</em> to another terrain type, not just one of its own.  (It also usually means it's a little more expensive, performance-wise, than other terrains.)</p>
+<h2 id="common-features">Common Features<a class="headerlink" href="#common-features" title="Permanent link">&para;</a></h2>
+<p>Up until now, our focus has been entirely on world generation and the dynamic loading of terrains.   It has generally <em>not</em> been about the characteristics of the games that might use it: that is, we're generating the world, not defining how the player interacts with it.  That's mostly still going to be true, but water is "special" enough that we'll at least talk about game implementation possibilities.</p>
+<p>If water is a barrier to the player--if they cannot enter it at all, or cannot enter it past walking depth--then the implementation is pretty simple:  the player will never "see" from underwater, the edges of the water can be limited like any other terrain boundaries, and all you really need is a good shader for the surface(s); many free and paid ones exist for all of Unity's shader pipelines.   For most such scenarios, the water "surface" can be a simple plane.</p>
+<p>But if the player can swim, we're opening up a bunch of new considerations.</p>
+<h3 id="vision">Vision<a class="headerlink" href="#vision" title="Permanent link">&para;</a></h3>
+<p>Generally, we can't see as well or as far underwater as we can above it.  Natural water is often not entirely transparent -- debris, algae, cyanobacteria and the like will physically limit the distance we can see.    This is very, very similar to fog above water, and we can implement it the same way:  distance or volumetric fog, or both.   Land fog is typically white or grey; underwater fog-like effects will usually take on the colors of whatever's causing it:  muddy browns, various greens and blues, red from blood, or whatever.</p>
+<p>Even in the absence of particles, human vision is blurred underwater.  This is because our eyes evolved for the the refraction at the surface of the eye to be with the eye itself and <em>air</em>.  (For the opposite reason, many amphibious creatures can't see well in air, because their eyes expect an eyeball/water boundary.).  Water bends light more dramatically than air, and provides more pressure on the eyeball itself.   The refraction is expecially significant if you're looking from the air <em>into</em> water in which something is partially submerged.  Even in relatively shallow water, distances and even true positions are difficult to judge.</p>
+<p>Ray tracing systems can work with refraction directly. Most other games tend to just ignore its effects (or "roll them in" to the fog, or assume the player is wearing a mask or goggles), because they're difficult to implement and generally deleterious to game play.  It's very unusual for a game to implement surface refraction, for example.</p>
+<p>Air and water are both generally moving, but the effect is considerably more obvious in water.  This causes changes in density that both visibly affect refraction and eyeball pressure.  The resulting "wavy" distortion is easily simulated with post-processing if you want it.</p>
+<p>Finally, water isn't completely transparent.  As you descend, less light from the surface reaches you, and the darker the surroundings will be.  In the real world, light is very dim by 200 meters down, and even in the best conditions completely dark by 1000 meters down.   Whether or not this matters to your game depends on whether there's any ability of your characters reaching such depths.  Note that this only applies to sunlight:  emissive surfaces (e.g. underwater lava), bioluminescence, and player-carried illumination can all bring light to the depths.</p>
+<p>Generally, these effects are placed based on the <em>camera</em> position, not those of the player's eyes (except in first-person where the two are coincident).   This can cause a very common effect where by placing the camera right at the surface of the water, you can often "see" underwater using the above-water lighting and visibility settings.   Solving this is extremely expensive; even AAA games tend to just live with it.</p>
+<p><em>Note: Want to solve it?  Calculate the line where the surface plane intersects the "near" plane of the camera frustrum.   Create a second camera at the same position.  Apply the underwater settings to the second camera, and render to a texture that is invisible to the underwater camera, but rendered on a plane perpendicular to the above-water camera with its top at the waterline.  Expect a drop in frame rates, since you've effectively just doubled the amount of stuff you're rendering.</em></p>
+<h3 id="armature-position">Armature Position<a class="headerlink" href="#armature-position" title="Permanent link">&para;</a></h3>
+<p>Generally there are three basic character postures for our player's avatar model:</p>
+<p><strong>Walking</strong>: In shallow water, they will walk, run, or stand just like they do on land.  (If they're doing it <em>exactly</em> the same as they do on land--i.e. on top of the water itself--remember to turn off or remove the mesh colider for the water surface object!)</p>
+<p><strong>Swimming:</strong> The normal standing posture will continue until the player reaches some depth, typically either the waist or the shoulders (shoulders is more realistic), at which point they will pivot to a "swimming" posture.   This is prone along the surface of the water.  Hands and legs tend to stay near the body or each other except during strokes.   Typical swim animations are either the Australian crawl, some sort of dog paddle, or a breaststroke.  The latter two have the advantage that the eyes remain forward looking, and are much more likely in a world where swimming is a very occasional occurrence, rather than something that people would train in.   Swimming animations tend to mostly ignore the up-down motion of real swimming in favor of "sticking" to the water surface.   It's just as two-dimensional as walking/running, just in a different positure, and with greater penetration of the "ground."</p>
+<p><strong>Diving/Underwater</strong>: In some games (for example, <em>Valheim</em>), that's all the swimming that's allowed.   But most games in which water is a traversable environment also allow underwater movement.   This is typically initiated by a sort of head-down dive.  Once the body is below water, orientation becomes somewhat arbitrary; the swimmer is effectively in a zero-gravity environment.  The arms and legs tend to be spread further away from the body and used for larger, more sweeping motions.  For humans, direction changes are fairly rapid (like a figure skater pivoting), but orientation changes (where the spine and head point, relative to "up") are quite slow (probably because they require movements that make no sense on land).</p>
+<p>These three positions are mutually exclusive; probably different animation layers or controllers altogether.</p>
+<h3 id="surface-distortion">Surface Distortion<a class="headerlink" href="#surface-distortion" title="Permanent link">&para;</a></h3>
+<p>Except in exceptionally windless conditions, water is almost never perfectly flat.  Moving water never is.  Larger bodies of water are also subject to waves and tides from non-wind sources.   While games often present a sort of "foam" effect at the edges of water, this is relatively uncommon in the real world, especially in freshwater.    Water that moves rapidly over uneven surfaces will incorporate air and become whiter and more opaque.   Waves that reach a certain height and shape will "break," again incorportating air and scattering droplets.  Disturbed water will make characteristic expanding "rings" around the point of disturbance.</p>
+<p>All of this is hard to model, and modelling it completely accurately in anything like realtime is well beyond desktop computers.   But it can be faked reasonably well, particularly using GPU shaders.  These are typically of two types:  reflection shaders distort the visual aspect of water; waves and patterns on the water being achieved through (in effect) moving normal maps, where changing the direction of reflections at each point can give a very convicing illusion of an uneven surface.  This illusion falls apart at shorelines, though, where the unmoving "edges" of the water destroy the effect.   Reflection shaded water doesn't lap onto beaches, or change it's depth.</p>
+<p>Surface displacement shaders actually move the vertices of the water, generating "actual" waves.  As such, they will rise and fall above the "beach" textures sufficiently to model actual incoming waves.    These displacements are also much more convincing when viewed from almost parallel to the water line, because they're actually moving.</p>
+<p>Available shaders can do either, and often both, of these effects.  Assuming sufficient GPU resources, they're also pretty cheap and provide reasonably good-looking water.   Want to roll your own?  There are dozens of tutorials out there on the Internet.</p>
+<p>_Note: I talk about water surface "planes" a lot in this section, but because our players may be able to see the surface from underneath, the implementation actually uses a very thin solid (a squished cube), instead, so that it has both a top and bottom side.   You can also turn on the flag to make plane meshes visible from both sides, but I've had mixed luck with shaders handling that. </p>
+<h1 id="seas">Seas<a class="headerlink" href="#seas" title="Permanent link">&para;</a></h1>
+<p>The first case is the (literally) biggest:  the oceans and seas that border the landmasses of our world.  While not strictly physically accurate, we can just represent this as a single "sea level" plane that covers the entire map.</p>
+<p>This does have the downside that we can't have "dry" areas of land that are below sea level (see the page on mountain generation for some cases where that causes issues), but living with that limitation is a small price to pay for the simplicity of a single sea-level plane.</p>
+<p>...or is it?</p>
+<p>In all but the simplest graphical environments (maybe a very low-poly game), our water is likely to have one or more shaders on it.  That makes it relatively expensive to render compared to our other polygons, and it's not necessary for the vast majority of non-underwater terrains---basically just the seashore and the ocean.    Even if it's not drawn, though, the engine needs to spend effort culling it.</p>
+<p>Very large polygons (and ours might be hundreds of thousands of meters along an edge) are also a pain in other ways.   Shaders and textures may or may not tile correctly on them (or require so many tilings they exceed the capabilities of the system), they block views in the scene editor while we're debugging.   They're just not on the same scale as most anything else in the world, which means they're a special case everywhere.</p>
+<p>And then there's that pesky "sea is everywhere" problem.  It's relatively easy for us to solve in our world generation (we simply don't generate parts that are under that layer unless we want them), but what if the player is allowed to manipulate the terrain?  Or if we have caves or other underground structures?   Do they fill with water wherever they're below sea level?</p>
+<p>We may or may not care.   If our game doesn't need any of that stuff, and is OK with the performance, the single-sea-plane thing might work fine.   If not, we can just generate a local, patch-sized sea plane for those spots we want to have ocean in.  As long as we're careful about tiling so that the edges meet correctly, we should get a decent sea from that.</p>
+<p>We could also keep the sea plane, but just make the parts of that are under land 100% transparent.   That's harder to do correctly (again, since the scales are so different), but it's a simpler conceptual model.</p>
+<h2 id="lakes-ponds-swamps-puddles">Lakes, ponds, swamps, puddles<a class="headerlink" href="#lakes-ponds-swamps-puddles" title="Permanent link">&para;</a></h2>
+<p>Water (usually freshwater) accumulates above sea level in various forms.  Some, like puddles, are very transient and perhaps best handled as part of precipitation shaders.    But for larger bodies---particularly ones deep enough for a player to swim or submerge---we'll need to handle them sort of like little oceans, with some exceptions.    </p>
+<p>There are some really deep lakes in the world: Crater Lake is over five hundred meters, and Lake Baikal is more than three times that depth.   But generally speaking, lakes aren't as deep as oceans, and we can probably accept not having depth-based light fade for simpler implementations.</p>
+<p>Generally, we'll want to define a simple "volume" to contain the water.  The top of this volume will define the water's surface, the bottom will be below the maximum water depth, and the other edges will define the horizontal limits in (x, z) space.  In most cases, we can probably live with a scaled cube.  Recent versions of <em>Minecraft</em> refer to such structures as <em>aquifers</em>, a name that's good enough that I'll steal it.   Unlike real aquifers, these are generally no larger than necessary to contain their body of water.</p>
+<p>For something like a swamp, we might want our aquifer to cover the entire area of the terrain (and maybe adjoining ones, as well).  For more contained bodies of water, we can make them smaller, and even place them with the body.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>

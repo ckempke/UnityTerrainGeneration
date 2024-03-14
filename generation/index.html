@@ -1,0 +1,1407 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/generation/">
+      
+      
+        <link rel="prev" href="../size_of_game_worlds/">
+      
+      
+        <link rel="next" href="../unity_base_classes/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Generation - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#generating-techniques" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Generation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Noise
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Noise">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problems-with-perlin-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problems with Perlin Noise
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problems with Perlin Noise">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#randomness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Randomness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simplex-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simplex noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#natural-ish" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natural-ish?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#midpoint-displacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Midpoint Displacement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#voronoi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Voronoi
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natural Processes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Natural Processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#continental-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continental Drift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volcanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Volcanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erosion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Erosion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_base_classes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-terrain-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redo-mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../erosion-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../water/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Noise
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Noise">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-problems-with-perlin-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Problems with Perlin Noise
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Problems with Perlin Noise">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#randomness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Randomness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simplex-noise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simplex noise
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#natural-ish" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natural-ish?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#midpoint-displacement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Midpoint Displacement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#voronoi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Voronoi
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#natural-processes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Natural Processes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Natural Processes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#continental-drift" class="md-nav__link">
+    <span class="md-ellipsis">
+      Continental Drift
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volcanism" class="md-nav__link">
+    <span class="md-ellipsis">
+      Volcanism
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#erosion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Erosion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="generating-techniques">Generating Techniques<a class="headerlink" href="#generating-techniques" title="Permanent link">&para;</a></h1>
+<p>Terrain generation is hardly uncharted territory.   In fact, this project is meant to be less about breaking new ground than it is integrating and implementing techniques to make a "good game" or "good simulation," ideally one that's easy enough to use that it can be repurposed and modified for other games, other simulations, and other environments.</p>
+<p>Let's begin by going over some of the popular techniques.</p>
+<h2 id="noise">Noise<a class="headerlink" href="#noise" title="Permanent link">&para;</a></h2>
+<p>"Noise," in the technical sense we're using here, means a continuous function in one or more dimensions, that exhibit some random or pseudo-random properties.</p>
+<p>For one-dimensional noise, think of it as a line that "wanders" between two values (typically either -1 and 1 or else 0 and 1) in an unpredictable fashion.  "Continuous" here means that if you were drawing the line, it could be done without lifting your pencil from the paper.</p>
+<p>Of course, computers aren't great at continuous things, and this kind of continuity is broken if you're not thinking of the function as an infinitely-divisible line over real numbers.    In real implementations, this function is "sampled" at discrete, usually fixed intervals.    So long as the intervals are small compared the to average distances over which the function changes value ("period" or the "inverse frequency", if we think of the function as a signal), an illusion of continuity is maintained.   If the interval approaches or becomes longer than the period, the resulting output will show <em>moire</em> effects or break down altogether.  This is the same effect that makes fans and propellers appear to slow, then spin backwards when seen on film.</p>
+<p>Probably the most famous of the computational noise generation functions is <em>Perlin noise</em>.  Developed for the movie <em>Tron</em>, it's been around for decades, and won its creator an Oscar for screen effects that used it.</p>
+<p>Perlin noise generates "slow," smooth changes in value over the X axis.    These values are typically scaled from their [0,1] range into whatever is useful for a given application, and sampled at different frequencies in order to speed up or slow down the rate of change.</p>
+<p>Early in its existence, it was noticed that Perlin noise at certain frequencies tends to look like a natural "ridge line" when viewed edge-on.   This effect is significantly magnified by sampling the Perlin noise function at several different rates (often called "octaves" in the literature), and adding or subtracting the resulting curves.</p>
+<p>This effect persists when Perlin noise is extended to two dimensions.   When two-dimensional Perlin noise is generated over a range of (x, y) values, it produces a sort of "lumpy" or "cloudlike" pattern (very visible if you make an image of it, with each pixel given a greyscale value corresponding to the Perlin value at that position).    Again, sampling at different frequencies and adding the results together makes the clouds "fluffier."  </p>
+<p>If you take that two-dimensional Perlin bitmap, and treat it as a <em>heightmap</em>, where the value indicates the "height" in the third dimension, you get something that often bears a remarkable similarity to natural terrain.    Messing with the scale, frequency, number of octaves, and interpretation can produce a wide variety of terrain effects, from rolling plains through dunes, hills, and mountains.    A huge amount of the "procedurally generated" terrains you see online are created directly from Perlin noise or a similar function.</p>
+<h3 id="the-problems-with-perlin-noise">The Problems with Perlin Noise<a class="headerlink" href="#the-problems-with-perlin-noise" title="Permanent link">&para;</a></h3>
+<h4 id="randomness">Randomness<a class="headerlink" href="#randomness" title="Permanent link">&para;</a></h4>
+<p>If the solution were "Perlin noise produces great terrains--we're done," this would be a short document, indeed.   But there are some downsides.</p>
+<p>The first is technical.   Perlin noise describes a single, fixed function.   Assuming no bugs, your Perlin noise generator and my Perlin noise generator will generate the same function every time.   If you use it to generate a terrain, it will generate the <em>same</em> terrain each run.</p>
+<p>Pseudo-random number generation has had this problem for ages, of course, and the solution there is to introduce a <em>seed</em> value, effectively a developer-provided starting point for the sequence (often itself derived from some near-random value like the microsection portion of the current clock time).</p>
+<p>Perlin noise is unseeded, but we can fake the seed by simply offsetting the input value by a "seed" distance in the X or (X,Y) dimensions, basically just moving the "origin" of the Perlin function somewhere else.</p>
+<p>There's a second issue with randomness, although it's not obvious until you look at some Perlin noise results for a while.   There's a distinct "grid" to it--that is, terrain features tend to appear in horizontal and vertical lines.   Whether or not this is a problem depends on the implementation; the "grid" is generally visible only when large amounts of the terrain are visible at once, so for a game where the player spends most of his or her time on the ground, it may never be obvious.</p>
+<h4 id="simplex-noise">Simplex noise<a class="headerlink" href="#simplex-noise" title="Permanent link">&para;</a></h4>
+<p>Both of these problems are solved in a more modern noise function, called Simplex (also developed by Ken Perlin).  First, it takes an explicit seed, so you can generate repeatable or non-repeatable output as desired.  Second, it's built over a <em>hexagonal</em> structure rather than a gridded one, and with more deviation from those directions.   This generates far fewer visible "lines" in the resulting noise.  Simplex is also somewhat more computationally efficient, so it takes less computer time to generate.</p>
+<p>A few specific implementations and uses for Simplex noise were covered by a U.S. patent, but there are a large number of non-infringing libraries and implementations available (e.g. "OpenSimplex"), and in any case the patent expired in early 2022.  Generally speaking, it's almost always better to use simplex noise rather than Perlin.</p>
+<h4 id="natural-ish">Natural-ish?<a class="headerlink" href="#natural-ish" title="Permanent link">&para;</a></h4>
+<p>The biggest problem with both Perlin and Simplex noise is that while it generates some of the shapes and structures of natural terrain, the terrains described are only superficially "natural."   A geologist looking at noise-generated terrain won't be fooled, and even laypeople will tend to find it "boring" compared to real-world terrains.  "Sharp" features like geologically young mountain peaks, deep canyons, badlands, cliffs, and other features where sudden discontinuities are common aren't produced at all by most noise-based implementations, and require a lot of tweaking to achieve even if you're trying for them.  And of course, in the typical implementations, these are generating height maps over a 2D grid, so there are never any overhangs at all.</p>
+<p>The last problem can be addressed in part by moving to <em>3D</em> noise, which is how games like Minecraft produce their bridges, overhangs, underground caves, and other features.   But even if you ignore the blocky-ness of Minecraft, its terrains are actually <em>less</em> natural looking than 2D implementations:  it covers more of nature, but at the cost of producing a lot of things nature never could.  And this sort of terrain virtually requires an expensive voxel implementation because of it's three-dimensional nature.</p>
+<p>In the real world, mountain ranges tend to have foothills because colliding plates ripple like two pieces of gelatin shoved together.   Canyons are carved by rivers, and often still have them in the bottom.  Desert dunes are formed by the effects and direction of wind.   "Sharp" features in climatologically wet areas will tend to crumble and produce debris fields at the bottom.  Cliffs next to oceans or lakes will be undercut over time, resulting in sea caves or just collapse.   Hurricanes and tsunamis re-shape low-lying islands.    Unstable geology falls under gravity, structures become smoother and flatter as they (geologically) age.   Hot spots in the mantle produce "arcs" of volcanic mountains, caulderas, or islands as continental plates move over them.</p>
+<p>Noise-based algorithms deal with precisely none of that.   They generate terrains that make sense locally but not globally.  One site discussing perlin-based terrains put it succinctly as "the terrain has no history."</p>
+<p>None of this is to say that noise-based terrains have no place.   Sometimes realism isn't important.   Sometimes local is enough.   And almost always, you can use noise-based data to add realistic detail to terrains generated by other methods.</p>
+<h2 id="midpoint-displacement">Midpoint Displacement<a class="headerlink" href="#midpoint-displacement" title="Permanent link">&para;</a></h2>
+<p>Another popular noise-like algorithm is "Midpoint Displacement."  There are numerous variations of this, but in general, the algorithm is:</p>
+<ul>
+<li>On a very coarse grid, choose (or randomize) some known positions to be your minimum and maximum heights.   These could, for example, be mountaintops, sea floors, etc.</li>
+<li>Subdivide the grid in both dimensions by 2x, basically adding a new position between each existing one in both dimensions.</li>
+<li>Set the height of that new position to the average of the 2/4 positions around it, plus or minus a small random displacement.</li>
+<li>Repeat until you're at the desired resolution, possibly halving the displacement each time.</li>
+</ul>
+<p>This is a little more complex in practice than it looks like, since some of the positions need to be handled slightly differently than the others (there's a center square in each quad that has no neighbors with existing values when created), but it's relatively simple.   ("Diamond square" is a popular specific algorithm, there are others, as well.)</p>
+<p>This doesn't generate quite as nice looking a terrain as the perlin/simplex versions, but it has the advantage that you can force certain positions to have certain values:  if you want to insure that the edges of your map are below sea level, for example, or that there are mountains/continents in specific places or quantities.</p>
+<p>On the other hand, it shares a fair amount of disadvantages with the other noise methods:  the terrain tends to be either smoother or rougher in places than seems "natural," and it in general tends toward the smooth.   If you want a deep canyon with steep walls, for example, you'll need to place the high walls and the deep floor next to each other "manually," since they algorithm will almost always produce relatively shallow slopes.</p>
+<p>Also, despite seeming fairly fractal, there's really only two scales:  the initial "gross features" one and the detailed "rough surface" one.  Everything else tends to get smoothed out between them.  It's pretty good (maybe better than any of the other algorithms) at creating the rough structure of continents and seas, but is much poorer at things like mountain ranges and hills, unless you provide them in the initial data (which sort of defeats the point).</p>
+<h2 id="voronoi">Voronoi<a class="headerlink" href="#voronoi" title="Permanent link">&para;</a></h2>
+<p>Voronoi diagrams/Voronoi maps are a sort of "region map."    A bunch of "seed points" are randomly distributed over a surface, and then every other point is assigned to the "region" containing the closest seed point to it.   The region edges are polygons, whose edges are along the exact midpoint between each pair of seed points.   This process effectively divides space into a random set of convex polygons.</p>
+<p>For example, using Alex Beutel's online Voronoi generator <a href="http://alexbeutel.com/webgl/voronoi.html">here</a>, we can create an example diagram:</p>
+<p><img alt="Example Voronoi diagram" src="../media/voronoi-1.png" /></p>
+<p>The seed points here are the black dots, and the various colored polygons are their associated regions.   Note that because they are distributed randomly, the seed points are often quite far from the center of regions they define.   Also note that every polygon is convex, and all of the edges are straight lines.   The size of the regions is defined by the density of the corresponding seed points; in the diagram above, sparser points on the left tend to lead to larger polygons than on the right.</p>
+<p>Despite their apparent simplicity, Voronoi diagrams can be used in a number of ways for terrain generation, as we'll see later.</p>
+<p><strong>Height Map:</strong> Using the seed points as mountain "peaks" and defining either a fixed slope or one dependent on the polygon size can give you a base for mountain ranges and passes (the mountain passes correspond to the polygon edges, which are the low points of the height maps).   Mountains generated in this way are unnaturally conical and "spiky," so this would generally be the starting point for an algorithm that then roughens the surface by adding noise, erosion, etc.</p>
+<p><strong>Elevation Generation</strong>:  Let's take the above map and manipulate it a little bit.  If we take every polygon that touches the edge and make it blue, then every polygon that <em>does not</em> touch a blue one white, and the remainder green, you get this:</p>
+<p><img alt="Same Voronoi diagram, but with coloration showing &quot;distance&quot; from the edge of the map." src="../media/voronoi-2.png" /></p>
+<p>If you squint at that hard enough, you can see an island surrounded by water, with central snowy mountain peaks.  Using the "distance" (here meaning smallest number of polygons to an edge) to generate elevation zones can give you, again, a starting point for other generation techniques.  To get more elevation levels and rougher coastlines, start with more seed points. Amit Patel has a frequently-referenced online article where he takes this technique a <em>lot</em> farther, which you can find here:  http://www-cs-students.stanford.edu/~amitp/game-programming/polygon-map-generation/</p>
+<p><strong>Others:</strong>  There are lots of other possibilities.  Andy Lo uses them to define continental plates: https://squeakyspacebar.github.io/2017/07/12/Procedural-Map-Generation-With-Voronoi-Diagrams.html, then models the "stress" along their edges as they push together or pull apart.  Voronoi maps can be used to place moisture maps, biomes, political divisions, or what have you.  <em>Empyrion</em> appears to use a similar technique to determine zone of control around planetary bases (which act as the seed points).   Basically any time you've got "zones of influence" that can't overlap, you're ending up with a Voronoi diagram or something like it under the covers.</p>
+<h2 id="natural-processes">Natural Processes<a class="headerlink" href="#natural-processes" title="Permanent link">&para;</a></h2>
+<p>The natural world is shaped by continental drift, volcanism, gravity, water, and wind (and the occasional drive-by attack by comets and asteroids).   To one degree or another, all of these are relatively simple phenomenon that interact in decidedly non-simple ways to produce the astounding diversity of our planet's geography.</p>
+<p>This sort of "simple rules to produce non-simple emergent behavior" is the whole idea of procedural generation, and of course it's ideal for computational approximation.</p>
+<h3 id="continental-drift">Continental Drift<a class="headerlink" href="#continental-drift" title="Permanent link">&para;</a></h3>
+<p><strong>Continental Drift</strong>, or more accurately <em>Plate Tectonics,</em> is the science that described the large-scale movement of sections of the Earth's crust, called plates.   While it's accepted today as the best scientific description of planetary geology, it's surprisingly young--there was considerable debate about it as late as the 1960's.</p>
+<p>For our purposes, we can simplify the ideas to this, while losing some details:  The surface of some Earth-like planet is divided into large regions which float on top of the "liquid" mantle.   These plates move about, very slowly (centimeters per year).   Interesting things happen at the edges:</p>
+<ul>
+<li>Where two plates push into each other, the earth buckles up and you get mountain ranges.   This isn't a stable situation (mountains can't grow indefinitely), and the heavier plate will be pushed under the lighter one, a process called "subduction."    If one or both the the plates are oceanic rather than landmasses, the physics are a little different and you'll generally get a trench or deep ocean valley instead (often with a line of volcanos or volcanic islands some distance back along the uplifted side).</li>
+<li>Where two plates pull apart, you get significant volcanism, and the formation of rift valleys (on land) and oceanic ridges at sea, where volcanism effectively produces "new" seafloor to fill in the gaps.</li>
+<li>Where plates slide along each other, you get buildups and releases of friction, which cause earthquakes, generally in combination with one of the other two scenarios.   The edges of plates are fault lines.</li>
+</ul>
+<p>From an implementation standpoint, we can do things as complicated as measuring stresses (see the Andy Lo article above), or as simple as just realizing that mountain ranges, rifts, and trenches tend to follow plate boundaries, and that the interiors of plates distant from the edges tend toward flatness.</p>
+<p>Plate tectonics as it occurs on Earth may not be a universal phenomenon; science is ongoing about its existence (or lack of same) on other worlds.</p>
+<h3 id="volcanism">Volcanism<a class="headerlink" href="#volcanism" title="Permanent link">&para;</a></h3>
+<p>Volcanos are a more local effect, especially if you broaden the definition to anytime magma, ash, or hot materials are brought to the surface.   They occur around continental plate edges (e.g. the Pacific "Ring of Fire"), often on the uplifted (higher) side of a subduction zone.  Those tend to be the clustered ones you see in mountain ranges, like the numerous volcanoes in the Cascade range of the U.S. Pacific Northwest.   But volcanoes can form anywhere that there's a sufficient "hot spot" below the earth's crust.  Hot spot volcanoes like this are often responsible for island chains--for example, Hawaii's islands were formed by repeated volcanic eruptions of a hot spot as the tectonic plate moved over it.   They can also be absolutely massive, such as the super-volcanos that formed the Yellowstone caldera and Lake Toba.</p>
+<h3 id="erosion">Erosion<a class="headerlink" href="#erosion" title="Permanent link">&para;</a></h3>
+<p>Gravity, wind, and water all combine into erosion; the sometimes gradual, sometimes sudden process by which parts of the terrain are separated from their initial position, carried away (or just dropped), and deposited somewhere else.  Water is perhaps the most powerful of these effects; it can dissolve materials, wear them away though battering, seep into and widen cracks as temperatures change, and carry the resulting debris substantial distances.   At colder temperatures, ice is an even more powerful source of erosion.</p>
+<p>These changes take place over timescales ranging from seconds in the case of landslides and floods through millennia in the case of mountains flattening.  Generally speaking, we can't hope to simulate the actual processes, just the net results.    That usually means removing height from one location and adding some or all of it to another.    A crude form of this is the Gaussian Blur we use so often to smooth algorithmic maps -- it generally degrades sharp peaks and fills in sharp valleys.</p>
+<p>Erosion is often tied to steepness.  Avalanches, landslides, hydraulic shearing, and similar techniques rely on significant grades.  They tend to steepen the terrain at the point of loss, and make it shallower at the point of deposition.    Tidal erosion (where water hits shores) behaves very differently if it hits cliffs (generating sea caves and overhangs, and sometimes causing the higher terrain to fall into the sea) rather than shallower shores (where it will deposit beaches and generally both flatten the terrain and make the undersea portion shallower for some distance).    Rivers run faster, narrower, and cut deeper in steep terrains, then spread out, slow down, and deposit over much larger areas when they hit shallower plains.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>

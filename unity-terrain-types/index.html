@@ -1,0 +1,1316 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/unity-terrain-types/">
+      
+      
+        <link rel="prev" href="../Requirements/">
+      
+      
+        <link rel="next" href="../locality/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Unity Terrains - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#terrains-and-terraindata" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unity Terrains
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_base_classes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#heightmaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heightmaps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-of-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      The problem of scale
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The problem of scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-high-is-mt-everest" class="md-nav__link">
+    <span class="md-ellipsis">
+      How high is Mt. Everest?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#height-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Height models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stitching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stitching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stitching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiprocessing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distortion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distortion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redo-mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../erosion-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../water/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#heightmaps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heightmaps
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-problem-of-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      The problem of scale
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The problem of scale">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-high-is-mt-everest" class="md-nav__link">
+    <span class="md-ellipsis">
+      How high is Mt. Everest?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#height-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Height models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stitching" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stitching
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stitching">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiprocessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiprocessing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distortion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Distortion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="terrains-and-terraindata">Terrains and TerrainData<a class="headerlink" href="#terrains-and-terraindata" title="Permanent link">&para;</a></h1>
+<p>Unity has a "Terrain" component that can be added to any gameObject.   This combines a mesh, a level-of-detail (LOD) system, as well as layered textures and systems for representing trees, plants, rocks, and other details.  For build-time terrain objects, there are extensive tools available in the Unity editor for shaping, texturing, and adding objects to terrains.</p>
+<p>Some of these components are deferred into a TerrainData class; one TerrainData is present in each Terrain object.   Generally, it's not important for this discussion which attributes are where, but most of the data heavy objects (alpha, detail and height maps, for example) are in the TerrainData object.</p>
+<p>We won't use all of its capabilities.   For example, Terrains have a <em>navMesh</em> component which can be used to determine where players or NPCs can travel.   Because this is "baked" at build time, it can't easily be used with entirely procedurally generated terrains.</p>
+<h2 id="heightmaps">Heightmaps<a class="headerlink" href="#heightmaps" title="Permanent link">&para;</a></h2>
+<p>Unity Terrains are heightmap-based; that is, they consist of exactly one height (y) value for each (x, z) coordinate.   As such, they are effectively 2.5D objects -- they cannot themselves represent overhangs, bridges, caves, etc.   If such things are needed, they must be composed of multiple terrain objects, added on as separate meshes, or implemented using some other technique such as voxels.</p>
+<p>A quirk of Unity heightmaps is that they are stored as (z, x) values rather than (x, z) ones; it's not clear why the indices are backward, and different types of maps on the TerrainData object handle this differently, so you need to keep an eye on it.</p>
+<p>Terrain objects can be stitched together to create larger terrains, and individual terrains within the group loaded and unloaded as necessary for resource management.   For editor-built terrains, this stitching is automatic; we'll need to do it manually for ours.</p>
+<p>The heightmap data is provided as an array of values from 0 to 1, and this brings us to our first challenge.</p>
+<h2 id="the-problem-of-scale">The problem of scale<a class="headerlink" href="#the-problem-of-scale" title="Permanent link">&para;</a></h2>
+<p>Terrain objects (or more specifically, their TerrainData substructure) have a field called size.   When the Terrain gameObject is first created (from a supplied TerrainData), this is set to a vector containing the x, y, and z dimensions of the object.   "x" and "z" will be determined from the number of samples in the heightmap and their resolution, but "y" is always set to 1.  Since that value corresponds to the maximum height in the terrain in world units, "1" wouldn't work for all but the very flattest of regions.   So we can snag the y value and set it to something else:</p>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="n">TerrainData</span><span class="w"> </span><span class="n">td</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">TerrainData</span><span class="p">();</span>
+<span class="w">  </span><span class="n">Vector3</span><span class="w"> </span><span class="n">tdsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">td</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
+<span class="w">  </span><span class="n">tdsize</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1200f</span><span class="p">;</span>
+<span class="w">  </span><span class="n">td</span><span class="p">.</span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tdsize</span><span class="p">;</span>
+</code></pre></div>
+<p>The question is, what do we set it to?</p>
+<p>The heightmap [0,1] values are interpreted in the scale of <em>size.y</em>.    If we set it to 1200 (as shown in the code example), that means a value of 0.0 in the heightmap is 0 world units high, and a value of 1.0 is 1200 world units high.  </p>
+<p>For the typical interpretation, that's 1.2 kilometers of vertical range over whatever our horizontal dimensions are.  Terrain objects are typically pretty small -- maybe a square kilometer at the largest, 512 meters square being more common.   (Sizes need to be a power of two).   Very steep mountains might have areas where they gain 1.2 kilometers of height in less than a kilometer of horizontal space, but we could probably live with that limitation for our engine, and if we couldn't, a size.y value of 2500 would probably cover even the exceptional cases.</p>
+<p>...but wait.</p>
+<p>Remember that our terrain object is a patch of a larger world, and we have to stitch those terrains together seamlessly.</p>
+<h4 id="how-high-is-mt-everest">How high is Mt. Everest?<a class="headerlink" href="#how-high-is-mt-everest" title="Permanent link">&para;</a></h4>
+<p>The first question we need to answer is: "What does 0 mean as a height?"    It's the lowest possible value for that terrain patch, but what does that mean?</p>
+<p>Consider a relatively flat plain, where there's no feature higher than 1 meter over our square kilometer patch.    Assuming <em>size.y</em> is set to 1000, that means that the difference between the lowest heightmap value and the highest one will be 0.001.</p>
+<p>Does that mean that all the values will be between 0 and 0.001?</p>
+<p>If we have two such plains, but one (call it "Plain A") has values between 0 and 0.001 and the other ("Plain B") has values between 0.5 and .501, what's the difference between them?   We'll come back to this question in a bit.</p>
+<p>Mt Everest's height is often given as about 8,800 meters, but that's from sea level.  From its "base," it's between 3,500 and  5,000 meters (it's a big mountain, the base covers a lot of area.)    And if we're measuring in a system that starts at zero and needs to cover every undersea area, as well, our "absolute zero" point would be the bottom of the Marianas Trench, which would add maybe another 11,000 meters, for a total of about 20,000.   An argument might be made for going deeper than that, too, in case we needed to account for undersea drilling or somesuch.</p>
+<p>Any of these values are reasonable.   </p>
+<ul>
+<li>If we're representing a 1km square chunk of Everest using a 0 - 20,000 range, a large amount of the range will be "wasted," that could be used for greater precision (see below).  </li>
+<li>If we <em>don't</em> use a 0 - 20,000 range, we need to keep track of what "zero" height for whatever range we <em>do</em> use is.   It also means that a heightmap value of, say, 0.5 will <em>mean something different</em> for each individual terrain.   That difference needs to be accounted for at stitching time.</li>
+</ul>
+<p>The heightmap values are floating-point, and there's no way to make use of negative values, so our range limit of roughly 0.0 - 5,000.0  for the scaled height applies.   If we have a larger range than that, we'll start to lose resolution; at 0.0 - 20,000, our precision will drop to about a tenth of a meter.</p>
+<p>That may be fine:  terrains are fairly coarse objects, and maybe centimeter resolution isn't required, especially because the <em>horizontal</em> resolution of vertices is usually an entire meter.   Whether or not this produces visible polygonization artifacts and jitter will likely require testing on your target hardware.</p>
+<p>Does your world have a Mt. Everest and a Marianas Trench?   If it's modelled on the real world...maybe.    Airplanes are notoriously bad at flying underwater.   Does your flight simulator need to measure distances below sea level?    Naval simulators are unlikely to get near tall mountains.   <em>Subnatica</em> takes place almost entirely underwater; the highest land areas in the game are less than fifty meters high.</p>
+<p>If you're making a computer game, unless "huge vertical range" is a specific feature, there are good arguments for a much smaller one.   Those <em>Skyrim</em> mountains are very short:  not because the artists were afraid of heights, but because climbing five thousand feet up the side of a mountain takes a lot of time. That's more than the player likely wants to commit.   Realistic or not, a five kilometer "range" from the deepest ocean to the tallest mountain is a pretty big canvas for an adventure.</p>
+<h4 id="height-models">Height models<a class="headerlink" href="#height-models" title="Permanent link">&para;</a></h4>
+<p>So there are at least three possible mechanisms we can use here, each with some pros and cons.   Let's look at each one in turn.</p>
+<p><strong>Uniform Range, Uniform Base (UR, UB):</strong>  In this model, we use the same range for every terrain patch; it represents the entire distance from the lowest point to the highest point <em>in our game world.</em>   Stitching is automatic as long as the patches generate compatible edges.    In this model, the difference between Plain A and Plain B above is <em>altitude,</em> Plain B is higher above sea level (or closer to sea level if undersea) than Plain A is.  Because the scale, range, and interpretation of every terrain patch is uniform, this is relatively easy to implement.   The major downside of it is that the entire world's highs and lows need to fit into the chosen range, which means either limiting it to 5 kilometers of vertical scope or accepting some loss of resolution (and associated artifacts) to get a larger one.</p>
+<p><img alt="ur-ub model illustration" src="../media/ur-ub.png" /></p>
+<p><strong>Uniform Range, Dynamic Base (UR, DB):</strong>  In this model, we use the same range for every terrain patch (so a "hill" 0.15 high will be the same size in every patch), but interpret the bottom of the range differently for each patch based on it's local highs and lows.   For example, a patch from the side of a beach rise might range from 0 to 500 meters above sea level, the next patch "uphill" from 400 to 900 meters.   This involves keeping a "base height" for each terrain that indicates what "zero" means for that patch.    This method allows us almost unlimited global range.  In implementation, the entire terrain object will be moved up or down relative to its neighbors to achieve the correct relative position.   This is only slightly more difficult to implement, and allows a sort of "floating origin" to keep the terrain chunks near the player in the 10K window (negative values are possible here because you can position the actual terrain lower than zero).   Whether stitching is problematical or not will depend on implementation details; assuming the edges match in "real world" heights and the terrains are properly positioned vertically, things should match up.  But because there are more transforms involved here, there's a chance of small rounding differences showing up as holes along the patch edges.    </p>
+<p><img alt="ur-db model illustration" src="../media/ur-db.png" /></p>
+<p><strong>Dynamic Range, Dynamic Base (DR, DB):</strong>  In the most complicated model, we use the entire range available for each patch to cover it's local highs and lows.   That is, if the lowest and highest points in a patch are 300 and 500 meters, the range for the patch will be 200.    If the low and high are -500 and 3000 within that single patch, the range will be 3500.   This needs to be coupled, like the last case, with a dynamic height to indicate what "0.0" means in that patch.   Generation also becomes harder because the same "distance" in heightmap [0,1] space means something different in each patch.   Rounding is almost certain to be different between patches, making stitching difficult.</p>
+<p><img alt="dr-db model illustration" src="../media/dr-db.png" /></p>
+<p>(The missing case here, Dynamic Range and Uniform Base, combines the worst of all worlds and doesn't really merit discussion, "implicit" stitching will almost certainly fail because of artifactual differences between patches.)</p>
+<p>The DR, DB model only makes sense for scenarios where very fine gradations in height are critical, or where there are patches of very extreme local height differences (five kilometer high sheer cliffs or some such) to justify the need for dynamic range.</p>
+<p>The other two have the advantage that their implementations are similar enough (basically some fixed vertical offsets) that migrating from one to the other at any time would be both simple and could be done locally at the point of terrain generation.    So it makes sense to implement that easier (UR, UB) model initially, and move to the UR, DB one if the need arises.</p>
+<h4 id="stitching">Stitching<a class="headerlink" href="#stitching" title="Permanent link">&para;</a></h4>
+<p>"Stitching" is the process of making sure there are not visible seams or holes where the terrain patches meet each other.  Ideally, we'd like "implicit" stitching.  That is, for the edge vertices (which are in common to both patches), we'd like those edges to have <em>exactly</em> the same values.   Since we're using floating point numbers, that pretty much means they need to be generated in exactly the same way, by a deterministic process that's <em>idempotent,</em> a Scrabble-caliber word that just means that the same inputs always produce the same outputs.</p>
+<p>Most Perlin/Simplex noise generators meet this criteria, so if our algorithm uses the same position values in each patch, it should produce identical heights along those edges (realizing that the height <em>range</em> of the patch is an input here, which is where uniform ranges are a benefit).    In the best cases, implicit stitching allows our implementation to do <em>nothing at all</em> and get proper behavior.   The edges just "line up" in space as a property of being in the same position.</p>
+<p>If we can't assume that our generation for different patches will produce exactly the same results, we then have to consider an actual stitching algorithm.   This is likely when the two patches have even slightly different geomes:  they may both be using Perlin-ish noise, but probably not the <em>same</em> Perlin-ish noise for a mountain as for a foothill.    And once we start implementing erosive forces, they may also have different effects on the "same" position in neighboring patches.</p>
+<p>There are several possible algorithms.   Unity has a built-in one, that basically takes an "old" and a "new" terrain and forces the values of the "new" terrain to match the "old" one, even when new heights are provided.   This is really meant for use in the editor, and there's some uncertainty around its use in procedurally generated terrains.    An experiment for another day, perhaps.</p>
+<p>If we expect that two adjacent patches have very similar edges (e.g. they differ only by rounding differences or a just a few centimeters of displacement), we can use a <code>for</code> loop to run along the edge of one or both terrains and set their height values to match (either one taking the other's values, or both taking the average of them.)   Note that corners (which are shared by four patches instead of two) may need to be handled separately.</p>
+<p>If the differences can be larger, a more complex solution is called for, to prevent large "corrections" happening within the small one-meter distance to either side of the seam.   Generally, this involves creating a "skirt" in the last several meters of each terrain that can be manipulated by something like midpoint displacement to "spread" the change in altitude out over a larger space.   (In the simplest implementation, just divide the distance delta by the number of meters of skirt and apply that fraction to each vertex.)    This algorithm isn't incredibly difficult, but it's got some weird edge cases (pun necessary), especially at the corners, and it requires a fair amount of computational time.    </p>
+<p>So ideally we'll want to build implementations where the edges don't differ enough to need skirt stitching. If we use this requirement to inform our choices of generation algorithm, we can hopefully avoid expensive skirt computations.</p>
+<h5 id="multiprocessing">Multiprocessing<a class="headerlink" href="#multiprocessing" title="Permanent link">&para;</a></h5>
+<p>There are two big caveats we need to be aware of in our stitching algorithms.   The first is multiprocessing.   Virtually all "chunk" or "patch" based implementations are going to need to generate several of those chunks at a time (probably nine initially, 3-5 at a time as the player moves about).    Most devs will want to do this with multi-processing techniqes; at least co-routines, and probably something like the Jobs system.</p>
+<p>Multi-processing is only simple if the "units" of work are entirely independent of each other.  (Non-implicit) stitching depends on at least two different patches.   So the implementation either needs to make sure that the patch generations are far enough apart in time that the "existing" patch is always complete when the "new" one needs it for stitching, or else separate stitching out to a single-threaded post-processing step.    The latter is likely easier, especially if an inexpensive stitching algorithm is used.</p>
+<p>The same sort of considerations apply if you're trying to use a GPU shader to do the terrain generation (you can find GPU implementations of things like 3D Simplex noise out on the Internet.)</p>
+<h5 id="distortion">Distortion<a class="headerlink" href="#distortion" title="Permanent link">&para;</a></h5>
+<p>The second consideration for (again, non-implicit) stitching is that it <em>changes</em> one of more of the terrains as it adjusts the heights along the edge.   If that edge is sufficiently close to the player camera, the result may be a visible distortion of the ground over either the edge or the entire skirt area, depending on the stitching algorithm.</p>
+<p>Of course, if the player can see the edge, they can presumably also see the "new" terrain popping into place, which is far more distracting.    In both cases, the solution is to make sure that new patches generate at a distance from the player where they're either invisible or sufficiently tiny as to not matter, and do stitching as early as possible, long before the player approaches the edge.</p>
+<p>Most chunking algorithms keep a "buffer" of loaded space around the player anyway, so this isn't likely to be a big problem.   But you should do stitching <em>before</em> placing detail objects on the terrain, since the ground may shift underneath them.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>

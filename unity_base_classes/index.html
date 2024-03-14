@@ -1,0 +1,1343 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/unity_base_classes/">
+      
+      
+        <link rel="prev" href="../generation/">
+      
+      
+        <link rel="next" href="../Requirements/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>MonoBehaviour vs. ScriptableObject - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unity-monobehaviour-vs-scriptableobject-vs-standard-classes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              MonoBehaviour vs. ScriptableObject
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-we-talking-about-anyway" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are we talking about, anyway?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What are we talking about, anyway?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monobehavior-gameobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      MonoBehavior / GameObject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scriptableobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      ScriptableObject
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      First Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-flexible-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      More Flexible Implementation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generic-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generic Class
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-terrain-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redo-mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../erosion-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../water/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-we-talking-about-anyway" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are we talking about, anyway?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What are we talking about, anyway?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#monobehavior-gameobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      MonoBehavior / GameObject
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scriptableobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      ScriptableObject
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#first-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      First Implementation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#more-flexible-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      More Flexible Implementation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generic-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      Generic Class
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="unity-monobehaviour-vs-scriptableobject-vs-standard-classes">Unity MonoBehaviour vs. ScriptableObject vs. Standard Classes<a class="headerlink" href="#unity-monobehaviour-vs-scriptableobject-vs-standard-classes" title="Permanent link">&para;</a></h1>
+<p>In my first few weeks and months of learning Unity, I made a lot of mistakes and had a lot of misunderstandings about what base classes worked best to create my "things" on. </p>
+<p>This doesn't have anything to do with Procedural Terrain Generation (and in fact, if you're reading a multi-thousand-word rambling treatise on PTG, you're probably past these learning steps).    But my reading indicates there's still a <em>ton</em> of misunderstandings about these out there, and the winds of GoogleBing can bring all sorts of readers to these shores.</p>
+<p>So let's review.</p>
+<h2 id="what-are-we-talking-about-anyway">What are we talking about, anyway?<a class="headerlink" href="#what-are-we-talking-about-anyway" title="Permanent link">&para;</a></h2>
+<p>Unity's scripting environment is a C# framework (actually several) that provides APIs useful for game development and related tasks.    Like most frameworks, it provides "root classes" that your own classes can derive from.</p>
+<p>When implementing a class to provide functionality in a Unity app, we generally have three choices:</p>
+<ul>
+<li>Inherit from <strong>UnityEngine.MonoBehaviour</strong></li>
+<li>Inherit from <strong>UnityEngine.ScriptableObject</strong></li>
+<li>Don't inherit from either (just use a "standard" C# class).</li>
+</ul>
+<p>As far as the language is concerned, these are all the same:  <strong>MonoBehaviour</strong> and <strong>ScriptableObject</strong> are just C# classes that can be inherited from, like any other.    But they are used quite differently.</p>
+<h3 id="monobehavior-gameobject">MonoBehavior / GameObject<a class="headerlink" href="#monobehavior-gameobject" title="Permanent link">&para;</a></h3>
+<p>Classes derived from <strong>MonoBehaviour</strong> create <em>components</em> which are added to a Unity <strong>GameObject</strong>.  (At a conceptual level, a GameObject is basically just an empty container for it's components.  By default, they contain nothing at all except a transform, and even that's a component.) They can define what the GameObject <em>is</em> (Mesh, Terrain), or just add capabilities and properties to it (transforms, navagents, colliders).  There are two reasons to use a MonoBehavior:</p>
+<ul>
+<li>For any entity that has "physical" presence in a scene.  This is by far the most common usage of <strong>MonoBehavior</strong>.  Anything you add into the Hierarchy window is a <strong>GameObject</strong>, usually with <strong>MonoBehaviour</strong> components on it.   If your player can look at it, or through it, or more generally anything for which its <em>position</em> in the virtual world (or screen) is important, use <strong>MonoBehaviour</strong>.  For example, a monster, camera, terrain, treasure chest, tree, mesh, UI Button, etc.   </li>
+<li>For any non-physical entity that needs the "heartbeat" of frames or the lifecycle of scenes.   If you want your object to be created when a scene loads and deleted when it goes away, or if you need to do something at regular intervals guided by <em>Update()</em> or its ilk, use a <strong>MonoBehaviour</strong>.  Examples here tend to be called "managers" and implement things like network connections, quest and dialog systems, spawners and deleters of game entities, and other things that do work every frame (or every few frames) and come and go with parts of the world.</li>
+</ul>
+<p><strong>GameObjects</strong> (and therefore their associated <strong>MonoBehaviours</strong>) are created with scene entry and deleted on its exit.  Conceptually, they exist as part of the world that's represented by each scene.</p>
+<p>It's possible (through the <em>DontDestroyOnAwake()</em> mechanism) for a game object and its <strong>MonoBehaviours</strong> to survive between scene changes---and there are even some good reasons why you might do so---but generally needing to do this is a sign that your design could use some work.   For example, if your managers can save and load their data, as they're destroyed and recreated, they can just be included in the scenes they're needed for and left out of others.    Or even more commonly, they would be better represented as one of the other two class types.</p>
+<p><strong>MonoBehavior</strong> interacts with the Unity Editor; adding a <strong>MonoBehaviour</strong> script to a <strong>GameObject</strong> lets you edit that behavior's public and [SerializableField] properties from the Unity Inspector window.   This alone is not sufficient to require <strong>MonoBehaviour</strong>, since <strong>ScriptableObject</strong> also allows inspector editing.</p>
+<h3 id="scriptableobject">ScriptableObject<a class="headerlink" href="#scriptableobject" title="Permanent link">&para;</a></h3>
+<p><strong>ScriptableObjects</strong> are assets, like files, materials, images, sounds, prefabs, and the like.   They have no inherent presence in the game world, and are not tied to the lifecycle of scenes.   They are, by definition, persistent unless explicitly destroyed.   </p>
+<p>Reasons to choose <strong>ScriptableObject:</strong></p>
+<ul>
+<li>One or more instances of your class needs to exist (or at least be available) throughout the lifetime of the application.  Managers that don't need integration with the <em>Awake/Start/Update/FixedUpdate</em> sort of cycle are good candidates for <strong>ScriptableObjects</strong>.</li>
+<li>You want to allow devs or artists to create and edit them using the Inspector.  Adding the [CreateAssetMenu] attribute to the class will allow them to be created from the Asset menu or by right-clicking in the Project window, like any other asset.</li>
+<li>To define a specific set of values for entities, as a sort of "template" for instantiating later (think of it as a much more generic version of a template, or a database---see below.)</li>
+</ul>
+<p>Like <strong>MonoBehaviour</strong>, <strong>ScriptableObject</strong> allows you to edit public and serializable properties from the Unity Inspector window.</p>
+<h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
+<h3 id="first-implementation">First Implementation<a class="headerlink" href="#first-implementation" title="Permanent link">&para;</a></h3>
+<p>That last case may require an example.  Let's say we're making an RPG game with monsters: Orcs and Kobolds.   We'll need to be able to place or spawn these monsters into the scene, so they're going to be MonoBehaviors attached to a gameObject.</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Orc</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MonoBehaviour</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxHitpoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">hitPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">10</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">damageDone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">GameObject</span><span class="w"> </span><span class="n">prefab</span><span class="p">;</span>
+<span class="w">  </span><span class="p">...</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">rest</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">stuff</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">does</span><span class="p">..</span>
+<span class="p">}</span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Kobold</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MonoBehaviour</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxHitpoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">hitPoints</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">damageDone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">GameObject</span><span class="w"> </span><span class="n">prefab</span><span class="p">;</span>
+<span class="w">  </span><span class="p">...</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">rest</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">stuff</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">does</span><span class="p">..</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This works, and for a small enough game, it might actually work fine.   But it has some problems:</p>
+<ul>
+<li>Almost all of the code is duplicated, except for some constant values</li>
+<li>If we create a new "Goblin" monster, we need to copy paste and create a new class (and since it's in code, a dev needs to do it).   That might become unweildy in an RPG with 50 or 60 different kinds of monsters.</li>
+</ul>
+<h3 id="more-flexible-implementation">More Flexible Implementation<a class="headerlink" href="#more-flexible-implementation" title="Permanent link">&para;</a></h3>
+<p>One of the uses of ScriptableObject is to allow a "template" to be created as an asset, with no new code necessary after the initial creation.    So, consider this:</p>
+<div class="highlight"><pre><span></span><code><span class="na">[CreateAssetMenu(fileName = &quot;MonsterSpeciesData&quot;, menuName = &quot;MyCoolGame/MonsterSpecies&quot;)]</span>
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">MonsterSpecies</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ScriptableObject</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">name</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxHitpoints</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">damageDone</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">GameObject</span><span class="w"> </span><span class="n">prefab</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Now any time a developer, artist, or other team member wants to add a new monster type, all they need to do is right-click in the Assets folder, choose "MonsterSpecies" from the "MyCoolGame" submenu, name the asset, and define the values for that monster.  Notice that "hitpoints" isn't defined here, since it's an attribute of a particular monster, rather than all of the monsters of a given species (if you damage one orc, the others remain undamaged.)</p>
+<p>Then, we can just have a generic "Monster" class that references it:</p>
+<div class="highlight"><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Monster</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MonoBehavior</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="n">MonsterSpecies</span><span class="w"> </span><span class="n">monsterSpecies</span><span class="p">;</span>
+<span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">hitPoints</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span><span class="w"> </span><span class="n">generic</span><span class="w"> </span><span class="n">monster</span><span class="o">-</span><span class="n">y</span><span class="w"> </span><span class="n">behaviours</span><span class="w"> </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This ability to treat "Monster Species" as an asset, the same way you'd define a Material asset for painting a mesh, makes adding new species of monsters require no code at all, just connecting stuff up in the editor, which frees up your devs to do more development work, and enables your artists and game designers to do their work without needing the devs.</p>
+<p>This same sort of thing used to be done using a database (and if you've got very large amounts of data, the database is still the better solution), but for small-to-medium size datasets, defining assets is easier for everybody.</p>
+<p>Important:  Note that like all assets, ScriptableObjects created while the game is running in the editor will be removed when you end the game.   This makes it easy to "try out" a new monster race even while the game is running, but also means you'll lose your work if you forget and build an asset meant to be permanent during a run. </p>
+<p>Having just one MonoBehaviour class for all monsters may or may not be sufficient, depending on whether the behaviors of those monsters differ in ways that need to be expressed in code (for example, bipeds vs. quadrupeds vs. snakes may be sufficiently different in motion that actual subclasses make sense), but you'll need many fewer of them.    (And you might reduce further by defining "Locomotion" ScriptableObjects for various locomotion methods, and make them available as assets, too.)</p>
+<h2 id="generic-class">Generic Class<a class="headerlink" href="#generic-class" title="Permanent link">&para;</a></h2>
+<p>If you've got an entity that doesn't require any particular integration of Unity mechanisms at all -- say something purely mathematical, or "business logic", or AI algorithms, you can just use an ordinary C# class.  Nothing in Unity <em>requires</em> you to derive your classes from <strong>MonoBehaviour</strong> or <strong>ScriptableObject</strong> if you don't need the capabilities they offer.   Such classes are available only from code; they have no presence in the Unity Scene Hierarchy, Project Hierarchy (except for the script files that they're defined in), or Editor.    They must be instantiated and destroyed by code, and cannot expose properties to the Inspector.</p>
+<p>Which sounds like a lot of limitations, but really, that's just <em>code,</em> of the kind you've probably been writing for years.  It works just fine in Unity, it just doesn't do anything special there.  It also describes basically all third-party C# libraries and APIs, unless they are specifically designed for Unity.</p>
+<h1 id="conceptually-assets-are-databases">Conceptually, Assets are Databases<a class="headerlink" href="#conceptually-assets-are-databases" title="Permanent link">&para;</a></h1>
+<p>The title of this section isn't literally true:  assets are serialized and deserialized by Unity in various ways, but they aren't actually backed by a traditional database, so far as I know.    But if your programming background is from the database world, it's a powerful metaphor for understanding the Asset library, and <strong>ScriptableObject's</strong> role in it.</p>
+<p>Different databases use slightly different terminology, but generally speaking a database <em>table</em> defines a group of related <em>fields</em> ("<em>columns</em>" in some terminology) and their types; strongly analogous to a struct or class that contains only properties and variables.   Tables are types: they define the structure and layout of data, they aren't the data itself.</p>
+<p>A database <em>row</em> or <em>entry</em> is the instantiation of that: the specific set of values for one entity.   Rows are variables (often constants); they define the values for one instance of the type defined by their table.</p>
+<p>At this very basic level, you can think of the project's Asset folder as a database:  the <em>types</em> of assets available are the tables.  This includes the ones Unity gives you:  Material, Prefab, Textures, Sprytes, Images, and so on and on.   It also includes any that you define yourself via <strong>ScriptableObject</strong>.   A <strong>ScriptableObject</strong> class definition is effectively a database table definition.</p>
+<p>When you actually right-click and create an asset of any type, you're conceptually adding an entry/row to that table.</p>
+<p>Assets are traditionally used for compile-time databases:  usually constant elements that define the available options built into a game:   The materials things are made of, the logos displayed in your UIi, the kinds of monsters, the kinds of treasures, the kinds of items that players can pick up, towns and dungeons in your world, etc.    They usually don't change, or at least don't change much, as the game executes.</p>
+<p>Assets are typically <em>not</em> used for the sort of updated-at-runtime databases you might use to store information that changes at runtime:  character names and avatars, the "picked up" state of items, the character's actual inventory and equipment.    That sort of dynamically changing information tends to go into a save file or traditional database.    </p>
+<p>There's no technical limitation here:  you can create and modify assets at runtime, you <em>could</em> use them as your save game storage.  But doing so makes it very hard to "reset" the game to starting conditions, and it's not a best practice.</p>
+<p><em>This isn't a perfect analogy:  </em><em>ScriptableObjects</em><em> can add behaviors---not just properties and variables, and sometimes you'll have </em><em>ScriptableObjects</em><em> that are entirely code and define no traditional fields at all.   This often isn't true of more traditional databases.  Many don't allow "executable" entries in their tables (in many traditional usages, this could be a security nightmare), nor the inheritance </em><em>ScriptableObject</em><em> gets from its C# nature.    And most databases provide querying and combining operators that aren't needed in the ScriptableObject case because C# or .NET provide equivalents.</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>

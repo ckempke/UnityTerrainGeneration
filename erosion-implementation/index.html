@@ -1,0 +1,1368 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/erosion-implementation/">
+      
+      
+        <link rel="prev" href="../regional-loc/">
+      
+      
+        <link rel="next" href="../performance-1/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Erosion - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#implementing-erosion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Erosion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_base_classes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-terrain-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redo-mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#landslides-and-shearing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landslides and Shearing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shearing-algorithm-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shearing Algorithm 2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stitching-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stitching Limits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#canyoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Canyoning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Canyoning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#separator-canyons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Separator Canyons
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drainage-canyons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drainage Canyons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#striation-and-layering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Striation and Layering
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../performance-1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../water/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#landslides-and-shearing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landslides and Shearing
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#shearing-algorithm-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shearing Algorithm 2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stitching-limits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stitching Limits
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#canyoning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Canyoning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Canyoning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#separator-canyons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Separator Canyons
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drainage-canyons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Drainage Canyons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#striation-and-layering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Striation and Layering
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="implementing-erosion">Implementing Erosion<a class="headerlink" href="#implementing-erosion" title="Permanent link">&para;</a></h1>
+<p>So at all scales of our terrain, we want to see the effects of erosion.   Algorithmic generation tends to be either overly blocky or overly smooth to pass for real world terrains--in a single word, it's just too "uniform."</p>
+<p>Jacob Olsen describes a number of techniques for implementing erosion in his paper here:  https://web.mit.edu/cesium/Public/terrain.pdf, and Dr. de Byl covers the same and others in her Procedural Generation course at Udemy or the Holistic3D web site: https://www.h3dlearn.com/course/procedural-terrain-generation-with-unity.  </p>
+<p>We'll use some of those.    But we've got a few quirks to throw in the mix.    One is that despite the generally fractal nature of the real world, many of these scale poorly outside of their domains:  the techniques that erode mountains nicely in at something like our global template level don't work nearly as well when we're coming down to individual terrain-patch slopes.   Inversely, things like raindrop erosion make no sense at all on global scales.   The second is that many of these are very expensive, requiring hundreds or thousands of passes over the terrain to build their shapes.</p>
+<p>We can accept that level of computational expense for the global template generation -- it's likely to take many seconds or even a few minutes to generate that world model, and since for most games it'll be a one-time (or one time per "new game") expense, we'll just suck it up.   But our more local levels (regional, patch) need to be generable in real-time.   Terrains can't take more than a few seconds to generate:  after a teleport or on initial load because the player is <em>waiting</em> for them, and in buffer patches because we don't want the player to be able to get close enough to the generating patches to see it when it "snaps in," or worse, to fall off the edge because the new patch isn't ready yet.</p>
+<h2 id="landslides-and-shearing">Landslides and Shearing<a class="headerlink" href="#landslides-and-shearing" title="Permanent link">&para;</a></h2>
+<p><em>Nomenclature: Dr. de Byl's course calls these "Thermal" and "Rivers," respectively.  In our larger context, both of those terms are likely to cause confusion with other concepts, so I'll stick to the more visually descriptive terms.   Other papers tend to describe shearing as "hydraulic," which I'm avoiding since it describes the mechanism rather than the result, and I'm applying some of these more broadly.</em></p>
+<p>These two effects are similar.  In both, material is removed from a higher point and potentially placed at a lower one.   </p>
+<p><strong>Landslides</strong> are the more gradual process, basically a movement of material from steeper points to shallower ones, tending to result in a flattening of the entire structure (think the little movements down the side of a pile of sand to which more sand is being added).   Unless iterated on a lot, this is a pretty subtle effect, generally dwarfed by both any addition of Perlin-class noisse or smoothing.  It's effect is also a <em>lot</em> like that produced by the Gaussian Blur (which also tends to make slopes shallower), while being more expensive to implement.  Because it's so subtle, I don't actually implement it anywhere at the moment.</p>
+<p>The classic implemenation here is basically:</p>
+<div class="highlight"><pre><span></span><code>repeat a lot
+   foreach x in xdimension
+       foreach z in zdimension
+           foreach neighbor of (x,z) (often in random order)
+               if (x,z) is &quot;sufficiently&quot; higher than the neighbor
+                   remove a little bit from (x,z)
+                   add it to the neighbor
+</code></pre></div>
+<p><strong>Shearing</strong> is sort of the same effect in reverse, where large pieces of terrain are "sheared" away from their parent (in the real world, generally by expanding ice or erosion of softer material) and disappear.  This turns gradual slopes into steep cliffs and drops, separated by flatter (but often still sloped) areas.  This is a geologically sudden event, and is largely what gives young mountains their jagged appearance.   As they age, the landslide effect described above makes the mountains smaller and smoother, eventually wearing them down into mere shallow hills.  In the real world, most of the material is---at least initially---deposited lower down as large debris.  But this debris erodes away much faster than the structure that it came from, so it's often absent entirely below sheared cliffs.</p>
+<p>The classic algorithm here is a little more sophisticated</p>
+<div class="highlight"><pre><span></span><code>repeat a lot
+   pick a location (x,z)
+      lower our height by a fixed amount (the &quot;strength&quot;)
+      repeat a few times (the number of &quot;rivulets&quot; or &quot;cracks&quot;)
+         find a random neighbor that&#39;s lower in height
+            set the neighbor to our height
+               then recurse on that neighbor (up to a given depth)
+</code></pre></div>
+<p>This basically makes "cracks" spread out downhill from a given point, which leaves a sort of field of depressed terrain (with some spikes) behind.   A subsequent guassian blur removes or dampens the spikes.  The net effect is like a flat-bottomed scoop was taken out of the terrain at "strength" depth down from the highest point.</p>
+<p>It looks good, but it's incredibly expensive.   On a steeply sloped 512x512 terrain, even 10,000 iterations is insufficient:</p>
+<p><img alt="Pockmarked terrain" src="../media/classic-river.png" /></p>
+<p>That screen shot is without the guassian blur, and the terrain took over 20 seconds to generate on my fastest machine (an Apple Silicon M1 Max; it takes more than twice as long on the game PC).   This is basically just a bunch of pits (the blur smooths them out a bit, but it still looks like a bunch of less-sharp pits).   At a guess, getting something natural looking there would take hundreds of thousands of iterations (and some tweaking of the rivulets / strength parameters), or adjusting to make each "pit" many, many times larger.</p>
+<p>Note that this algoritm works fine in environment where the features are relatively small compared to the resolution of the height map:  such as our global terrain template.   But for our detail patches, it's going to be too expensive.</p>
+<h2 id="shearing-algorithm-2">Shearing Algorithm 2<a class="headerlink" href="#shearing-algorithm-2" title="Permanent link">&para;</a></h2>
+<p>We've been in this situation before:  the "classic" algorithm isn't working (or rather, it's working exactly as intended, but it's too expensive and finicky for "unattended" realtime use).   </p>
+<p>The real problem here is human judgement:   I'll spare you images of the effects of the above algorithm applied to shallower slopes or plains.  But the general idea is:  we can make it work in each situation, but only by testing out various parameters until it "looks good."   If we want fully procedural generation, though, we can't be tweaking for every possible scenario.</p>
+<p>So we'll borrow the idea from our canyon-based mountain implementation:   we'll erode in reverse.  We know what we want it to look like when we're done, so we'll start with that and work it backward.</p>
+<p>So here's the new plan:</p>
+<div class="highlight"><pre><span></span><code>repeat a few times
+   on our slope, take a large, contiguous area, and push it all down to the lowest height it touches.
+add a little noise
+smooth the results a bit.
+</code></pre></div>
+<p>And contiguous areas are no problem for us, since we still have a cheap Voronoi-ish algorithm lying around from the inital world generation.   So:</p>
+<div class="highlight"><pre><span></span><code>generate a voronoi(-ish) map for our terrain
+pick a subset of the generated regions
+for each element of that subset
+   push the whole region down to the lowest height in the region.
+add a little noise
+smooth the results a bit.
+</code></pre></div>
+<p>For a similarly steep hillside, that give us this:</p>
+<p><img alt="Better eroded hillside" src="../media/erosion-2.png" /></p>
+<p>That's a lot closer to what we're looking for.   That's using a 50% pushdown (that is, half the regions are "flattened" to their lowest point.).  The average region size is pretty big, which translates to a lot of very high cliffs.   Both of these values are easily tweaked.   Better, the algorithm doesn't distort less steep terrains nearly as much.  It's still probably too much to use <em>everywhere</em>, but it's not wildly disruptive.</p>
+<p>This also has a game-friendly function, in that there are generally "paths" up the mountains that avoid the drops, although sometimes you need to go significantly far "out of the way" to reach them.   This will make our life a little easier when we get to the "gamify" functions, later.</p>
+<p>This is still pretty unnatural looking:  the slopes are too even, the lines at the edges of patches are too sharp, and since this is implemented independently on each patch, it makes some very weird things happen along the stitch lines.     But, baby steps.</p>
+<p>With a little more tweaking, looking "up" a mountain gives us a sense of how bad the seam-stitching is going to be:</p>
+<p><img alt="Mountain view with obvious seam" src="../media/erosion-3.png" /></p>
+<p>We can see at least two crossing terrain edges here, one running horizontally across the screen near the top, and the other, more obvious one runing vertically.   In both cases, our stitching does the best it can, but the results are...poor.   Bob Ross's mountains never looked like that!</p>
+<p>This is the first time we've seen this issue (at least to this extent), but it won't be the last.  Any time we apply transformations to terrains that are independent from the terrains next to them, we have the chance of significant mismatches like this, and the results will typically be the same as we see here:  sharp vertical cliffs that run along the terrain boundaries.    We'll discuss some ways to fix these later.  For now, we're primarily concerned with the erosion algorithm itself.</p>
+<p>The biggest complaints here are the obvious "smooth" slope of the unindented terrain portions, and the sort of global, uniform roundness of the cliff edges.</p>
+<p>The former is just the relatively smooth pre-erosion terrain showing through.   We'll ignore it for now, and revisit it after we're done with our various erosion methods if it's still a problem.</p>
+<p>The rounding, though....   It's reminiscent of our issues with Perlin noise.   It's both irregular and too uniform at the same time.  This one's caused by the Gaussian blur.   It takes every edge and sharpens it the same amount.   There's no real randomness here.</p>
+<p>Of course, total randomness wouldn't be all that useful, either.   What we want is the amount of smoothing to vary---itself smoothly---across a two-dimensional surface.    Ladies, Gentlemen, and sentient hunter-killer robots reading this in the future: I present <em>PerlinGaussian</em>!</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">scale</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.025f</span><span class="p">;</span>
+<span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="p">[,]</span><span class="w"> </span><span class="n">PerlinGaussian</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="p">[,]</span><span class="w"> </span><span class="n">array</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">dimension</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxWindow</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="kt">float</span><span class="p">[,]</span><span class="w"> </span><span class="n">returnVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">float</span><span class="p">[</span><span class="n">dimension</span><span class="p">,</span><span class="w"> </span><span class="n">dimension</span><span class="p">];</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dimension</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">dimension</span><span class="p">;</span><span class="w"> </span><span class="n">z</span><span class="o">++</span><span class="p">)</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">float</span><span class="w"> </span><span class="n">newVal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0f</span><span class="p">;</span>
+
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">thisWindow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Mathf</span><span class="p">.</span><span class="n">RoundToInt</span><span class="p">(</span><span class="n">Mathf</span><span class="p">.</span><span class="n">Abs</span><span class="p">(</span>
+<span class="w">                  </span><span class="n">SimplexNoise</span><span class="p">.</span><span class="n">Noise</span><span class="p">.</span><span class="n">Generate</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">scale</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">maxWindow</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// If the window would exceed the bounds, just copy the existing value.</span>
+<span class="w">            </span><span class="c1">// (Cheaper, but less accurate than doing a partial sum.)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">thisWindow</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">dimension</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">thisWindow</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">thisWindow</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">dimension</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">thisWindow</span><span class="p">)</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="n">returnVal</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">];</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">thisWindow</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">thisWindow</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">thisWindow</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">thisWindow</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span>
+<span class="w">                    </span><span class="p">{</span>
+<span class="w">                        </span><span class="n">newVal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">array</span><span class="p">[</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">j</span><span class="p">];</span>
+<span class="w">                    </span><span class="p">}</span>
+
+<span class="w">                </span><span class="n">newVal</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)((</span><span class="n">thisWindow</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">thisWindow</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="p">));</span>
+<span class="w">                </span><span class="n">returnVal</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVal</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">returnVal</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The only thing that differentiates this function from <em>GaussianBlur</em> is that calculation of <em>thisWindow</em>.   As we move in X and Z, we vary the size of the "window" that the blur averages over.</p>
+<p>It's a small thing, but it makes all the difference in the world:</p>
+<p><img alt="Better Slope randomness" src="../media/perlin-gaussian.png" /></p>
+<p>Some places are sharp, some are rounded, and the entire terrain feels much more natural.   There do tend to be a lot of "spiky" areas (where the window was zero), but we can get rid of those by just using 1 as the minimum window size.</p>
+<p>A final tweak here is that the algorithm produces very smooth terraces; the "cutout" portions are completely flat.  We fix that by putting back a percentage of the missing height at each step; this simulates erosive debris accumulation.</p>
+<p><img alt="Final Erosion Pic" src="../media/erosion-4.png" /></p>
+<p>That's a lot more "gouges" than natural mountains, of course, so we'll probably set this to a much smaller amount later.</p>
+<p><em>Note from the future:  A little browsing of images of natural mountains indicates that the previous sentence is wrong as often as it's right; many mountains have <strong>more</strong> such shearing than what's shown above.   The real takeaway appears to be that there's a massive amount of variation in the natural world.   Also, that there are an awful lot of <strong>real</strong> mountains that you'd swear were bad renders by looking at them.  See also: clouds.</em></p>
+<h2 id="stitching-limits">Stitching Limits<a class="headerlink" href="#stitching-limits" title="Permanent link">&para;</a></h2>
+<p>Our stitching algorithm can handle a fair amount of discrepancy between edges, but our erosions here are pushing it beyond its limits.   Even after adding some additional smoothing and tweaking, we're still seeing very harsh separations:</p>
+<p><img alt="Image showing steep &quot;cliffs&quot; where stitching is averaging across wildly separate values" src="../media/stitch-failures.png" /></p>
+<p>Those "hard" cliffs along the top ridge and to the right of the character are caused by dramatic mismatches between the terrains that are being stitched.    The problem here isn't the base elevations -- those are well within the abilities of the stitching algorithm to compensate for, especially if we add a little skirting rather than a simple edge average.</p>
+<p>The problem is the erosion.   Since we're applying what amounts to very deep "scoops" out of terrain at the patch level, you get these issues any time one of the scoops touches an edge (unless you get very lucky and there's a corresponding scoop in the next patch.)</p>
+<p>This is the first time we're having to deal with this, but it won't be the last:  we're going to have the same problem with any feature that is larger than or crosses patch boundaries and results in significant elevation changes:  ridges, lakes, glaciers, etc.   </p>
+<p>Our solution is not to do these things at the patch level at all, but rather apply them more broadly across "regions" of the map, which we'll discuss when we talk about regional locality.</p>
+<h2 id="canyoning">Canyoning<a class="headerlink" href="#canyoning" title="Permanent link">&para;</a></h2>
+<p>The same net of canyons that define our mountain ranges at the global level makes sense at the local level, as well.   In fact, this is a stronger effect than the shearing, most of the time.</p>
+<p>I've recently had the opportunity to make a long drive across the central United States, and of course I paid close attention to the geographic features I was passing through.    From the nearly flat midwest to the mountainous Rockies, and everywhere in between, canyoning was the single most dominant aspect of the landscape features except for erosive smoothing.</p>
+<p>It was also clear that the canyoning algorithm described there was incomplete.  From observation, there appear to be two different "kinds" of canyons, although they're really just variations on a theme.</p>
+<h3 id="separator-canyons">Separator Canyons<a class="headerlink" href="#separator-canyons" title="Permanent link">&para;</a></h3>
+<p>What I'm calling "separator canyons" are what we implemented for our mountain range algorithm.   They are more or less at the same elevation at both ends (although, of course they're caused mostly by water, and and so have some elevation drop that our current algorithm ignores), and visually separate geographic features from each other:  mountain ridges, hills, bluffs, badlands, etc.   Generally speaking, these are roughly equally "deep" along their entire length.  Our mountain algorithm made them all the same depth <em>as each other</em>, though, which is definitely not the case in nature -- these canyons occur at varying elevations, often with depth corresponding to length (longer canyons carry more water and are carved deeper).   When they're shallow and eroded, you get gentle hills or old, weathered mountains; where they're deep and sharp, new mountain ranges.</p>
+<h3 id="drainage-canyons">Drainage Canyons<a class="headerlink" href="#drainage-canyons" title="Permanent link">&para;</a></h3>
+<p>The "other kind" of canyon I'll call "drainage canyons."   These are features that occur only on slopes, distinctly change elevation, and tend to not be of uniform depth:  they're shallower at the high end where they begin, and become deeper and wider as they descend in elevation.    At the lower end, unless they hit some other geological feature, they tend to become shallower again, either spreading out into eventual invisibility, or by narrowing and simply ending.</p>
+<p>You'd expect these to be related mostly to the size of the slope they occur on, but the reality appears to be that they're far more affected by the underlying rock or soil.   Softer materials seem to produce more distinct canyons than harder ones.</p>
+<p>Shallower slopes produce deeper and longer canyons than steep ones, and in fact very gradual slopes (typically along rivers) generate the large structures we tend to think of as "canyons."   The erosion effect here is much, much stronger than the forces that shape the land, and can produce impressive canyons that descend well below the average surface elevation of an area.</p>
+<h2 id="striation-and-layering">Striation and Layering<a class="headerlink" href="#striation-and-layering" title="Permanent link">&para;</a></h2>
+<p>Many landforms---especially where they've been cut by one form of erosion or another---show significant layering of color and other properties, and even dramatic shifts in shape at certain elevations where the "deeper" rocks are harder or softer than those above them, and hence wear differently.   Often, these layers are parallel to the ground, but they can also tilt at significant angles as a result of uplift (or presumedly subduction, although that's unlikely to be visible near the surface.)</p>
+<p>A lot of this we'll need to get from texturing, but sometimes the effect is pronounced enough that it's actually visible in shape as well as texture.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>

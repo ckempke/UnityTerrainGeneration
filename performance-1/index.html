@@ -1,0 +1,1304 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://ckempke.github.io/UnityTerrainGeneration/performance-1/">
+      
+      
+        <link rel="prev" href="../erosion-implementation/">
+      
+      
+        <link rel="next" href="../runtime-patch-management/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Overview - Unity Terrain Generation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#performance" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Unity Terrain Generation" class="md-header__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Unity Terrain Generation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Unity Terrain Generation" class="md-nav__button md-logo" aria-label="Unity Terrain Generation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Unity Terrain Generation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Theory
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Theory
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Background/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Background
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../heightmaps_and_voxels/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heightmaps or Voxels
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../size_of_game_worlds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    World Size
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../generation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_base_classes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MonoBehaviour vs. ScriptableObject
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Practice
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Practice
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requirements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Requirements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity-terrain-types/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Terrains
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Locality Part1
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Locality Part1
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locality/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../global-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../redo-mtns-and-valleys/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Do-Over! Global Features
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../local-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Local
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regional-loc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Regional
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../erosion-implementation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Erosion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Performance
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Performance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unitys-expectations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unity's expectations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#first-things-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      First things first
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-kinds-of-asynchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two kinds of Asynchronous
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Two kinds of Asynchronous">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yield-based-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yield-based Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thread-based-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thread-based Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-what-does-that-mean-for-terrain-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      So what does that mean for Terrain Generation?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../runtime-patch-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Patch Management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Biomes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Biomes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    More On Biomes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../water/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Water
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../biomes-unity/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unity Notes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../seeds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Seeds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hooks-and-usability/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using it!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    References
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tags/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Articles By Tag
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unitys-expectations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unity's expectations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#first-things-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      First things first
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#two-kinds-of-asynchronous" class="md-nav__link">
+    <span class="md-ellipsis">
+      Two kinds of Asynchronous
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Two kinds of Asynchronous">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yield-based-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Yield-based Methods
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thread-based-methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Thread-based Methods
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#so-what-does-that-mean-for-terrain-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      So what does that mean for Terrain Generation?
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h1>
+<p>We interrupt our regularly scheduled program for some notes on performance, because if you've been trying to duplicate my code and algorithms (or actually USING my code and algorithms; contact me if you want the current source), you're probably getting slammed by it about now.</p>
+<h2 id="unitys-expectations">Unity's expectations<a class="headerlink" href="#unitys-expectations" title="Permanent link">&para;</a></h2>
+<p>Although built on C# and .NET, Unity's docs don't generally make much mention of the standard multithreading/asynchronous models.</p>
+<p>First, be aware that despite the absolute silence from the docs, <em>async</em> and <em>await</em> work just fine in Unity.   If you're already familiar with them, they may be all you need.    To this, Unity adds at least three different models for unblocking the all-important main thread:   Coroutines, Jobs/Entity Component System, and Shaders.</p>
+<p>Shaders are different in kind from the others: they move work from the CPU to the GPU, and are particularly useful for things where you're performing essentially the same calculation over many, many entities:  computing colors by applying a function to every pixel every frame, computing waves by calculating distortion maps, moving entities by applying a function to ever vertex, etc.   They're not a generic mechanism for doing "background" work; rather they solve certain common problems <em>extremely</em> efficiently.    So we're not going to talk about them right now.</p>
+<p>To begin with, Unity's main unit of computation is the <em>frame</em>.  That's a little unusual if you come from a non-game development world, but it makes sense for games.   Everything in <em>MonoBehaviour</em> is built around execution in a specific order, generally once per displayed frame.    For most code that's in one of the <em>Update()</em> or similarly-named methods that get executed every frame (or at least on a cadence similar to frames, like <em>FixedUpdate()</em>).</p>
+<p>Unity is also very, very main-thread focused.   Almost none of it's API can be called anywhere except the main thread (at least not successfully). </p>
+<p>All of this leads to a model where Unity expects work to be done in very small chunks, per frame, on a single thread.    So nothing that goes in the <em>MonoBehaviour</em> implementations should take more than about 1/60 of a second <em>at worst</em>, and modern games are aiming for more than twice that frame rate.</p>
+<p>With my "straightforward" implementations, generating a new terrain patch can take up to about a second, depending on size, and we're still just generating shape.    Generating the initial world's Global Terrain Template can take <em>minutes</em>.</p>
+<p>Both work, even when done in <em>MonoBehaviour</em> contexts.   But I'm stretching the definition of "work" here -- the game basically freezes at startup until the GTT is complete, and freezes for a second or two every time a new terrain patch (or more than one) needs to be created.   It's fine for this sort of initial research and experimentation, but it would be unacceptable as shipping code.    And it's going to be unacceptable for us, pretty soon -- this is only going to get worse as we add functionality.</p>
+<p>This is a good time to start working on performance, because if we're doing something <em>wrong</em> in a way that can't be moved to a more performant mechanism easily, we're just making more work for ourselves the longer we wait.</p>
+<h2 id="first-things-first">First things first<a class="headerlink" href="#first-things-first" title="Permanent link">&para;</a></h2>
+<p>Does our code really need to take so long?   I'm a big believer in straightforward, naïve algorithms for experimenting.   Simple code means fewer bugs and more time to spend on the fun stuff.</p>
+<p>As an example, my Voronoi diagram code (to assign each pixel a region) basically looks like this:</p>
+<div class="highlight"><pre><span></span><code>for each x position
+   for each z position
+       for each voronoi point
+            {
+            calculate the distance from (x,z) to that point
+            if it&#39;s the smallest we&#39;ve seen so far, remember it as &quot;smallest&quot;
+            }
+       set the region for (x,z) to smallest
+</code></pre></div>
+<p>That works great, always gives the right answer, and is really simple to write; the actual code's only a little longer than the pseudocode here.    But <em>Vector2.Distance()</em> is actually pretty expensive, and we're creating vectors constantly from both the test point at the Voronoi points in order to call it -- that allocation is moderately expensive, too.</p>
+<p>Here's a different way to do it:</p>
+<div class="highlight"><pre><span></span><code>radius = 0
+repeat until no pixels are assigned during a pass (or equivalently, all points are &quot;finished&quot;)
+{
+    for each voronoi point that&#39;s not &quot;finished&quot;
+       {
+       Find every pixel in a &quot;ring&quot; around the point at radius
+       if that pixel hasn&#39;t been assigned yet, assign it to this voronoi point
+       if all of them were already assigned, this voronoi point is &quot;finished&quot;
+       }
+    increase radius by 1
+}
+</code></pre></div>
+<p>This never calls <em>Distance()</em> (or makes any vectors) at all.  Each pixel is touched only once unless it's on an edge or corner.  The "ring" calculation is complex and needs to not miss any pixels, so the actual implementation replaces it with an expanding square instead of a circle, which is much easier to calculate. </p>
+<p>A circular expansion would produce the same basic map as the old algorithm.   The simpler, expanding-square algorithm does not.  It's not an actual Voronoi map.   Convexity isn't maintained, and in fact, the regions are much more unevenly shaped.  </p>
+<p><img alt="Voronoi-approximate regions" src="../media/fake-voronoi.png" /></p>
+<p>But we're using this to make a rough map in the first place, and for this use, convexity isn't really much of a benefit and might even be a penalty.  (This image compresses some 700+ different regions into 256 color levels, so not all of the region edges are visible.)</p>
+<p>And while it may not be obvious from the pseudocode, the second algorithm is much, much faster than the first.   For 400 Voronoi points on my system, it lowers the cost of the GTT from 2.5 minutes to 18 seconds.    And the benefits get higher as you increase the number of Voronoi points:  it takes the new algorithm about 25 seconds to do 900 points, but over ten minutes for the first one.</p>
+<p>Huge gains like this aren't actually that uncommon in code like games where you're often iterating repeatedly over huge numbers of pixels.   So it's worth a look to find out if there's an optimization somewhere that can bring your computational costs down.    The profiler is a good place to look for this; it's a bit complex to use in Unity, but it's time well spent.   You're going to need it, eventually.</p>
+<h2 id="two-kinds-of-asynchronous">Two kinds of Asynchronous<a class="headerlink" href="#two-kinds-of-asynchronous" title="Permanent link">&para;</a></h2>
+<p>Even after our optimizations, though, we've still got several hundred or thousand times too much work to do in a frame, and it doesn't seem likely that any amount of algorithmic tweaking is going to bring us down into the right range.     So we need to look at ways to keep our game performant while still getting that work done.</p>
+<p>The two major tasks we've concentrated on thus far are fundamentally different from each other:</p>
+<p><strong>Global Terrain Template</strong> generation is done once at startup, and it needs to be completely finished before the rest of the game can do <em>anything</em>.   Until there's a world that exists, there's nothing for the player to explore.   So some amount of time needs to pass here.   We can toss up a "Loading..." screen and just let GTT generation hang the game on the first frame until it's done, but it would be better to let the player do something else (customize their avatar, watch a cut scene, configure a network match, whatever) while it's happening, and just not let them go "in world" until we're ready.   On subsequent runs loaded from a saved game, the GTT will presumably be loaded as part of the game data and not need to be regenerated at all.</p>
+<p>A few <strong>Terrain Patches</strong> need to be present at startup, too -- at least the one the player is standing on.  But mostly, these will be generated as the player moves around the world, in sets of three to five (or so, depending on generation radius) at a time.   After the initial ones, Terrain Patches are generated while the player is still a full patch or more away from them.  The player can only move so fast, so if these take a few hundred--or even a few thousand--frames to be generated, we're still good.    These will be an ongoing cost as the player plays the game; they will likely still be generating new patches a hundred hours into the game.</p>
+<p>So our goal in both places is to spread the computation out over many frames, without preventing the other things that are going on in our game from happening.    And there are essentially two ways to do that:</p>
+<ul>
+<li>We could do a little bit of work each frame, and then give up ("yield") the rest of that frame's computational time to the rest of the game.   In this model, everything would stay on the main thread, both our computation and the rest of the game's could use Unity APIs whenever they wanted, and the time taken would be determined by the total amount of computation and the single-threaded performance of the hardware.    This is the model implemented by the simple <em>async/await</em> without Tasks, and by Unity's Coroutines.</li>
+<li>We could offload the work entirely to another thread or process, which on most modern systems means moving them to another real or virtual/hyperthreaded CPU core.   This will be faster in absolute terms for both the expensive computation and the rest of the game -- they're effectively not competing for resources at all, and don't even need to interact until the expensive computation is done and the results are ready.    Unity APIs would be mostly unavailable to the expensive computation, which often isn't as much of a penalty as it seems, since these are generally mathematical and data-structure oriented.   This is the model implemented by <em>async/await</em> combined with <em>Task.Run()</em>, and by the Unity Jobs System.     There's also a variant on this where you run essentially the same code simultaneously on many threads/cores with different inputs (say, generating 50 terrains at once) using <em>ParallelForTask</em>, but such routines are usually better suited to shaders on modern systems, and scale poorly between devices with varying numbers of cores.</li>
+</ul>
+<h3 id="yield-based-methods">Yield-based Methods<a class="headerlink" href="#yield-based-methods" title="Permanent link">&para;</a></h3>
+<p>The most common of the yield-based methods is the Coroutine.   To write one of these, you declare the routine to be of type IEnumerable (Coroutines can't return values), do whatever you're going to do, and break up the work with an occasional "yield return" statement of some sort.    Each time the yield is encountered, the system will suspend the work, go do something else for a while, and resume on the next frame.</p>
+<p>Aside from this "spreading" over time, the co-routine does just what it would do without the yields.  Everything's executed in the same order, the results should be the same (unless they're dependent on time), and anything waiting for those results will still need to wait for them.    It's always executing on the main thread, so there aren't any limitations in what Unity APIs you can call.   Most importantly, the routine will still take the same amount of (clock) time to execute, or even a little more.   You're not getting any true parallelism here--no background threads or multiple CPU cores are involved.   The code just isn't blocking all the other stuff going on (in Unity, especially other game objects and the like).</p>
+<p>A variant of the <em>yield</em> is <em>yield wait</em>, which effectively says "when you block me, don't bother giving me more time until this much time has passed."   It's useful for expensive calculations that need to happen occasionally, but not on every frame.</p>
+<p>And that's the ideal case for co-routines:  things that are just running "beside" the regular stuff going on, and don't need to interact much with the rest of the system.    If a co-routine calculates a value that other routines need, for example, you'll need to code the delivery mechanism of that value yourself (raise an event, call a function, or whatever when the coroutine is "done").    Things co-routines are good at:  moving monsters around; turning on and off lighting and other effects as the players move around, tracking projectiles, etc.   What they're bad at is:  go do this expensive calculation, and give us the answer.  The expensive calculation will take at least as long as just calling a normal function, and we have to figure out a mechanism for getting that answer from a routine that has no return type.</p>
+<p>The C# language and .NET runtime provide the <em>async</em> and <em>await</em> keywords which do something similar in their basic forms:  <em>async</em> functions can yield to suspend themselves for a while, and they can <em>await</em> the results of other async functions (await is "yield until I get the answer I want.").    It works very similarly (Coroutines are implemented using async/await under the covers), but is somewhat more general and less Unity-specific.   You can use either, or both.</p>
+<p>I'm not giving examples here, because these are complex topics and there are much better examples and explanations on the Internet.</p>
+<h3 id="thread-based-methods">Thread-based Methods<a class="headerlink" href="#thread-based-methods" title="Permanent link">&para;</a></h3>
+<p>If your intent is to actually parallelize work--that is, use multiple threads and cores to get the same amount of work done in a shorter clock time--you need a different mechanism.  Again, you've got at least two to choose from.</p>
+<p>The <strong>Unity Jobs system</strong> allows you to package work as an IJob, whose <em>Execute()</em> method contains the work to do.   When executed, the job will do its computation on a background thread, possibly on another core (resources permitting).</p>
+<p>The standard .NET runtime offers <strong>Task</strong> objects, which are fundamentally similar.   Tasks are integrated with <em>async/await</em> so that you can use the same syntax, but <em>await</em> on a function that returns a Task is actually waiting for that Task's thread to complete.  (You can also aggregate Tasks with a list of array, and then await "Any" or "All" of them completing.)</p>
+<p>Again, the exact syntax is left for more specific sites on the Internet to provide.  Also note that the Jobs system has some   integration with the "Boost" compiler, and I'm not sure that's necessarily true of Tasks, if you want that extra functionality.  That said, I'm not a big fan of libraries that replace something already built into the language with functionally identical replacements.</p>
+<p>But there are some takeaways here:   The first is:  Jobs or Tasks are how you get more work done in the same time.  They're actually happening in parallel, usually on different cores of the hardware itself.   If you've got a lot of these running, they'll all complete in the time that would be taken by the single longest one if you were running them sequentially.</p>
+<p>The second takeaway is the dev cost.   Multithreaded programming is <em>harder</em> than single-threaded programming.  The order of things becomes less predictable if the system is scheduling things for you.    Two threads accessing the same variables can have all sorts of weird effects.    It's easy to end up with circular dependencies that deadlock your application.  Shared resources need to be carefully controlled to prevent multiple threads from modifying them in an unexpected order.   The syntax (particularly in C# and .NET) is obtuse and finicky.  And there's a always a little added cost for all the synchronization (although you usually get far more back from the parallelism.)</p>
+<p>There are a number of standards and best practices for multithreading, but those only help for the code you write.   Unless they specifically say so, you shouldn't expect any libraries you call--even standard system ones--to be thread-safe.</p>
+<p>In particular, that goes for Unity's APIs.   There are a small number of API points you can call from Jobs (they're listed on Unity's web site), but in generally assume you can't do anything that calls Unity-provided endpoints from a background thread.   Even things you might expect to work, mathematical functions like Random.Range(), aren't thread safe.</p>
+<p>So Jobs and Tasks are meant for computationally expensive stuff that can be written mostly using the base capabilities of the language, or with explicitly thread-safe APIs.  For our purposes, that's actually not such a huge limitation, since we're generally just modifying large arrays of basic types using basic math.   But if you do need math libraries, you'll likely want to use the .NET ones instead of Unity's, and for anything class based (like System.Random), you'll want to instantiate one class per thread, not share them between jobs (especially if you're using seeds to try and insure the same sequence of numbers.   If multiple threads are pulling numbers from a single Random object, the order of numbers in each thread will not be deterministic even with seeding.)</p>
+<p>A note of caution:  If you're planning to use these true multiprocessing APIs, write your algorithms synchronously first:  Unity in particular is very bad about reporting errors that occur in background threads, and you can't use <em>Debug.Log()</em> there.  The most common sign that something has gone wrong is that <em>await</em> just never returns.   Once you've got the routine working to your satisfaction, <em>then</em> move it to the background.</p>
+<h2 id="so-what-does-that-mean-for-terrain-generation">So what does that mean for Terrain Generation?<a class="headerlink" href="#so-what-does-that-mean-for-terrain-generation" title="Permanent link">&para;</a></h2>
+<p>After a few days of performance tweaking, I've achieved some significant gains.  In particular, the multi-second freeze that used to occur near patch edge traversal has been reduced to a sub-second hiccup.   But it took a fair amount of work.</p>
+<p>Achieving playable performance seems to be effectively impossible without using actual background threads, so that was the main focus of my efforts.</p>
+<p>The single, most important takeaway: <strong>work with height maps as float[,] arrays and similar low-level structures, not Unity objects, as much as possible</strong>, and when not possible, try to do the "math" stuff and the "Unity Object" stuff separately.</p>
+<p>In my case, that meant doing effectively all of the actual <em>work</em> of terrain generation directly on primitive arrays:  I calculated all of the heights, stitching heights, texture values, etc. ahead of time on simple arrays, did them in async Tasks, and only actually transferred them to TerrainData objects after that background work completed.   It still takes 8-12 seconds to make a terrain patch and stitch it to it's neighbors, but all of that gets done on a background thread while the player is still on a remote patch, and the actual copy (which has to be done on the main thread) takes a fraction of a second when we're done.</p>
+<p>This has a second benefit:  ECS and similar shader and shader-like technologies also don't work on most Unity objects, so we're ahead of the game moving to those technologies, too. </p>
+<p>I also moved the Voronoi "shell" height generation into a background task, and the entirely-independent mountain range generation into another one.    These can be executed in parallel, have no dependencies on each other, and are similarly complex, so they roughly cut the world generation time in half (to on the order of 15 seconds instead of half a minute).   I used Tasks instead of Jobs for no particular reason.  Since these make heavy use of random number generation, I built my own small random class that just implements the routines I need with the same names as Unity uses, but can be instantiated per-thread rather than based on a static.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0/katex.min.js"></script>
+      
+    
+  </body>
+</html>
